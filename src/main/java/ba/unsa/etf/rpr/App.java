@@ -9,7 +9,7 @@ public class App
 
         UserDAO userDAO = UserDAO.getInstance();
 
-        userDAO.pretraga();
+       userDAO.pretraga();
 
     }
 

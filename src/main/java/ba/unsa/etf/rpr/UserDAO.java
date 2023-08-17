@@ -13,13 +13,24 @@ public class UserDAO {
         String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_RPR Projekat";
         String username = "freedb_edzanko1";
         String password = System.getenv("MYSQL_PASS");
-        this.conn = DriverManager.getConnection(url, username, password); // Initialize class-level conn
-        ps = conn.prepareStatement("SELECT * FROM User ");
+        conn = DriverManager.getConnection(url, username, password);
+        try {
+            ps = conn.prepareStatement("SELECT * FROM User");
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static UserDAO getInstance() throws SQLException {
         if (instance == null) instance = new UserDAO();
         return instance;
+    }
+
+    public static void removeInstance() throws SQLException {
+        if (instance == null) return;
+        instance.conn.close();
+        instance = null;
     }
 
     void pretraga() {
