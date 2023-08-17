@@ -7,7 +7,7 @@ public class UserDAO {
     private static UserDAO instance = null;
 
     private Connection conn;
-    private PreparedStatement ps;
+    private PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit;
 
     private UserDAO () throws SQLException {
         String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_RPR Projekat";
@@ -15,11 +15,13 @@ public class UserDAO {
         String password = System.getenv("MYSQL_PASS");
         conn = DriverManager.getConnection(url, username, password);
         try {
-            ps = conn.prepareStatement("SELECT * FROM User");
+            pretragaUpit = conn.prepareStatement("SELECT * FROM User");
         }
         catch(SQLException e) {
             e.printStackTrace();
         }
+        noviIdUpit = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
+        dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?)");
     }
 
     public static UserDAO getInstance() throws SQLException {
@@ -33,7 +35,7 @@ public class UserDAO {
         instance = null;
     }
 
-    void pretraga() {
+   /* void pretraga() {
         try {
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -46,7 +48,29 @@ public class UserDAO {
         } catch (SQLException e) {
             System.out.println("Connection failed: " + e.getMessage());
         }
+    }*/
+
+
+    public void dodaj(User user) {
+        try {
+            ResultSet rs = noviIdUpit.executeQuery();
+            if(rs.next())
+                user.setId(rs.getInt(1));
+            else
+                user.setId(1);
+
+            dodavanjeUpit.setInt(1, user.getId());
+            dodavanjeUpit.setString(2, user.getUsername());
+            dodavanjeUpit.setString(3, user.getPassword());;
+            dodavanjeUpit.setString(4, user.getSalt());
+            dodavanjeUpit.setString(5, user.getFirstName());
+            dodavanjeUpit.setString(6, user.getLastName());
+            dodavanjeUpit.setString(7, user.getEmail());
+
+            dodavanjeUpit.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-
-
 }
