@@ -14,7 +14,7 @@ public class App
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Users ");
+            ResultSet rs = statement.executeQuery("SELECT * FROM User ");
             while(rs.next()) {
                 int id = rs.getInt(1);
                 String username1 = rs.getString(2);
