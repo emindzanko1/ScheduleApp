@@ -14,12 +14,7 @@ public class UserDAO {
         String username = "freedb_edzanko1";
         String password = System.getenv("MYSQL_PASS");
         conn = DriverManager.getConnection(url, username, password);
-        try {
-            pretragaUpit = conn.prepareStatement("SELECT * FROM User");
-        }
-        catch(SQLException e) {
-            e.printStackTrace();
-        }
+        pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE username=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
         dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?)");
         izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=? WHERE User_ID=?");
@@ -36,20 +31,25 @@ public class UserDAO {
         instance = null;
     }
 
-   /* void pretraga() {
+    void pretraga(String pretraga) {
         try {
-            ResultSet rs = ps.executeQuery();
+            pretragaUpit.setString(1,pretraga);
+            ResultSet rs = pretragaUpit.executeQuery();
             while(rs.next()) {
                 int id = rs.getInt(1);
-                String username1 = rs.getString(2);
-                System.out.println("Id 1. korisnika je " + id + ", naziv 1. korisnika je " + username1 + ".");
+                String username = rs.getString(2);
+                String password = rs.getString(3);
+                String salt = rs.getString(4);
+                String firstName = rs.getString(5);
+                String lastName = rs.getString(6);
+                String email = rs.getString(7);
+                System.out.println("ID: " + id + " username: " + username + " password " + password + " salt: " + salt + " firstName: " + firstName + " lastName: " + lastName + " email: " + email);
             }
             System.out.println("Connection successful!");
-            conn.close();
         } catch (SQLException e) {
             System.out.println("Connection failed: " + e.getMessage());
         }
-    }*/
+    }
 
 
     public User dodaj(User user) {

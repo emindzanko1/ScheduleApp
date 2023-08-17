@@ -89,6 +89,13 @@ public class App
     }
 
     private static void pretraga() {
+        System.out.println("Unesite ime, prezime ili username korisnika kojeg želite pretražiti");
+        String upit = ulaz.nextLine();
+
+        userDAO.pretraga(upit);
+
+        //for(User user : userDAO.pretraga(upit))
+          //  System.out.println("Puno ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
     }
 
 }
