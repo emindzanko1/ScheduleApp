@@ -3,9 +3,8 @@ package ba.unsa.etf.rpr;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class UserSQLImplementation implements Dao {
+public class UserSQLImplementation implements UserDao  {
 
     private static UserSQLImplementation instance = null;
 
@@ -17,7 +16,7 @@ public class UserSQLImplementation implements Dao {
         String username = "freedb_edzanko1";
         String password = System.getenv("MYSQL_PASS");
         conn = DriverManager.getConnection(url, username, password);
-        pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE username=? OR firstname=? OR lastname=?");
+        pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE User_id=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
         dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?)");
         izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=? WHERE User_ID=?");
@@ -35,12 +34,11 @@ public class UserSQLImplementation implements Dao {
         instance = null;
     }
 
-    ArrayList<User> pretraga(String pretraga) {
+    @Override
+    public ArrayList<User> get(int id) {
         ArrayList<User> users = new ArrayList<User>();
         try {
-            pretragaUpit.setString(1,pretraga);
-            pretragaUpit.setString(2, pretraga);
-            pretragaUpit.setString(3, pretraga);
+            pretragaUpit.setString(1, String.valueOf(id));
             ResultSet rs = pretragaUpit.executeQuery();
             while(rs.next()) {
                 users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
@@ -52,8 +50,13 @@ public class UserSQLImplementation implements Dao {
         return users;
     }
 
+    @Override
+    public List<User> getAll() {
+        return null;
+    }
 
-    public User dodaj(User user) {
+    @Override
+    public void save(User user) {
         try {
             ResultSet rs = noviIdUpit.executeQuery();
             if(rs.next())
@@ -74,10 +77,10 @@ public class UserSQLImplementation implements Dao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
     }
 
-    public void izmijeni(User user) {
+    @Override
+    public void update(User user) {
         try {
             izmjenaUpit.setInt(7, user.getId());
             izmjenaUpit.setString(1, user.getUsername());
@@ -92,7 +95,8 @@ public class UserSQLImplementation implements Dao {
         }
     }
 
-    public void obrisi(User user) {
+    @Override
+    public void delete(User user) {
         try {
             brisanjeUpit.setInt(1, user.getId());
             brisanjeUpit.execute();
@@ -102,27 +106,7 @@ public class UserSQLImplementation implements Dao {
     }
 
     @Override
-    public Optional get(long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public List getAll() {
+    public List<User> getByUsername(String username) {
         return null;
-    }
-
-    @Override
-    public void save(Object o) {
-
-    }
-
-    @Override
-    public void update(Object o, String[] params) {
-
-    }
-
-    @Override
-    public void delete(Object o) {
-
     }
 }

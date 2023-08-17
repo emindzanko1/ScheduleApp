@@ -59,7 +59,7 @@ public class App
 
         User user = new User(0, username, password, salt, firstName, lastName, email);
 
-        userDao.dodaj(user);
+        userDao.save(user);
     }
 
     private static void brisanje() {
@@ -68,7 +68,7 @@ public class App
         System.out.println("Unesite ID usera kojeg brišete: ");
         id = ulaz.nextInt();
         User user = new User(id, "", "", "", "", "", "");
-        userDao.obrisi(user);
+        userDao.delete(user);
     }
 
     private static void izmjena() {
@@ -91,14 +91,14 @@ public class App
         email = ulaz.nextLine();
         User user = new User(id, username, password, salt, firstName, lastName, email);
 
-        userDao.izmijeni(user);
+        userDao.update(user);
     }
 
     private static void pretraga() {
-        System.out.println("Unesite ime, prezime ili username korisnika kojeg želite pretražiti");
-        String upit = ulaz.nextLine();
+        System.out.println("Unesite id korisnika kojeg želite pretražiti");
+        int id = ulaz.nextInt();
 
-        for(User user : userDao.pretraga(upit))
+        for(User user : userDao.get(id))
             System.out.println("Puno ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
     }
 
