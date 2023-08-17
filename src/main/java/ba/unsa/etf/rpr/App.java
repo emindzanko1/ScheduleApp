@@ -21,6 +21,7 @@ public class App
                 System.out.println("Id 1. korisnika je " + id + ", naziv 1. korisnika je " + username1 + ".");
             }
             System.out.println("Connection successful!");
+            conn.close();
         } catch (SQLException e) {
             System.out.println("Connection failed: " + e.getMessage());
         }
