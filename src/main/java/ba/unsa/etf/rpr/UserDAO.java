@@ -8,7 +8,7 @@ public class UserDAO {
     private static UserDAO instance = null;
 
     private Connection conn;
-    private PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit;
+    private PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit;
 
     private UserDAO () throws SQLException {
         String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_RPR Projekat";
@@ -19,6 +19,7 @@ public class UserDAO {
         noviIdUpit = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
         dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?)");
         izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=? WHERE User_ID=?");
+        brisanjeUpit = conn.prepareStatement("DELETE FROM User WHERE User_ID=?");
     }
 
     public static UserDAO getInstance() throws SQLException {
@@ -84,6 +85,15 @@ public class UserDAO {
             izmjenaUpit.setString(5, user.getLastName());
             izmjenaUpit.setString(6, user.getEmail());
             izmjenaUpit.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void obrisi(User user) {
+        try {
+            brisanjeUpit.setInt(1, user.getId());
+            brisanjeUpit.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -63,6 +63,12 @@ public class App
     }
 
     private static void brisanje() {
+        int id;
+        String username, password, salt, firstName, lastName, email;
+        System.out.println("Unesite ID usera kojeg brišete: ");
+        id = ulaz.nextInt();
+        User user = new User(id, "", "", "", "", "", "");
+        userDAO.obrisi(user);
     }
 
     private static void izmjena() {
