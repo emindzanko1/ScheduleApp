@@ -51,7 +51,7 @@ public class UserDAO {
     }*/
 
 
-    public void dodaj(User user) {
+    public User dodaj(User user) {
         try {
             ResultSet rs = noviIdUpit.executeQuery();
             if(rs.next())
@@ -72,5 +72,6 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return user;
     }
 }
