@@ -15,7 +15,7 @@ public class UserDAO {
         String username = "freedb_edzanko1";
         String password = System.getenv("MYSQL_PASS");
         conn = DriverManager.getConnection(url, username, password);
-        pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE username=?");
+        pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE username=? OR firstname=? OR lastname=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
         dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?)");
         izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=? WHERE User_ID=?");
@@ -36,6 +36,8 @@ public class UserDAO {
         ArrayList<User> users = new ArrayList<User>();
         try {
             pretragaUpit.setString(1,pretraga);
+            pretragaUpit.setString(2, pretraga);
+            pretragaUpit.setString(3, pretraga);
             ResultSet rs = pretragaUpit.executeQuery();
             while(rs.next()) {
                 users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
