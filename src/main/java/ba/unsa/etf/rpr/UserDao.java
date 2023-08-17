@@ -3,14 +3,14 @@ package ba.unsa.etf.rpr;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class UserDAO {
+public class UserDao {
 
-    private static UserDAO instance = null;
+    private static UserDao instance = null;
 
     private Connection conn;
     private PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit;
 
-    private UserDAO () throws SQLException {
+    private UserDao() throws SQLException {
         String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_RPR Projekat";
         String username = "freedb_edzanko1";
         String password = System.getenv("MYSQL_PASS");
@@ -22,8 +22,8 @@ public class UserDAO {
         brisanjeUpit = conn.prepareStatement("DELETE FROM User WHERE User_ID=?");
     }
 
-    public static UserDAO getInstance() throws SQLException {
-        if (instance == null) instance = new UserDAO();
+    public static UserDao getInstance() throws SQLException {
+        if (instance == null) instance = new UserDao();
         return instance;
     }
 

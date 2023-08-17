@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class App 
 {
-    private static UserDAO userDAO;
+    private static UserDao userDao;
     private static Scanner ulaz;
     public static void main( String[] args ) throws ClassNotFoundException, SQLException {
 
-        userDAO = UserDAO.getInstance();
+        userDao = UserDao.getInstance();
         ulaz = new Scanner(System.in);
 
         int opcija = 0;
@@ -59,7 +59,7 @@ public class App
 
         User user = new User(0, username, password, salt, firstName, lastName, email);
 
-        userDAO.dodaj(user);
+        userDao.dodaj(user);
     }
 
     private static void brisanje() {
@@ -68,7 +68,7 @@ public class App
         System.out.println("Unesite ID usera kojeg brišete: ");
         id = ulaz.nextInt();
         User user = new User(id, "", "", "", "", "", "");
-        userDAO.obrisi(user);
+        userDao.obrisi(user);
     }
 
     private static void izmjena() {
@@ -91,14 +91,14 @@ public class App
         email = ulaz.nextLine();
         User user = new User(id, username, password, salt, firstName, lastName, email);
 
-        userDAO.izmijeni(user);
+        userDao.izmijeni(user);
     }
 
     private static void pretraga() {
         System.out.println("Unesite ime, prezime ili username korisnika kojeg želite pretražiti");
         String upit = ulaz.nextLine();
 
-        for(User user : userDAO.pretraga(upit))
+        for(User user : userDao.pretraga(upit))
             System.out.println("Puno ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
     }
 
