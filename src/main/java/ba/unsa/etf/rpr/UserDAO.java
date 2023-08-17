@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UserDAO {
 
@@ -31,24 +32,19 @@ public class UserDAO {
         instance = null;
     }
 
-    void pretraga(String pretraga) {
+    ArrayList<User> pretraga(String pretraga) {
+        ArrayList<User> users = new ArrayList<User>();
         try {
             pretragaUpit.setString(1,pretraga);
             ResultSet rs = pretragaUpit.executeQuery();
             while(rs.next()) {
-                int id = rs.getInt(1);
-                String username = rs.getString(2);
-                String password = rs.getString(3);
-                String salt = rs.getString(4);
-                String firstName = rs.getString(5);
-                String lastName = rs.getString(6);
-                String email = rs.getString(7);
-                System.out.println("ID: " + id + " username: " + username + " password " + password + " salt: " + salt + " firstName: " + firstName + " lastName: " + lastName + " email: " + email);
+                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
             System.out.println("Connection failed: " + e.getMessage());
         }
+        return users;
     }
 
 
