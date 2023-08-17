@@ -1,8 +1,6 @@
 package ba.unsa.etf.rpr;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class App 
 {
@@ -15,6 +13,13 @@ public class App
 
         try {
             Connection conn = DriverManager.getConnection(url, username, password);
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Users ");
+            while(rs.next()) {
+                int id = rs.getInt(1);
+                String username1 = rs.getString(2);
+                System.out.println("Id 1. korisnika je " + id + ", naziv 1. korisnika je " + username1 + ".");
+            }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
             System.out.println("Connection failed: " + e.getMessage());
