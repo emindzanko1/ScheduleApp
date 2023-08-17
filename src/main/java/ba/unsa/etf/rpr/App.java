@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class App 
 {
-    private static UserDao userDao;
+    private static UserSQLImplementation userDao;
     private static Scanner ulaz;
     public static void main( String[] args ) throws ClassNotFoundException, SQLException {
 
-        userDao = UserDao.getInstance();
+        userDao = UserSQLImplementation.getInstance();
         ulaz = new Scanner(System.in);
 
         int opcija = 0;
