@@ -129,8 +129,7 @@ public class App
         lastName = ulaz.nextLine();
         System.out.println("Unesite email:");
         email = ulaz.nextLine();
-        User user = new User(id, username, password, salt, firstName, lastName, email, id);
-        return user;
+        return(new User(id, username, password, salt, firstName, lastName, email, id));
     }
 
     private static void izmjenaKorisnika() {
