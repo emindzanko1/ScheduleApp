@@ -19,7 +19,7 @@ public class UserSQLImplementation implements UserDao  {
         pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE User_id=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
         dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?,?)");
-        izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=?, scheduleId=?, WHERE User_ID=?");
+        izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=?, Schedule_ID=? WHERE User_ID=?");
         brisanjeUpit = conn.prepareStatement("DELETE FROM User WHERE User_ID=?");
         sviUpit = conn.prepareStatement("SELECT * FROM User");
     }
@@ -101,7 +101,7 @@ public class UserSQLImplementation implements UserDao  {
             izmjenaUpit.setString(4, user.getFirstName());
             izmjenaUpit.setString(5, user.getLastName());
             izmjenaUpit.setString(6, user.getEmail());
-            dodavanjeUpit.setInt(7, user.getScheduleId());
+            izmjenaUpit.setInt(7, user.getScheduleId());
             izmjenaUpit.execute();
         } catch (SQLException e) {
             e.printStackTrace();

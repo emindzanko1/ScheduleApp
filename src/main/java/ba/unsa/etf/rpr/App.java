@@ -8,7 +8,7 @@ public class App
     private static UserSQLImplementation userDao;
     private static ScheduleSQLImplementation scheduleDao;
     private static Scanner ulaz;
-    public static void main( String[] args ) throws ClassNotFoundException, SQLException {
+    public static void main( String[] args ) throws SQLException {
 
         userDao = UserSQLImplementation.getInstance();
         scheduleDao = ScheduleSQLImplementation.getInstance();
@@ -124,19 +124,14 @@ public class App
 
     private static void brisanjeKorisnika() {
         int id;
-        String username, password, salt, firstName, lastName, email;
         System.out.println("Unesite ID usera kojeg brišete: ");
         id = ulaz.nextInt();
         User user = new User(id, "", "", "", "", "", "", id);
         userDao.delete(user);
     }
 
-    private static void izmjenaKorisnika() {
-        int id, rasporedId;
+    private static User unosDuplication(int id) {
         String username, password, salt, firstName, lastName, email;
-        System.out.println("Unesite ID usera kojeg mijenjate: ");
-        id = ulaz.nextInt();
-        if(ulaz.hasNextLine()) ulaz.nextLine();
         System.out.println("Unesite username: ");
         username = ulaz.nextLine();
         System.out.println("Unesite password: ");
@@ -149,10 +144,16 @@ public class App
         lastName = ulaz.nextLine();
         System.out.println("Unesite email:");
         email = ulaz.nextLine();
-        System.out.println("Unesite id rasporeda:");
-        rasporedId = ulaz.nextInt();
-        User user = new User(id, username, password, salt, firstName, lastName, email, rasporedId);
+        User user = new User(id, username, password, salt, firstName, lastName, email, id);
+        return user;
+    }
 
+    private static void izmjenaKorisnika() {
+        int id;
+        System.out.println("Unesite ID usera kojeg mijenjate: ");
+        id = ulaz.nextInt();
+        if(ulaz.hasNextLine()) ulaz.nextLine();
+        User user = unosDuplication(id);
         userDao.update(user);
     }
 
