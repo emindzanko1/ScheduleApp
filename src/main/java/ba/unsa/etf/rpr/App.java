@@ -60,7 +60,7 @@ public class App
         System.out.println("Unesite email:");
         email = ulaz.nextLine();
 
-        User user = new User(0, username, password, salt, firstName, lastName, email);
+        User user = new User(0, username, password, salt, firstName, lastName, email, 0);
 
         userDao.save(user);
     }
@@ -70,12 +70,12 @@ public class App
         String username, password, salt, firstName, lastName, email;
         System.out.println("Unesite ID usera kojeg brišete: ");
         id = ulaz.nextInt();
-        User user = new User(id, "", "", "", "", "", "");
+        User user = new User(id, "", "", "", "", "", "", id);
         userDao.delete(user);
     }
 
     private static void izmjena() {
-        int id;
+        int id, rasporedId;
         String username, password, salt, firstName, lastName, email;
         System.out.println("Unesite ID usera kojeg mijenjate: ");
         id = ulaz.nextInt();
@@ -92,7 +92,9 @@ public class App
         lastName = ulaz.nextLine();
         System.out.println("Unesite email:");
         email = ulaz.nextLine();
-        User user = new User(id, username, password, salt, firstName, lastName, email);
+        System.out.println("Unesite id rasporeda:");
+        rasporedId = ulaz.nextInt();
+        User user = new User(id, username, password, salt, firstName, lastName, email, rasporedId);
 
         userDao.update(user);
     }

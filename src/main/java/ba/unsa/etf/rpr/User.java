@@ -1,10 +1,10 @@
 package ba.unsa.etf.rpr;
 
 public class User {
-    private int id;
+    private int id, scheduleId;
     private String username, password, salt, firstName, lastName, email;
 
-    public User(int id, String username, String password, String salt, String firstName, String lastName, String email) {
+    public User(int id, String username, String password, String salt, String firstName, String lastName, String email, int scheduleId) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -12,8 +12,8 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.scheduleId = scheduleId;
     }
-
 
     public User() {
     }
@@ -24,6 +24,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
     }
 
     public String getUsername() {

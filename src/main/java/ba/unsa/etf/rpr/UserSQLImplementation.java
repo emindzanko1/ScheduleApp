@@ -18,8 +18,8 @@ public class UserSQLImplementation implements UserDao  {
         conn = DriverManager.getConnection(url, username, password);
         pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE User_id=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
-        dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?)");
-        izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=? WHERE User_ID=?");
+        dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?,?)");
+        izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=?, scheduleId=?, WHERE User_ID=?");
         brisanjeUpit = conn.prepareStatement("DELETE FROM User WHERE User_ID=?");
         sviUpit = conn.prepareStatement("SELECT * FROM User");
     }
@@ -42,7 +42,7 @@ public class UserSQLImplementation implements UserDao  {
             pretragaUpit.setString(1, String.valueOf(id));
             ResultSet rs = pretragaUpit.executeQuery();
             while(rs.next()) {
-                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
@@ -57,7 +57,7 @@ public class UserSQLImplementation implements UserDao  {
         try {
             ResultSet rs = sviUpit.executeQuery();
             while(rs.next()) {
-                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
@@ -82,6 +82,7 @@ public class UserSQLImplementation implements UserDao  {
             dodavanjeUpit.setString(5, user.getFirstName());
             dodavanjeUpit.setString(6, user.getLastName());
             dodavanjeUpit.setString(7, user.getEmail());
+            dodavanjeUpit.setInt(8, user.getScheduleId());
 
             dodavanjeUpit.execute();
 
@@ -93,13 +94,14 @@ public class UserSQLImplementation implements UserDao  {
     @Override
     public void update(User user) {
         try {
-            izmjenaUpit.setInt(7, user.getId());
+            izmjenaUpit.setInt(8, user.getId());
             izmjenaUpit.setString(1, user.getUsername());
             izmjenaUpit.setString(2, user.getPassword());;
             izmjenaUpit.setString(3, user.getSalt());
             izmjenaUpit.setString(4, user.getFirstName());
             izmjenaUpit.setString(5, user.getLastName());
             izmjenaUpit.setString(6, user.getEmail());
+            dodavanjeUpit.setInt(7, user.getScheduleId());
             izmjenaUpit.execute();
         } catch (SQLException e) {
             e.printStackTrace();
