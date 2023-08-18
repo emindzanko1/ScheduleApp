@@ -102,23 +102,8 @@ public class App
     }
 
     private static void unosKorisnika() {
-
-        String username, password, salt, firstName, lastName, email;
-        System.out.println("Unesite username: ");
-        username = ulaz.nextLine();
-        System.out.println("Unesite password: ");
-        password = ulaz.nextLine();
-        System.out.println("Unesite salt: ");
-        salt = ulaz.nextLine();
-        System.out.println("Unesite ime: ");
-        firstName = ulaz.nextLine();
-        System.out.println("Unesite prezime: ");
-        lastName = ulaz.nextLine();
-        System.out.println("Unesite email:");
-        email = ulaz.nextLine();
-
-        User user = new User(0, username, password, salt, firstName, lastName, email, 0);
-
+        int id = 0;
+        User user = unosDuplication(id);
         userDao.save(user);
     }
 
