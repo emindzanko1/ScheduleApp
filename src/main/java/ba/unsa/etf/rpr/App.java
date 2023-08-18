@@ -102,14 +102,14 @@ public class App
         int id = ulaz.nextInt();
 
         for(User user : userDao.get(id))
-            System.out.println("Puno ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
+            System.out.println("Ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
     }
 
     private static void pretragaSvih() {
         System.out.println("Pretražite ime i prezime svakog korisnika: ");
 
         for(User user : userDao.getAll())
-            System.out.println("Puno ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
+            System.out.println("Ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
     }
 
 }
