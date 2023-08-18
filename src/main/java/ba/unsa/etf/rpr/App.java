@@ -15,7 +15,7 @@ public class App
         int opcija = 0;
 
         do {
-            System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n0 - kraj programa");
+            System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n5 - pretraga svih\n0 - kraj programa");
             opcija = ulaz.nextInt();
             if(ulaz.hasNextLine()) ulaz.nextLine();
             switch (opcija) {
@@ -30,6 +30,9 @@ public class App
                     break;
                 case 4:
                     brisanje();
+                    break;
+                case 5:
+                    pretragaSvih();
                     break;
                 case 0:
                     break;
@@ -95,10 +98,17 @@ public class App
     }
 
     private static void pretraga() {
-        System.out.println("Unesite id korisnika kojeg želite pretražiti");
+        System.out.println("Unesite id korisnika kojeg želite pretražiti: ");
         int id = ulaz.nextInt();
 
         for(User user : userDao.get(id))
+            System.out.println("Puno ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
+    }
+
+    private static void pretragaSvih() {
+        System.out.println("Pretražite ime i prezime svakog korisnika: ");
+
+        for(User user : userDao.getAll())
             System.out.println("Puno ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
     }
 

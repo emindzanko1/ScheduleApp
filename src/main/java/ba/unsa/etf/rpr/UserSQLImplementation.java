@@ -9,7 +9,7 @@ public class UserSQLImplementation implements UserDao  {
     private static UserSQLImplementation instance = null;
 
     private Connection conn;
-    private PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit;
+    private PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit, sviUpit;
 
     private UserSQLImplementation() throws SQLException {
         String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_RPR Projekat";
@@ -21,6 +21,7 @@ public class UserSQLImplementation implements UserDao  {
         dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?)");
         izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=? WHERE User_ID=?");
         brisanjeUpit = conn.prepareStatement("DELETE FROM User WHERE User_ID=?");
+        sviUpit = conn.prepareStatement("SELECT * FROM User");
     }
 
     public static UserSQLImplementation getInstance() throws SQLException {
@@ -52,7 +53,17 @@ public class UserSQLImplementation implements UserDao  {
 
     @Override
     public List<User> getAll() {
-        return null;
+        ArrayList<User> users = new ArrayList<User>();
+        try {
+            ResultSet rs = sviUpit.executeQuery();
+            while(rs.next()) {
+                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+            }
+            System.out.println("Connection successful!");
+        } catch (SQLException e) {
+            System.out.println("Connection failed: " + e.getMessage());
+        }
+        return users;
     }
 
     @Override
