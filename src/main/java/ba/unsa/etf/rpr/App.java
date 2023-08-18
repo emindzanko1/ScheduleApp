@@ -15,6 +15,10 @@ public class App
 
         ulaz = new Scanner(System.in);
 
+        System.out.println("S kojom tabelom želite da radite?");
+
+
+
         int opcija = 0;
 
         do {
@@ -23,19 +27,19 @@ public class App
             if(ulaz.hasNextLine()) ulaz.nextLine();
             switch (opcija) {
                 case 1:
-                    pretraga();
+                    pretragaKorisnika();
                     break;
                 case 2:
-                    unos();
+                    unosKorisnika();
                     break;
                 case 3:
-                    izmjena();
+                    izmjenaKorisnika();
                     break;
                 case 4:
-                    brisanje();
+                    brisanjeKorisnika();
                     break;
                 case 5:
-                    pretragaSvih();
+                    pretragaSvihKorisnika();
                     break;
                 case 0:
                     break;
@@ -47,7 +51,7 @@ public class App
 
     }
 
-    private static void unos() {
+    private static void unosKorisnika() {
 
         String username, password, salt, firstName, lastName, email;
         System.out.println("Unesite username: ");
@@ -68,7 +72,7 @@ public class App
         userDao.save(user);
     }
 
-    private static void brisanje() {
+    private static void brisanjeKorisnika() {
         int id;
         String username, password, salt, firstName, lastName, email;
         System.out.println("Unesite ID usera kojeg brišete: ");
@@ -77,7 +81,7 @@ public class App
         userDao.delete(user);
     }
 
-    private static void izmjena() {
+    private static void izmjenaKorisnika() {
         int id, rasporedId;
         String username, password, salt, firstName, lastName, email;
         System.out.println("Unesite ID usera kojeg mijenjate: ");
@@ -102,7 +106,7 @@ public class App
         userDao.update(user);
     }
 
-    private static void pretraga() {
+    private static void pretragaKorisnika() {
         System.out.println("Unesite id korisnika kojeg želite pretražiti: ");
         int id = ulaz.nextInt();
 
@@ -110,7 +114,7 @@ public class App
             System.out.println("Ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
     }
 
-    private static void pretragaSvih() {
+    private static void pretragaSvihKorisnika() {
         System.out.println("Pretražite ime i prezime svakog korisnika: ");
 
         for(User user : userDao.getAll())

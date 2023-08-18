@@ -1,9 +1,6 @@
 package ba.unsa.etf.rpr;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +16,8 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         String username = "freedb_edzanko1";
         String password = System.getenv("MYSQL_PASS");
         conn = DriverManager.getConnection(url, username, password);
+        pretragaUpit = conn.prepareStatement("SELECT * FROM Schedule WHERE Schedule_ID=?");
+        noviIdUpit = conn.prepareStatement("SELECT MAX(Schedule_ID)+1 FROM Schedule");
     }
 
     public static ScheduleSQLImplementation getInstance() throws SQLException {
@@ -34,7 +33,18 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
     @Override
     public ArrayList<Schedule> get(int id) {
-        return null;
+        ArrayList<Schedule> schedules = new ArrayList<Schedule>();
+        try {
+            pretragaUpit.setString(1, String.valueOf(id));
+            ResultSet rs = pretragaUpit.executeQuery();
+            while(rs.next()) {
+                schedules.add(new Schedule(rs.getInt(1), rs.getInt(2), rs.getString(3)));
+            }
+            System.out.println("Connection successful!");
+        } catch (SQLException e) {
+            System.out.println("Connection failed: " + e.getMessage());
+        }
+        return schedules;
     }
 
     @Override
