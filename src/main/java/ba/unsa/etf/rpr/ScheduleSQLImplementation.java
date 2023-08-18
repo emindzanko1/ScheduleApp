@@ -21,6 +21,17 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         conn = DriverManager.getConnection(url, username, password);
     }
 
+    public static ScheduleSQLImplementation getInstance() throws SQLException {
+        if (instance == null) instance = new ScheduleSQLImplementation();
+        return instance;
+    }
+
+    public static void removeInstance() throws SQLException {
+        if (instance == null) return;
+        instance.conn.close();
+        instance = null;
+    }
+
     @Override
     public ArrayList<Schedule> get(int id) {
         return null;
