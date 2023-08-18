@@ -6,10 +6,13 @@ import java.util.Scanner;
 public class App 
 {
     private static UserSQLImplementation userDao;
+    private static ScheduleSQLImplementation scheduleDao;
     private static Scanner ulaz;
     public static void main( String[] args ) throws ClassNotFoundException, SQLException {
 
         userDao = UserSQLImplementation.getInstance();
+        scheduleDao = ScheduleSQLImplementation.getInstance();
+
         ulaz = new Scanner(System.in);
 
         int opcija = 0;
