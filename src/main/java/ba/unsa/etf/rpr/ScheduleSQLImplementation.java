@@ -18,6 +18,8 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         conn = DriverManager.getConnection(url, username, password);
         pretragaUpit = conn.prepareStatement("SELECT * FROM Schedule WHERE Schedule_ID=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(Schedule_ID)+1 FROM Schedule");
+        dodavanjeUpit = conn.prepareStatement("INSERT INTO Schedule VALUES(?,?,?)");
+
     }
 
     public static ScheduleSQLImplementation getInstance() throws SQLException {
@@ -54,7 +56,22 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
     @Override
     public void save(Schedule schedule) {
+        try {
+            ResultSet rs = noviIdUpit.executeQuery();
+            if(rs.next())
+                schedule.setId(rs.getInt(1));
+            else
+                schedule.setId(1);
 
+            dodavanjeUpit.setInt(1, schedule.getId());
+            dodavanjeUpit.setInt(2, schedule.getUserId());
+            dodavanjeUpit.setString(3, schedule.getScheduleName());;
+
+            dodavanjeUpit.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

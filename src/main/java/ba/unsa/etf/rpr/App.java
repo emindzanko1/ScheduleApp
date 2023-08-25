@@ -81,7 +81,19 @@ public class App
 
     }
 
+    private static void unosRasporedaDuplication(int id) {
+
+    }
+
     private static void unosRasporeda() {
+        int id = 0;
+        //Schedule schedule = unosRasporedaDuplication(id);
+        System.out.println("Unesite naziv rasporeda: ");
+        String scheduleName = ulaz.nextLine();
+
+        Schedule schedule = new Schedule(id, id, scheduleName);
+
+        scheduleDao.save(schedule);
     }
 
     private static void pretragaSvihRasporeda() {
@@ -103,7 +115,7 @@ public class App
 
     private static void unosKorisnika() {
         int id = 0;
-        User user = unosDuplication(id);
+        User user = unosKorisnikaDuplication(id);
         userDao.save(user);
     }
 
@@ -111,11 +123,11 @@ public class App
         int id;
         System.out.println("Unesite ID usera kojeg brišete: ");
         id = ulaz.nextInt();
-        User user = new User(id, "", "", "", "", "", "", id);
+        User user = new User(id, "", "", "", "", "", "");
         userDao.delete(user);
     }
 
-    private static User unosDuplication(int id) {
+    private static User unosKorisnikaDuplication(int id) {
         String username, password, salt, firstName, lastName, email;
         System.out.println("Unesite username: ");
         username = ulaz.nextLine();
@@ -129,7 +141,7 @@ public class App
         lastName = ulaz.nextLine();
         System.out.println("Unesite email:");
         email = ulaz.nextLine();
-        return(new User(id, username, password, salt, firstName, lastName, email, id));
+        return(new User(id, username, password, salt, firstName, lastName, email));
     }
 
     private static void izmjenaKorisnika() {
@@ -137,7 +149,7 @@ public class App
         System.out.println("Unesite ID usera kojeg mijenjate: ");
         id = ulaz.nextInt();
         if(ulaz.hasNextLine()) ulaz.nextLine();
-        User user = unosDuplication(id);
+        User user = unosKorisnikaDuplication(id);
         userDao.update(user);
     }
 
