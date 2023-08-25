@@ -169,6 +169,15 @@ public class App
     }
 
     private static void brisanjeRasporeda() {
+        int id, userId;
+        System.out.println("Unesite ID rasporeda kojeg brišete: ");
+        id = ulaz.nextInt();
+        if(ulaz.hasNextLine()) ulaz.nextLine();
+        System.out.println("Unesite ID korisnika čiji raspored brišete: ");
+        userId = ulaz.nextInt();
+        if(ulaz.hasNextLine()) ulaz.nextLine();
+        Schedule schedule = new Schedule(id, userId, "");
+        scheduleDao.delete(schedule);
     }
 
     private static void izmjenaRasporeda() {

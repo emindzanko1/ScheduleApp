@@ -21,6 +21,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         dodavanjeUpit = conn.prepareStatement("INSERT INTO Schedule VALUES(?,?,?)");
         sviUpit = conn.prepareStatement("SELECT * FROM Schedule");
         izmjenaUpit = conn.prepareStatement("UPDATE Schedule SET ScheduleName=? WHERE Schedule_ID=?");
+        brisanjeUpit = conn.prepareStatement("DELETE FROM Schedule WHERE Schedule_ID=?");
 
     }
 
@@ -100,7 +101,12 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
     @Override
     public void delete(Schedule schedule) {
-
+        try {
+            brisanjeUpit.setInt(1, schedule.getId());
+            brisanjeUpit.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
