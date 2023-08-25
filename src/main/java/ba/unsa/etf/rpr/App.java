@@ -162,6 +162,10 @@ public class App
     }
 
     private static void pretragaSvihRasporeda() {
+        System.out.println("Pretražite naziv svakog rasporeda: ");
+
+        for(Schedule schedule : scheduleDao.getAll())
+            System.out.println("Naziv svakog rasporeda: " + schedule.getScheduleName() + ".");
     }
 
     private static void brisanjeRasporeda() {
