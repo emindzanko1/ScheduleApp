@@ -21,7 +21,7 @@ public class App
         int opcija = 0;
         if(brojTabele == 1) {
             do {
-                System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n5 - pretraga svih\n0 - kraj programa");
+                System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n5 - pretraga svih\n6 - pretraga po imenu\n0 - kraj programa");
                 opcija = ulaz.nextInt();
                 if(ulaz.hasNextLine()) ulaz.nextLine();
                 switch (opcija) {
@@ -39,6 +39,9 @@ public class App
                         break;
                     case 5:
                         pretragaSvihKorisnika();
+                        break;
+                    case 6:
+                        pretragaKorisnikaPoImenu();
                         break;
                     case 0:
                         break;
@@ -165,6 +168,14 @@ public class App
         System.out.println("Pretražite ime i prezime svakog korisnika: ");
 
         for(User user : userDao.getAll())
+            System.out.println("Ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
+    }
+
+    private static void pretragaKorisnikaPoImenu() {
+        System.out.println("Unesite username korisnika kojeg želite pretražiti:  ");
+        String username = ulaz.nextLine();
+
+        for(User user : userDao.getByUsername(username))
             System.out.println("Ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
     }
 
