@@ -16,9 +16,9 @@ public class UserSQLImplementation implements UserDao  {
         String username = "freedb_edzanko1";
         String password = System.getenv("MYSQL_PASS");
         conn = DriverManager.getConnection(url, username, password);
-        pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE User_id=?");
+        pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE User_ID=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
-        dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?,?)");
+        dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?)");
         izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=? WHERE User_ID=?");
         brisanjeUpit = conn.prepareStatement("DELETE FROM User WHERE User_ID=?");
         sviUpit = conn.prepareStatement("SELECT * FROM User");
