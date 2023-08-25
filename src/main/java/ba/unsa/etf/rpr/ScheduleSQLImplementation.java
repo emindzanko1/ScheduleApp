@@ -20,6 +20,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         noviIdUpit = conn.prepareStatement("SELECT MAX(Schedule_ID)+1 FROM Schedule");
         dodavanjeUpit = conn.prepareStatement("INSERT INTO Schedule VALUES(?,?,?)");
         sviUpit = conn.prepareStatement("SELECT * FROM Schedule");
+        izmjenaUpit = conn.prepareStatement("UPDATE Schedule SET ScheduleName=? WHERE Schedule_ID=?");
 
     }
 
@@ -88,7 +89,13 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
     @Override
     public void update(Schedule schedule) {
-
+        try {
+            izmjenaUpit.setInt(2, schedule.getId());
+            izmjenaUpit.setString(1, schedule.getScheduleName());
+            izmjenaUpit.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

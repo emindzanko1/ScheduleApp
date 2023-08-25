@@ -168,6 +168,15 @@ public class App
     }
 
     private static void izmjenaRasporeda() {
+        int id, userId;
+        System.out.println("Unesite ID rasporeda kojeg mijenjate: ");
+        id = ulaz.nextInt();
+        if(ulaz.hasNextLine()) ulaz.nextLine();
+        System.out.println("Unesite ID korisnika čiji raspored mijenjate: ");
+        userId = ulaz.nextInt();
+        if(ulaz.hasNextLine()) ulaz.nextLine();
+        Schedule schedule = unosRasporedaDuplication(id,userId);
+        scheduleDao.update(schedule);
     }
 
     private static void pretragaRasporeda() {
