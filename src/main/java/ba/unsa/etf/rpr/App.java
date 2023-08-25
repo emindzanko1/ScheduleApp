@@ -29,7 +29,7 @@ public class App
                         pretragaKorisnika();
                         break;
                     case 2:
-                        unosKorisnikaIRasporeda();
+                        unosKorisnika();
                         break;
                     case 3:
                         izmjenaKorisnika();
@@ -95,7 +95,7 @@ public class App
             System.out.println("Naziv rasporeda je: " + schedule.getScheduleName() +  ".");
     }
 
-    private static void unosKorisnikaIRasporeda() {
+    private static void unosKorisnika() {
         int id = 0;
         User user = unosKorisnikaDuplication(id);
         userDao.save(user);
