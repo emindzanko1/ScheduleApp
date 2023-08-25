@@ -9,7 +9,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     private static ScheduleSQLImplementation instance = null;
 
     private Connection conn;
-    private PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit, sviUpit;
+    private PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit, sviUpit, poImenuUpit;
 
     private ScheduleSQLImplementation() throws SQLException {
         String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_RPR Projekat";
@@ -22,6 +22,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         sviUpit = conn.prepareStatement("SELECT * FROM Schedule");
         izmjenaUpit = conn.prepareStatement("UPDATE Schedule SET ScheduleName=? WHERE Schedule_ID=?");
         brisanjeUpit = conn.prepareStatement("DELETE FROM Schedule WHERE Schedule_ID=?");
+        poImenuUpit = conn.prepareStatement("SELECT * FROM Schedule WHERE ScheduleName=?");
 
     }
 
@@ -111,6 +112,17 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
     @Override
     public List<Schedule> getByScheduleName(String scheduleName) {
-        return null;
+        List<Schedule> schedules = new ArrayList<Schedule>();
+        try {
+            poImenuUpit.setString(1, scheduleName);
+            ResultSet rs = poImenuUpit.executeQuery();
+            while(rs.next()) {
+                schedules.add(new Schedule(rs.getInt(1), rs.getInt(2), rs.getString(3)));
+            }
+            System.out.println("Connection successful!");
+        } catch (SQLException e) {
+            System.out.println("Connection failed: " + e.getMessage());
+        }
+        return schedules;
     }
 }

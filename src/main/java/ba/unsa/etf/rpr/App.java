@@ -53,7 +53,7 @@ public class App
         }
         else if(brojTabele == 2) {
             do {
-                System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n5 - pretraga svih\n0 - kraj programa");
+                System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n5 - pretraga svih\n6 - pretraga po imenu\n0 - kraj programa");
                 opcija = ulaz.nextInt();
                 if(ulaz.hasNextLine()) ulaz.nextLine();
                 switch (opcija) {
@@ -72,6 +72,9 @@ public class App
                     case 5:
                         pretragaSvihRasporeda();
                         break;
+                    case 6:
+                        pretragaRasporedaPoImenu();
+                        break;
                     case 0:
                         break;
                     default:
@@ -84,13 +87,18 @@ public class App
 
     }
 
+    private static void pretragaRasporedaPoImenu() {
+        System.out.println("Unesite naziv raspored koji želite pretražiti:  ");
+        String scheduleName = ulaz.nextLine();
+
+        for(Schedule schedule : scheduleDao.getByScheduleName(scheduleName))
+            System.out.println("Naziv rasporeda je: " + schedule.getScheduleName() +  ".");
+    }
+
     private static void unosKorisnikaIRasporeda() {
         int id = 0;
         User user = unosKorisnikaDuplication(id);
         userDao.save(user);
-
-        Schedule schedule = unosRasporedaDuplication(id, user.getId());
-        scheduleDao.save(schedule);
     }
 
     private static void brisanjeKorisnika() {
@@ -158,6 +166,12 @@ public class App
     }
 
     private static void unosRasporeda() {
+        int id = 0;
+        System.out.println("Unesite ispravan id korisnika čiji raspored želite kreireati: ");
+        int userId = ulaz.nextInt();
+        if(ulaz.hasNextLine()) ulaz.nextLine();
+        Schedule schedule = unosRasporedaDuplication(id, userId);
+        scheduleDao.save(schedule);
 
     }
 
