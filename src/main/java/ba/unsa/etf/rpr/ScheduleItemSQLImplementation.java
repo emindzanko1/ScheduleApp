@@ -1,9 +1,6 @@
 package ba.unsa.etf.rpr;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +15,8 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
         String username = "freedb_edzanko1";
         String password = System.getenv("MYSQL_PASS");
         conn = DriverManager.getConnection(url, username, password);
+        pretragaUpit = conn.prepareStatement("SELECT * FROM ScheduleItem WHERE Item_ID=?");
+
     }
 
     public static ScheduleItemSQLImplementation getInstance() throws SQLException {
@@ -32,7 +31,18 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
     }
     @Override
     public ArrayList<ScheduleItem> get(int id) {
-        return null;
+        ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
+        try {
+            pretragaUpit.setString(1, String.valueOf(id));
+            ResultSet rs = pretragaUpit.executeQuery();
+            while(rs.next()) {
+                scheduleItems.add(new ScheduleItem(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+            }
+            System.out.println("Connection successful!");
+        } catch (SQLException e) {
+            System.out.println("Connection failed: " + e.getMessage());
+        }
+        return scheduleItems;
     }
 
     @Override

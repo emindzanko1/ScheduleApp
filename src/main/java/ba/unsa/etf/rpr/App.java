@@ -7,11 +7,14 @@ public class App
 {
     private static UserSQLImplementation userDao;
     private static ScheduleSQLImplementation scheduleDao;
+    private static ScheduleItemSQLImplementation scheduleItemDao;
     private static Scanner ulaz;
     public static void main( String[] args ) throws SQLException {
 
         userDao = UserSQLImplementation.getInstance();
         scheduleDao = ScheduleSQLImplementation.getInstance();
+        scheduleItemDao = ScheduleItemSQLImplementation.getInstance();
+
 
         ulaz = new Scanner(System.in);
 
@@ -136,6 +139,11 @@ public class App
     }
 
     private static void pretragaSadržajaRasporeda() {
+        System.out.println("Unesite id sadržaja kojeg želite pretražiti: ");
+        int id = ulaz.nextInt();
+
+        for(ScheduleItem scheduleItemDao : scheduleItemDao.get(id))
+            System.out.println("Naziv sadržaja je: " + scheduleItemDao.getEventName() + ".");
     }
 
     private static User unosKorisnikaDuplication(int id) {
