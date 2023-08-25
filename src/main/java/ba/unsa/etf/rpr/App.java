@@ -83,30 +83,6 @@ public class App
             }
             while (opcija != 0);
         }
-
-
-    }
-
-    private static void pretragaRasporedaPoImenu() {
-        System.out.println("Unesite naziv raspored koji želite pretražiti:  ");
-        String scheduleName = ulaz.nextLine();
-
-        for(Schedule schedule : scheduleDao.getByScheduleName(scheduleName))
-            System.out.println("Naziv rasporeda je: " + schedule.getScheduleName() +  ".");
-    }
-
-    private static void unosKorisnika() {
-        int id = 0;
-        User user = unosKorisnikaDuplication(id);
-        userDao.save(user);
-    }
-
-    private static void brisanjeKorisnika() {
-        int id;
-        System.out.println("Unesite ID usera kojeg brišete: ");
-        id = ulaz.nextInt();
-        User user = new User(id, "", "", "", "", "", "");
-        userDao.delete(user);
     }
 
     private static User unosKorisnikaDuplication(int id) {
@@ -124,6 +100,20 @@ public class App
         System.out.println("Unesite email:");
         email = ulaz.nextLine();
         return(new User(id, username, password, salt, firstName, lastName, email));
+    }
+
+    private static void unosKorisnika() {
+        int id = 0;
+        User user = unosKorisnikaDuplication(id);
+        userDao.save(user);
+    }
+
+    private static void brisanjeKorisnika() {
+        int id;
+        System.out.println("Unesite ID usera kojeg brišete: ");
+        id = ulaz.nextInt();
+        User user = new User(id, "", "", "", "", "", "");
+        userDao.delete(user);
     }
 
     private static void izmjenaKorisnika() {
@@ -172,14 +162,6 @@ public class App
         if(ulaz.hasNextLine()) ulaz.nextLine();
         Schedule schedule = unosRasporedaDuplication(id, userId);
         scheduleDao.save(schedule);
-
-    }
-
-    private static void pretragaSvihRasporeda() {
-        System.out.println("Pretražite naziv svakog rasporeda: ");
-
-        for(Schedule schedule : scheduleDao.getAll())
-            System.out.println("Naziv svakog rasporeda: " + schedule.getScheduleName() + ".");
     }
 
     private static void brisanjeRasporeda() {
@@ -214,5 +196,18 @@ public class App
             System.out.println("Naziv rasporeda je: " + schedule.getScheduleName() + ".");
     }
 
+    private static void pretragaSvihRasporeda() {
+        System.out.println("Pretražite naziv svakog rasporeda: ");
 
+        for(Schedule schedule : scheduleDao.getAll())
+            System.out.println("Naziv svakog rasporeda: " + schedule.getScheduleName() + ".");
+    }
+
+    private static void pretragaRasporedaPoImenu() {
+        System.out.println("Unesite naziv raspored koji želite pretražiti:  ");
+        String scheduleName = ulaz.nextLine();
+
+        for(Schedule schedule : scheduleDao.getByScheduleName(scheduleName))
+            System.out.println("Naziv rasporeda je: " + schedule.getScheduleName() +  ".");
+    }
 }
