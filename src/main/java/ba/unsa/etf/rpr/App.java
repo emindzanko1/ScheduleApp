@@ -29,7 +29,7 @@ public class App
                         pretragaKorisnika();
                         break;
                     case 2:
-                        unosKorisnika();
+                        unosKorisnikaIRasporeda();
                         break;
                     case 3:
                         izmjenaKorisnika();
@@ -84,42 +84,13 @@ public class App
 
     }
 
-    private static void unosRasporedaDuplication(int id) {
-
-    }
-
-    private static void unosRasporeda() {
-        int id = 0;
-        //Schedule schedule = unosRasporedaDuplication(id);
-        System.out.println("Unesite naziv rasporeda: ");
-        String scheduleName = ulaz.nextLine();
-
-        Schedule schedule = new Schedule(id, id, scheduleName);
-
-        scheduleDao.save(schedule);
-    }
-
-    private static void pretragaSvihRasporeda() {
-    }
-
-    private static void brisanjeRasporeda() {
-    }
-
-    private static void izmjenaRasporeda() {
-    }
-
-    private static void pretragaRasporeda() {
-        System.out.println("Unesite id rasporeda kojeg želite pretražiti: ");
-        int id = ulaz.nextInt();
-
-        for(Schedule schedule : scheduleDao.get(id))
-            System.out.println("Naziv rasporeda je: " + schedule.getScheduleName() + ".");
-    }
-
-    private static void unosKorisnika() {
+    private static void unosKorisnikaIRasporeda() {
         int id = 0;
         User user = unosKorisnikaDuplication(id);
         userDao.save(user);
+
+        Schedule schedule = unosRasporedaDuplication(id, user.getId());
+        scheduleDao.save(schedule);
     }
 
     private static void brisanjeKorisnika() {
@@ -178,5 +149,34 @@ public class App
         for(User user : userDao.getByUsername(username))
             System.out.println("Ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
     }
+
+    private static Schedule unosRasporedaDuplication(int id, int userId) {
+        System.out.println("Unesite naziv rasporeda: ");
+        String scheduleName = ulaz.nextLine();
+
+        return new Schedule(id, userId, scheduleName);
+    }
+
+    private static void unosRasporeda() {
+
+    }
+
+    private static void pretragaSvihRasporeda() {
+    }
+
+    private static void brisanjeRasporeda() {
+    }
+
+    private static void izmjenaRasporeda() {
+    }
+
+    private static void pretragaRasporeda() {
+        System.out.println("Unesite id rasporeda kojeg želite pretražiti: ");
+        int id = ulaz.nextInt();
+
+        for(Schedule schedule : scheduleDao.get(id))
+            System.out.println("Naziv rasporeda je: " + schedule.getScheduleName() + ".");
+    }
+
 
 }

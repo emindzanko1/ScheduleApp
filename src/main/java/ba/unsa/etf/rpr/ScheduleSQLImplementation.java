@@ -19,6 +19,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         pretragaUpit = conn.prepareStatement("SELECT * FROM Schedule WHERE Schedule_ID=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(Schedule_ID)+1 FROM Schedule");
         dodavanjeUpit = conn.prepareStatement("INSERT INTO Schedule VALUES(?,?,?)");
+        sviUpit = conn.prepareStatement("SELECT * FROM Schedule");
 
     }
 
@@ -51,7 +52,18 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
     @Override
     public List<Schedule> getAll() {
-        return null;
+        List<Schedule> schedules = new ArrayList<Schedule>();
+        try {
+            ResultSet rs = sviUpit.executeQuery();
+            while(rs.next()) {
+                schedules.add(new Schedule(rs.getInt(1), rs.getInt(2), rs.getString(3)));
+            }
+            System.out.println("Connection successful!");
+        }
+        catch (SQLException e) {
+            System.out.println("Connection failed: " + e.getMessage());
+        }
+        return schedules;
     }
 
     @Override
