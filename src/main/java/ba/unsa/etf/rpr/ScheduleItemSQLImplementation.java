@@ -21,6 +21,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
         izmjenaUpit = conn.prepareStatement("UPDATE ScheduleItem SET dayOfWeek=?, startTime=?, endTime=?, eventName=?, location=? WHERE Item_ID=?");
         brisanjeUpit = conn.prepareStatement("DELETE FROM ScheduleItem WHERE Item_ID=?");
         sviUpit = conn.prepareStatement("SELECT * FROM ScheduleItem");
+        poImenuUpit = conn.prepareStatement("SELECT * FROM ScheduleItem WHERE eventName=?");
     }
 
     public static ScheduleItemSQLImplementation getInstance() throws SQLException {
@@ -114,6 +115,17 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
 
     @Override
     public List<ScheduleItem> getByEventName(String eventName) {
-        return null;
+        List<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
+        try {
+            poImenuUpit.setString(1, eventName);
+            ResultSet rs = poImenuUpit.executeQuery();
+            while(rs.next()) {
+                scheduleItems.add(new ScheduleItem(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+            }
+            System.out.println("Connection successful!");
+        } catch (SQLException e) {
+            System.out.println("Connection failed: " + e.getMessage());
+        }
+        return scheduleItems;
     }
 }
