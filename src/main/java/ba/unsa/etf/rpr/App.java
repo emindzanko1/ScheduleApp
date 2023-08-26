@@ -135,9 +135,6 @@ public class App
     private static void izmjenaSadržajaRasporeda() {
     }
 
-    private static void unosSadržajaRasporeda() {
-    }
-
     private static void pretragaSadržajaRasporeda() {
         System.out.println("Unesite id sadržaja kojeg želite pretražiti: ");
         int id = ulaz.nextInt();
@@ -161,6 +158,30 @@ public class App
         System.out.println("Unesite email:");
         email = ulaz.nextLine();
         return(new User(id, username, password, salt, firstName, lastName, email));
+    }
+
+    private static void unosSadržajaRasporeda() {
+        int id = 0;
+        System.out.println("Unesite ispravan id rasporeda čije stavke želite kreireati: ");
+        int scheduleId = ulaz.nextInt();
+        if(ulaz.hasNextLine()) ulaz.nextLine();
+        ScheduleItem scheduleItem = uunosSadržajaRasporedaDuplication(id, scheduleId);
+        scheduleItemDao.save(scheduleItem);
+    }
+
+    private static ScheduleItem uunosSadržajaRasporedaDuplication(int id, int scheduleId) {
+        String dayOfTheWeek, startTime, endTime, eventName, location;
+        System.out.println("Unesite dan u sedmici: ");
+        dayOfTheWeek = ulaz.nextLine();
+        System.out.println("Unesite početno vrijeme: ");
+        startTime = ulaz.nextLine();
+        System.out.println("Unesite krajnje vrijeme: ");
+        endTime = ulaz.nextLine();
+        System.out.println("Unesite naziv događaja: ");
+        eventName = ulaz.nextLine();
+        System.out.println("Unesite lokaciju: ");
+        location = ulaz.nextLine();
+        return(new ScheduleItem(id, scheduleId, dayOfTheWeek, startTime, endTime, eventName, location));
     }
 
     private static void unosKorisnika() {

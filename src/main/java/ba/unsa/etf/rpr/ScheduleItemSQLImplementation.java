@@ -16,7 +16,8 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
         String password = System.getenv("MYSQL_PASS");
         conn = DriverManager.getConnection(url, username, password);
         pretragaUpit = conn.prepareStatement("SELECT * FROM ScheduleItem WHERE Item_ID=?");
-
+        noviIdUpit = conn.prepareStatement("SELECT MAX(Item_ID)+1 FROM ScheduleItem");
+        dodavanjeUpit = conn.prepareStatement("INSERT INTO ScheduleItem VALUES(?,?,?,?,?,?,?)");
     }
 
     public static ScheduleItemSQLImplementation getInstance() throws SQLException {
@@ -52,7 +53,25 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
 
     @Override
     public void save(ScheduleItem scheduleItem) {
+        try {
+            ResultSet rs = noviIdUpit.executeQuery();
+            if(rs.next())
+                scheduleItem.setId(rs.getInt(1));
+            else
+                scheduleItem.setId(1);
 
+            dodavanjeUpit.setInt(1, scheduleItem.getId());
+            dodavanjeUpit.setInt(2, scheduleItem.getScheduleId());
+            dodavanjeUpit.setString(3, scheduleItem.getDayOfWeek());;
+            dodavanjeUpit.setString(4, scheduleItem.getStartTime());
+            dodavanjeUpit.setString(5, scheduleItem.getEndTime());
+            dodavanjeUpit.setString(6, scheduleItem.getEventName());
+            dodavanjeUpit.setString(7, scheduleItem.getLocation());
+            dodavanjeUpit.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
