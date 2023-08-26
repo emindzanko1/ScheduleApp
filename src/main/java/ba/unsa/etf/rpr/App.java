@@ -130,6 +130,15 @@ public class App
     }
 
     private static void brisanjeSadržajaRasporeda() {
+        int id, scheduleId;
+        System.out.println("Unesite ID sadržaja rasporeda kojeg brišete: ");
+        id = ulaz.nextInt();
+        if(ulaz.hasNextLine()) ulaz.nextLine();
+        System.out.println("Unesite ID rasporeda čiji sadržaj brišete: ");
+        scheduleId = ulaz.nextInt();
+        if(ulaz.hasNextLine()) ulaz.nextLine();
+        ScheduleItem scheduleItem = new ScheduleItem(id, scheduleId, "", "", "", "", "");
+        scheduleItemDao.delete(scheduleItem);
     }
 
     private static void izmjenaSadržajaRasporeda() {
