@@ -124,6 +124,11 @@ public class App
     }
 
     private static void pretragaSadržajaRasporedaPoImenu() {
+        System.out.println("Unesite naziv događaja:  ");
+        String eventName = ulaz.nextLine();
+
+        for(ScheduleItem scheduleItem : scheduleItemDao.getByEventName(eventName))
+            System.out.println("Naziv događaja je: " + scheduleItem.getEventName());
     }
 
     private static void pretragaSvihSadržajaRasporeda() {
