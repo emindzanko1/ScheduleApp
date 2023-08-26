@@ -20,6 +20,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
         dodavanjeUpit = conn.prepareStatement("INSERT INTO ScheduleItem VALUES(?,?,?,?,?,?,?)");
         izmjenaUpit = conn.prepareStatement("UPDATE ScheduleItem SET dayOfWeek=?, startTime=?, endTime=?, eventName=?, location=? WHERE Item_ID=?");
         brisanjeUpit = conn.prepareStatement("DELETE FROM ScheduleItem WHERE Item_ID=?");
+        sviUpit = conn.prepareStatement("SELECT * FROM ScheduleItem");
     }
 
     public static ScheduleItemSQLImplementation getInstance() throws SQLException {
@@ -50,7 +51,17 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
 
     @Override
     public List<ScheduleItem> getAll() {
-        return null;
+        ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
+        try {
+            ResultSet rs = sviUpit.executeQuery();
+            while(rs.next()) {
+                scheduleItems.add(new ScheduleItem(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+            }
+            System.out.println("Connection successful!");
+        } catch (SQLException e) {
+            System.out.println("Connection failed: " + e.getMessage());
+        }
+        return scheduleItems;
     }
 
     @Override
