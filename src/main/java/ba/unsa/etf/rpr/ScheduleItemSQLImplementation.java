@@ -18,7 +18,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
         pretragaUpit = conn.prepareStatement("SELECT * FROM ScheduleItem WHERE Item_ID=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(Item_ID)+1 FROM ScheduleItem");
         dodavanjeUpit = conn.prepareStatement("INSERT INTO ScheduleItem VALUES(?,?,?,?,?,?,?)");
-        izmjenaUpit = conn.prepareStatement("UPDATE ScheduleItem SET dayOfWweek=?, startTime=?, endTime=?, eventName=?, location=? WHERE Item_ID=?");
+        izmjenaUpit = conn.prepareStatement("UPDATE ScheduleItem SET dayOfWeek=?, startTime=?, endTime=?, eventName=?, location=? WHERE Item_ID=?");
     }
 
     public static ScheduleItemSQLImplementation getInstance() throws SQLException {

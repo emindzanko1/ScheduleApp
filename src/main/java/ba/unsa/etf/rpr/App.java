@@ -133,6 +133,15 @@ public class App
     }
 
     private static void izmjenaSadržajaRasporeda() {
+        int id, scheduleId;
+        System.out.println("Unesite ID sadržaja rasporeda koje mijenjate mijenjate: ");
+        id = ulaz.nextInt();
+        if(ulaz.hasNextLine()) ulaz.nextLine();
+        System.out.println("Unesite ID rasporeda čiji sadržaj mijenjate: ");
+        scheduleId = ulaz.nextInt();
+        if(ulaz.hasNextLine()) ulaz.nextLine();
+        ScheduleItem scheduleItem = uunosSadržajaRasporedaDuplication(id,scheduleId);
+        scheduleItemDao.update(scheduleItem);
     }
 
     private static void pretragaSadržajaRasporeda() {
