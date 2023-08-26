@@ -38,7 +38,7 @@ public class UserSQLImplementation implements UserDao  {
 
     @Override
     public ArrayList<User> get(int id) {
-        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<User> users = new ArrayList<>();
         try {
             pretragaUpit.setString(1, String.valueOf(id));
             ResultSet rs = pretragaUpit.executeQuery();
@@ -54,7 +54,7 @@ public class UserSQLImplementation implements UserDao  {
 
     @Override
     public List<User> getAll() {
-        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<User> users = new ArrayList<>();
         try {
             ResultSet rs = sviUpit.executeQuery();
             while(rs.next()) {
@@ -78,7 +78,7 @@ public class UserSQLImplementation implements UserDao  {
 
             dodavanjeUpit.setInt(1, user.getId());
             dodavanjeUpit.setString(2, user.getUsername());
-            dodavanjeUpit.setString(3, user.getPassword());;
+            dodavanjeUpit.setString(3, user.getPassword());
             dodavanjeUpit.setString(4, user.getSalt());
             dodavanjeUpit.setString(5, user.getFirstName());
             dodavanjeUpit.setString(6, user.getLastName());
@@ -95,7 +95,7 @@ public class UserSQLImplementation implements UserDao  {
         try {
             izmjenaUpit.setInt(7, user.getId());
             izmjenaUpit.setString(1, user.getUsername());
-            izmjenaUpit.setString(2, user.getPassword());;
+            izmjenaUpit.setString(2, user.getPassword());
             izmjenaUpit.setString(3, user.getSalt());
             izmjenaUpit.setString(4, user.getFirstName());
             izmjenaUpit.setString(5, user.getLastName());
@@ -118,7 +118,7 @@ public class UserSQLImplementation implements UserDao  {
 
     @Override
     public List<User> getByUsername(String username) {
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
         try {
             poImenuUpit.setString(1, username);
             ResultSet rs = poImenuUpit.executeQuery();
