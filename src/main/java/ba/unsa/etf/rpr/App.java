@@ -127,6 +127,10 @@ public class App
     }
 
     private static void pretragaSvihSadržajaRasporeda() {
+        System.out.println("Pretražite naziv sadržaja rasporeda: ");
+
+        for(ScheduleItem scheduleItem : scheduleItemDao.getAll())
+            System.out.println("Naziv sadržaja rasporeda je: " + scheduleItem.getEventName() + ".");
     }
 
     private static void brisanjeSadržajaRasporeda() {
