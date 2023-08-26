@@ -158,7 +158,7 @@ public class App
         System.out.println("Unesite ID rasporeda čiji sadržaj mijenjate: ");
         scheduleId = ulaz.nextInt();
         if(ulaz.hasNextLine()) ulaz.nextLine();
-        ScheduleItem scheduleItem = uunosSadržajaRasporedaDuplication(id,scheduleId);
+        ScheduleItem scheduleItem = unosSadržajaRasporedaDuplication(id,scheduleId);
         scheduleItemDao.update(scheduleItem);
     }
 
@@ -192,11 +192,11 @@ public class App
         System.out.println("Unesite ispravan id rasporeda čije stavke želite kreireati: ");
         int scheduleId = ulaz.nextInt();
         if(ulaz.hasNextLine()) ulaz.nextLine();
-        ScheduleItem scheduleItem = uunosSadržajaRasporedaDuplication(id, scheduleId);
+        ScheduleItem scheduleItem = unosSadržajaRasporedaDuplication(id, scheduleId);
         scheduleItemDao.save(scheduleItem);
     }
 
-    private static ScheduleItem uunosSadržajaRasporedaDuplication(int id, int scheduleId) {
+    private static ScheduleItem unosSadržajaRasporedaDuplication(int id, int scheduleId) {
         String dayOfTheWeek, startTime, endTime, eventName, location;
         System.out.println("Unesite dan u sedmici: ");
         dayOfTheWeek = ulaz.nextLine();
