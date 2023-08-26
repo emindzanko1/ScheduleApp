@@ -7,8 +7,8 @@ import java.util.List;
 public class ScheduleItemSQLImplementation implements ScheduleItemDao{
     private static ScheduleItemSQLImplementation instance = null;
 
-    private Connection conn;
-    private PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit, sviUpit, poImenuUpit;
+    private final Connection conn;
+    private final PreparedStatement  pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit, sviUpit, poImenuUpit;
 
     private ScheduleItemSQLImplementation() throws SQLException {
         String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_RPR Projekat";
@@ -115,7 +115,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
 
     @Override
     public List<ScheduleItem> getByEventName(String eventName) {
-        List<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
+        List<ScheduleItem> scheduleItems = new ArrayList<>();
         try {
             poImenuUpit.setString(1, eventName);
             ResultSet rs = poImenuUpit.executeQuery();
