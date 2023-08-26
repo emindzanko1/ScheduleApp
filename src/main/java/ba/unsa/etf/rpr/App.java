@@ -18,7 +18,7 @@ public class App
 
         ulaz = new Scanner(System.in);
 
-        int opcija = 0, brojTabele = 0;
+        int opcija, brojTabele ;
         do {
             System.out.println("S kojom tabelom želite da radite: 1, 2 ili 3? Unesite 0 ako ne želite da radite.");
             brojTabele = ulaz.nextInt();
@@ -92,22 +92,22 @@ public class App
                     if (ulaz.hasNextLine()) ulaz.nextLine();
                     switch (opcija) {
                         case 1:
-                            pretragaSadržajaRasporeda();
+                            pretragaSadrzajaRasporeda();
                             break;
                         case 2:
-                            unosSadržajaRasporeda();
+                            unosSadrzajaRasporeda();
                             break;
                         case 3:
-                            izmjenaSadržajaRasporeda();
+                            izmjenaSadrzajaRasporeda();
                             break;
                         case 4:
-                            brisanjeSadržajaRasporeda();
+                            brisanjeSadrzajaRasporeda();
                             break;
                         case 5:
-                            pretragaSvihSadržajaRasporeda();
+                            pretragaSvihSadrzajaRasporeda();
                             break;
                         case 6:
-                            pretragaSadržajaRasporedaPoImenu();
+                            pretragaSadrzajaRasporedaPoImenu();
                             break;
                         case 0:
                             break;
@@ -123,7 +123,7 @@ public class App
         } while(brojTabele != 0);
     }
 
-    private static void pretragaSadržajaRasporedaPoImenu() {
+    private static void pretragaSadrzajaRasporedaPoImenu() {
         System.out.println("Unesite naziv događaja:  ");
         String eventName = ulaz.nextLine();
 
@@ -131,14 +131,14 @@ public class App
             System.out.println("Naziv događaja je: " + scheduleItem.getEventName());
     }
 
-    private static void pretragaSvihSadržajaRasporeda() {
+    private static void pretragaSvihSadrzajaRasporeda() {
         System.out.println("Pretražite naziv sadržaja rasporeda: ");
 
         for(ScheduleItem scheduleItem : scheduleItemDao.getAll())
             System.out.println("Naziv sadržaja rasporeda je: " + scheduleItem.getEventName() + ".");
     }
 
-    private static void brisanjeSadržajaRasporeda() {
+    private static void brisanjeSadrzajaRasporeda() {
         int id, scheduleId;
         System.out.println("Unesite ID sadržaja rasporeda kojeg brišete: ");
         id = ulaz.nextInt();
@@ -150,7 +150,7 @@ public class App
         scheduleItemDao.delete(scheduleItem);
     }
 
-    private static void izmjenaSadržajaRasporeda() {
+    private static void izmjenaSadrzajaRasporeda() {
         int id, scheduleId;
         System.out.println("Unesite ID sadržaja rasporeda koje mijenjate mijenjate: ");
         id = ulaz.nextInt();
@@ -158,11 +158,11 @@ public class App
         System.out.println("Unesite ID rasporeda čiji sadržaj mijenjate: ");
         scheduleId = ulaz.nextInt();
         if(ulaz.hasNextLine()) ulaz.nextLine();
-        ScheduleItem scheduleItem = unosSadržajaRasporedaDuplication(id,scheduleId);
+        ScheduleItem scheduleItem = unosSadrzajaRasporedaDuplication(id,scheduleId);
         scheduleItemDao.update(scheduleItem);
     }
 
-    private static void pretragaSadržajaRasporeda() {
+    private static void pretragaSadrzajaRasporeda() {
         System.out.println("Unesite id sadržaja kojeg želite pretražiti: ");
         int id = ulaz.nextInt();
 
@@ -187,16 +187,16 @@ public class App
         return(new User(id, username, password, salt, firstName, lastName, email));
     }
 
-    private static void unosSadržajaRasporeda() {
+    private static void unosSadrzajaRasporeda() {
         int id = 0;
         System.out.println("Unesite ispravan id rasporeda čije stavke želite kreireati: ");
         int scheduleId = ulaz.nextInt();
         if(ulaz.hasNextLine()) ulaz.nextLine();
-        ScheduleItem scheduleItem = unosSadržajaRasporedaDuplication(id, scheduleId);
+        ScheduleItem scheduleItem = unosSadrzajaRasporedaDuplication(id, scheduleId);
         scheduleItemDao.save(scheduleItem);
     }
 
-    private static ScheduleItem unosSadržajaRasporedaDuplication(int id, int scheduleId) {
+    private static ScheduleItem unosSadrzajaRasporedaDuplication(int id, int scheduleId) {
         String dayOfTheWeek, startTime, endTime, eventName, location;
         System.out.println("Unesite dan u sedmici: ");
         dayOfTheWeek = ulaz.nextLine();
