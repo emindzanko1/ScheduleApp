@@ -39,7 +39,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
     @Override
     public ArrayList<Schedule> get(int id) {
-        ArrayList<Schedule> schedules = new ArrayList<Schedule>();
+        ArrayList<Schedule> schedules = new ArrayList<>();
         try {
             pretragaUpit.setString(1, String.valueOf(id));
             ResultSet rs = pretragaUpit.executeQuery();
@@ -55,7 +55,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
     @Override
     public List<Schedule> getAll() {
-        List<Schedule> schedules = new ArrayList<Schedule>();
+        List<Schedule> schedules = new ArrayList<>();
         try {
             ResultSet rs = sviUpit.executeQuery();
             while(rs.next()) {
@@ -80,7 +80,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
             dodavanjeUpit.setInt(1, schedule.getId());
             dodavanjeUpit.setInt(2, schedule.getUserId());
-            dodavanjeUpit.setString(3, schedule.getScheduleName());;
+            dodavanjeUpit.setString(3, schedule.getScheduleName());
 
             dodavanjeUpit.execute();
 
@@ -112,7 +112,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
     @Override
     public List<Schedule> getByScheduleName(String scheduleName) {
-        List<Schedule> schedules = new ArrayList<Schedule>();
+        List<Schedule> schedules = new ArrayList<>();
         try {
             poImenuUpit.setString(1, scheduleName);
             ResultSet rs = poImenuUpit.executeQuery();
