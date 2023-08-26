@@ -36,7 +36,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
     }
     @Override
     public ArrayList<ScheduleItem> get(int id) {
-        ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
+        ArrayList<ScheduleItem> scheduleItems = new ArrayList<>();
         try {
             pretragaUpit.setString(1, String.valueOf(id));
             ResultSet rs = pretragaUpit.executeQuery();
@@ -52,7 +52,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
 
     @Override
     public List<ScheduleItem> getAll() {
-        ArrayList<ScheduleItem> scheduleItems = new ArrayList<ScheduleItem>();
+        ArrayList<ScheduleItem> scheduleItems = new ArrayList<>();
         try {
             ResultSet rs = sviUpit.executeQuery();
             while(rs.next()) {
@@ -76,7 +76,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
 
             dodavanjeUpit.setInt(1, scheduleItem.getId());
             dodavanjeUpit.setInt(2, scheduleItem.getScheduleId());
-            dodavanjeUpit.setString(3, scheduleItem.getDayOfWeek());;
+            dodavanjeUpit.setString(3, scheduleItem.getDayOfWeek());
             dodavanjeUpit.setString(4, scheduleItem.getStartTime());
             dodavanjeUpit.setString(5, scheduleItem.getEndTime());
             dodavanjeUpit.setString(6, scheduleItem.getEventName());
@@ -93,7 +93,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
         try {
             izmjenaUpit.setInt(6, scheduleItem.getId());
             izmjenaUpit.setString(1, scheduleItem.getDayOfWeek());
-            izmjenaUpit.setString(2, scheduleItem.getStartTime());;
+            izmjenaUpit.setString(2, scheduleItem.getStartTime());
             izmjenaUpit.setString(3, scheduleItem.getEndTime());
             izmjenaUpit.setString(4, scheduleItem.getEventName());
             izmjenaUpit.setString(5, scheduleItem.getLocation());
