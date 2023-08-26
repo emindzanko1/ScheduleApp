@@ -18,6 +18,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
         pretragaUpit = conn.prepareStatement("SELECT * FROM ScheduleItem WHERE Item_ID=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(Item_ID)+1 FROM ScheduleItem");
         dodavanjeUpit = conn.prepareStatement("INSERT INTO ScheduleItem VALUES(?,?,?,?,?,?,?)");
+        izmjenaUpit = conn.prepareStatement("UPDATE ScheduleItem SET dayOfWweek=?, startTime=?, endTime=?, eventName=?, location=? WHERE Item_ID=?");
     }
 
     public static ScheduleItemSQLImplementation getInstance() throws SQLException {
@@ -76,7 +77,17 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
 
     @Override
     public void update(ScheduleItem scheduleItem) {
-
+        try {
+            izmjenaUpit.setInt(6, scheduleItem.getId());
+            izmjenaUpit.setString(1, scheduleItem.getDayOfWeek());
+            izmjenaUpit.setString(2, scheduleItem.getStartTime());;
+            izmjenaUpit.setString(3, scheduleItem.getEndTime());
+            izmjenaUpit.setString(4, scheduleItem.getEventName());
+            izmjenaUpit.setString(5, scheduleItem.getLocation());
+            izmjenaUpit.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
