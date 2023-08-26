@@ -8,8 +8,8 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
     private static ScheduleSQLImplementation instance = null;
 
-    private Connection conn;
-    private PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit, sviUpit, poImenuUpit;
+    private final Connection conn;
+    private final PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit, sviUpit, poImenuUpit;
 
     private ScheduleSQLImplementation() throws SQLException {
         String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_RPR Projekat";
