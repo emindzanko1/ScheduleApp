@@ -39,7 +39,7 @@
                         </TextField>
                     </children>
                 </HBox>
-                <Label text="under" />
+                <Label fx:id="invalidNameId" />
 
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
@@ -55,7 +55,7 @@
                         </TextField>
                     </children>
                 </HBox>
-                <Label text="under" />
+                <Label fx:id="invalidUsernameId" />
 
                 <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="380.0">
                     <children>
@@ -74,8 +74,7 @@
                         <Insets />
                     </VBox.margin>
                 </HBox>
-                <Label text="under" />
-
+                <Label fx:id="invalidPasswordId" />
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Log In">
