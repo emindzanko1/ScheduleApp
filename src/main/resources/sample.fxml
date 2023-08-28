@@ -32,7 +32,7 @@
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="2">
         <buttons>
             <Button mnemonicParsing="false" text="Cancel" />
-          <Button mnemonicParsing="false" text="OK" />
+          <Button defaultButton="true" mnemonicParsing="false" text="OK" />
         </buttons>
          <GridPane.margin>
             <Insets right="20.0" />
