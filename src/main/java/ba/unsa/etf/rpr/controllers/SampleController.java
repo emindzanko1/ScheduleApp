@@ -17,7 +17,7 @@ public class SampleController {
     public TextField usernameId;
     public PasswordField passwordId;
 
-    public void probaDugmeta(ActionEvent actionEvent) throws IOException {
+    public void switchToRegistration(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/registration.fxml"));
         stage.setTitle("ScheduleApp");
