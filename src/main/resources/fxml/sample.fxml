@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.Hyperlink?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.SampleController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="522.3999633789062" minWidth="192.79996337890623" prefWidth="208.3999755859375" />
@@ -75,6 +76,6 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="383.0" text="Not registered? Create an account" GridPane.rowIndex="2" />
+      <Hyperlink alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="383.0" text="Not registered? Create an account" GridPane.rowIndex="2" />
     </children>
 </GridPane>
