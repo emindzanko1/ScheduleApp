@@ -34,6 +34,9 @@
             <Button mnemonicParsing="false" text="Cancel" />
           <Button mnemonicParsing="false" text="OK" />
         </buttons>
+         <GridPane.margin>
+            <Insets right="20.0" />
+         </GridPane.margin>
       </ButtonBar>
    </children>
 </GridPane>
