@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
+
 public class SampleController {
     public Button cancelButtonId;
     public Button okButtonId;
@@ -19,9 +21,11 @@ public class SampleController {
 
     public void switchToRegistration(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/registration.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/registration.fxml"));
+        RegistrationController controller = new RegistrationController(usernameId.getText(), passwordId.getText());
+        loader.setController(controller);
         stage.setTitle("ScheduleApp");
-        stage.setScene(new Scene(root, 300, 275));
+        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
     }
 }
