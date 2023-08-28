@@ -31,8 +31,8 @@
       </PasswordField>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="2">
         <buttons>
-            <Button mnemonicParsing="false" text="Button" />
-          <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Cancel" />
+          <Button mnemonicParsing="false" text="OK" />
         </buttons>
       </ButtonBar>
    </children>
