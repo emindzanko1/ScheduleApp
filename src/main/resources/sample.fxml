@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="364.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1">
   <columnConstraints>
     <ColumnConstraints />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.39996337890625" minWidth="10.0" prefWidth="126.4000244140625" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="522.3999633789062" minWidth="365.60003662109375" prefWidth="473.5999755859375" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.39996337890625" minWidth="10.0" prefWidth="80.7999755859375" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="522.3999633789062" minWidth="228.79996051788325" prefWidth="284.0000244140625" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="113.20000610351562" minHeight="100.39998779296874" prefHeight="113.20000610351562" vgrow="SOMETIMES" />
@@ -27,7 +27,7 @@
             <Insets left="20.0" right="20.0" />
          </GridPane.margin>
       </TextField>
-      <PasswordField GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <PasswordField prefWidth="232.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="20.0" right="20.0" />
          </GridPane.margin>
@@ -41,14 +41,14 @@
             <Insets right="20.0" />
          </GridPane.margin>
       </ButtonBar>
-      <Label text="Username:" GridPane.columnIndex="1">
+      <Label prefHeight="18.0" prefWidth="81.0" text="Username:" GridPane.columnIndex="1">
          <GridPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="20.0" left="20.0" top="20.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Password:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Label prefHeight="18.0" prefWidth="67.0" text="Password:" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="20.0" left="20.0" top="20.0" />
          </GridPane.margin>
       </Label>
    </children>
