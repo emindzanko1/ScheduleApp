@@ -39,10 +39,9 @@ public class RegistrationController {
 
        passwordId.textProperty().addListener((obs, oldValue, newValue) -> {
            if(newValue.length() >= 5)
-               passwordId.setText(" ");
+               invalidPasswordId.setText(" ");
            else
-               passwordId.setText("Password must have at least 5 characters");
+               invalidPasswordId.setText("Password must have at least 5 characters");
        });
-
    }
 }
