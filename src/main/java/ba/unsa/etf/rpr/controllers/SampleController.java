@@ -12,6 +12,6 @@ public class SampleController {
     public PasswordField passwordId;
 
     public void probaDugmeta(ActionEvent actionEvent) {
-        System.out.println("uspjesna proba");
+        usernameId.setText("uspjesna proba");
     }
 }
