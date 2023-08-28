@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.controllers.SampleController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.39996337890625" minWidth="10.0" prefWidth="76.99998779296875" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="522.3999633789062" minWidth="192.79996337890623" prefWidth="208.3999755859375" />
@@ -28,7 +28,7 @@
         <ButtonBar prefHeight="42.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <buttons>
                 <Button mnemonicParsing="false" text="Cancel" />
-                <Button defaultButton="true" mnemonicParsing="false" text="OK" />
+                <Button defaultButton="true" mnemonicParsing="false" onAction="#probaDugmeta" text="OK" />
             </buttons>
             <GridPane.margin>
                 <Insets right="20.0" />
