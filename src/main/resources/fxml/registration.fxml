@@ -94,6 +94,6 @@
                 <Font size="20.0" />
             </font>
         </Label>
-        <Hyperlink fx:id="hyperlinkId" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="383.0" text="Already have an account? Log in instead!" GridPane.rowIndex="2" />
+        <Hyperlink fx:id="hyperlinkId" alignment="CENTER" contentDisplay="CENTER" onAction="#switchToLogin" prefHeight="18.0" prefWidth="383.0" text="Already have an account? Log in instead!" GridPane.rowIndex="2" />
     </children>
 </GridPane>
