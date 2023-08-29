@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +19,12 @@ public class SampleController {
     public Button okButtonId;
     public TextField usernameId;
     public PasswordField passwordId;
+
+    @FXML
+    public void initialize() {
+
+
+    }
 
     public void switchToRegistration(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
