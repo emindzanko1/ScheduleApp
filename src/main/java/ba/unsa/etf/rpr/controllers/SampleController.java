@@ -44,12 +44,13 @@ public class SampleController {
         String password = passwordId.getText();
         User user = UserSQLImplementation.getInstance().getByUsername(username);
 
-        if(user.getUsername() == null || !user.getUsername().equals(username)) {
+        if(user.getUsername() == null || !user.getUsername().equals(username))
             showAlert("Login Error", "Invalid username.");
-        }
+
+        else if(user.getPassword() == null || !user.getPassword().equals(password))
+            showAlert("Login Error", "Invalid password.");
 
         else {
-            System.out.println("username " + username + " .");
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));
             ScheduleController controller = new ScheduleController();
@@ -58,8 +59,6 @@ public class SampleController {
             stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             stage.show();
         }
-
-
     }
 
     private void showAlert(String title, String content) {
