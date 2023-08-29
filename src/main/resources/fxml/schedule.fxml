@@ -53,7 +53,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="133.0" text="ADD" GridPane.rowIndex="2">
+      <Button fx:id="addId" alignment="CENTER" mnemonicParsing="false"  onAction="#addSchedule" prefHeight="26.0" prefWidth="133.0" text="ADD" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="40.0" right="40.0" />
          </GridPane.margin>
