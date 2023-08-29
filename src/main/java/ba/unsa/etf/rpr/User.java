@@ -4,14 +4,12 @@ public class User {
     private int id;
     private String username, password, salt, firstName, lastName, email;
 
-    public User(int id, String username, String password, String salt, String firstName, String lastName, String email) {
+    public User(int id, String username, String password, String firstName, String lastName) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.salt = salt;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
     }
 
     public User() {
@@ -41,13 +39,6 @@ public class User {
         this.password = password;
     }
 
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -65,11 +56,5 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }
