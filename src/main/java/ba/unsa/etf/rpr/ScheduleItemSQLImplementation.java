@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.exceptions.ScheduleException;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

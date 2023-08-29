@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.User;
 import ba.unsa.etf.rpr.UserSQLImplementation;
+import ba.unsa.etf.rpr.exceptions.ScheduleException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +40,7 @@ public class SampleController {
         stage.show();
     }
 
-    public void login(ActionEvent actionEvent) throws IOException, SQLException {
+    public void login(ActionEvent actionEvent) throws IOException, SQLException, ScheduleException {
         String username = usernameId.getText();
         String password = passwordId.getText();
         User user = UserSQLImplementation.getInstance().getByUsername(username);

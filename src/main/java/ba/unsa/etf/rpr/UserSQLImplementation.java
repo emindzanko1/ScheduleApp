@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.exceptions.ScheduleException;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,7 @@ public class UserSQLImplementation implements UserDao  {
     }
 
     @Override
-    public ArrayList<User> get(int id) {
+    public ArrayList<User> get(int id) throws ScheduleException{
         ArrayList<User> users = new ArrayList<>();
         try {
             pretragaUpit.setString(1, String.valueOf(id));
@@ -45,15 +47,14 @@ public class UserSQLImplementation implements UserDao  {
             while(rs.next()) {
                 users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
-            System.out.println("Connection successful!");
         } catch (SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
+            throw new ScheduleException("Failed getting user by id.", e);
         }
         return users;
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAll() throws ScheduleException {
         ArrayList<User> users = new ArrayList<>();
         try {
             ResultSet rs = sviUpit.executeQuery();
@@ -62,13 +63,13 @@ public class UserSQLImplementation implements UserDao  {
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
+            throw new ScheduleException("Failed getting all user.", e);
         }
         return users;
     }
 
     @Override
-    public void save(User user) {
+    public void save(User user) throws ScheduleException {
         try {
             ResultSet rs = noviIdUpit.executeQuery();
             if(rs.next())
@@ -84,12 +85,12 @@ public class UserSQLImplementation implements UserDao  {
             dodavanjeUpit.execute();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ScheduleException("Failed creating a user.", e);
         }
     }
 
     @Override
-    public void update(User user) {
+    public void update(User user) throws ScheduleException {
         try {
             izmjenaUpit.setInt(5, user.getId());
             izmjenaUpit.setString(1, user.getUsername());
@@ -98,22 +99,23 @@ public class UserSQLImplementation implements UserDao  {
             izmjenaUpit.setString(4, user.getLastName());
             izmjenaUpit.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ScheduleException("Failed updating a user.", e);
         }
+
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(User user) throws ScheduleException {
         try {
             brisanjeUpit.setInt(1, user.getId());
             brisanjeUpit.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ScheduleException("Failed deleting a user.", e);
         }
     }
 
     @Override
-    public User getByUsername(String username) {
+    public User getByUsername(String username) throws ScheduleException {
         User user = new User();
         try {
             poImenuUpit.setString(1, username);
@@ -123,7 +125,7 @@ public class UserSQLImplementation implements UserDao  {
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
+            throw new ScheduleException("Failed getting a user by username.", e);
         }
         return user;
     }

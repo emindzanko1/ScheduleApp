@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.User;
 import ba.unsa.etf.rpr.UserSQLImplementation;
+import ba.unsa.etf.rpr.exceptions.ScheduleException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,7 +63,7 @@ public class RegistrationController {
        });
    }
 
-    public void register(ActionEvent actionEvent) throws IOException, SQLException {
+    public void register(ActionEvent actionEvent) throws IOException, SQLException, ScheduleException {
         String firstName = firstNameId.getText();
         String lastName = lastNameId.getText();
         String username = usernameId.getText();
