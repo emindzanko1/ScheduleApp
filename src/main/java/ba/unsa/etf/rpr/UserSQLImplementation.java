@@ -85,7 +85,7 @@ public class UserSQLImplementation implements UserDao  {
             dodavanjeUpit.execute();
 
         } catch (SQLException e) {
-            throw new ScheduleException("Failed creating a user.", e);
+            throw new ScheduleException("Failed creating a new user.", e);
         }
     }
 

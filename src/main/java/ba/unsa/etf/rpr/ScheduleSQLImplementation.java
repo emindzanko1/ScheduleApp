@@ -1,5 +1,7 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.exceptions.ScheduleException;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     }
 
     @Override
-    public ArrayList<Schedule> get(int id) {
+    public ArrayList<Schedule> get(int id) throws ScheduleException {
         ArrayList<Schedule> schedules = new ArrayList<>();
         try {
             pretragaUpit.setString(1, String.valueOf(id));
@@ -48,13 +50,13 @@ public class ScheduleSQLImplementation implements ScheduleDao {
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
+            throw new ScheduleException("Failed getting a schedule by id.", e);
         }
         return schedules;
     }
 
     @Override
-    public List<Schedule> getAll() {
+    public List<Schedule> getAll() throws ScheduleException {
         List<Schedule> schedules = new ArrayList<>();
         try {
             ResultSet rs = sviUpit.executeQuery();
@@ -64,13 +66,13 @@ public class ScheduleSQLImplementation implements ScheduleDao {
             System.out.println("Connection successful!");
         }
         catch (SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
+            throw new ScheduleException("Failed getting all schedules.", e);
         }
         return schedules;
     }
 
     @Override
-    public void save(Schedule schedule) {
+    public void save(Schedule schedule) throws ScheduleException {
         try {
             ResultSet rs = noviIdUpit.executeQuery();
             if(rs.next())
@@ -85,33 +87,33 @@ public class ScheduleSQLImplementation implements ScheduleDao {
             dodavanjeUpit.execute();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ScheduleException("Failed creating a new schedule.", e);
         }
     }
 
     @Override
-    public void update(Schedule schedule) {
+    public void update(Schedule schedule) throws ScheduleException {
         try {
             izmjenaUpit.setInt(2, schedule.getId());
             izmjenaUpit.setString(1, schedule.getScheduleName());
             izmjenaUpit.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ScheduleException("Failed updating a schedule.", e);
         }
     }
 
     @Override
-    public void delete(Schedule schedule) {
+    public void delete(Schedule schedule) throws ScheduleException {
         try {
             brisanjeUpit.setInt(1, schedule.getId());
             brisanjeUpit.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ScheduleException("Failed deleting a schedule.", e);
         }
     }
 
     @Override
-    public List<Schedule> getByScheduleName(String scheduleName) {
+    public List<Schedule> getByScheduleName(String scheduleName) throws ScheduleException {
         List<Schedule> schedules = new ArrayList<>();
         try {
             poImenuUpit.setString(1, scheduleName);
@@ -121,7 +123,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
+            throw new ScheduleException("Failed getting a schedule by name.", e);
         }
         return schedules;
     }

@@ -87,7 +87,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
             dodavanjeUpit.execute();
 
         } catch (SQLException e) {
-            throw new ScheduleException("Failed creating a schedule item.", e);
+            throw new ScheduleException("Failed creating a new schedule item.", e);
         }
     }
 
