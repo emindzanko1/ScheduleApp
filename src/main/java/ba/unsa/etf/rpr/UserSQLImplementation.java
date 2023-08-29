@@ -115,18 +115,18 @@ public class UserSQLImplementation implements UserDao  {
     }
 
     @Override
-    public List<User> getByUsername(String username) {
-        List<User> users = new ArrayList<>();
+    public User getByUsername(String username) {
+        User user = new User();
         try {
             poImenuUpit.setString(1, username);
             ResultSet rs = poImenuUpit.executeQuery();
             while(rs.next()) {
-                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
             System.out.println("Connection failed: " + e.getMessage());
         }
-        return users;
+        return user;
     }
 }

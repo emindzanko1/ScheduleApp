@@ -41,9 +41,14 @@ public class SampleController {
 
     public void login(ActionEvent actionEvent) throws IOException, SQLException {
         String username = usernameId.getText();
-        List<User> user = UserSQLImplementation.getInstance().getByUsername(username);
+        String password = passwordId.getText();
+        User user = UserSQLImplementation.getInstance().getByUsername(username);
 
-        if(!user.isEmpty()) {
+        if(user.getUsername() == null || !user.getUsername().equals(username)) {
+            showAlert("Login Error", "Invalid username.");
+        }
+
+        else {
             System.out.println("username " + username + " .");
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));
@@ -53,9 +58,7 @@ public class SampleController {
             stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             stage.show();
         }
-        else {
-            showAlert("Login Error", "Invalid username.");
-        }
+
 
     }
 
