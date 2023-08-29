@@ -2,21 +2,29 @@ package ba.unsa.etf.rpr;
 
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class ScheduleItemSQLImplementation implements ScheduleItemDao{
     private static ScheduleItemSQLImplementation instance = null;
 
-    private final Connection conn;
+    private Connection conn;
     private final PreparedStatement  pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit, sviUpit, poImenuUpit;
 
     private ScheduleItemSQLImplementation() throws SQLException {
-        String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_RPR Projekat";
-        String username = "freedb_edzanko1";
-        String password = System.getenv("MYSQL_PASS");
-        conn = DriverManager.getConnection(url, username, password);
+        Properties p = new Properties();
+        try {
+            p.load(ClassLoader.getSystemResource("application.properties").openStream());
+            String url = p.getProperty("db.url");
+            String username = p.getProperty("db.username");
+            String password = p.getProperty("db.password");
+            conn = DriverManager.getConnection(url, username, password);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         pretragaUpit = conn.prepareStatement("SELECT * FROM ScheduleItem WHERE Item_ID=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(Item_ID)+1 FROM ScheduleItem");
         dodavanjeUpit = conn.prepareStatement("INSERT INTO ScheduleItem VALUES(?,?,?,?,?,?,?)");
