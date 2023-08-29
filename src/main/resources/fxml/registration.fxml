@@ -39,7 +39,7 @@
                         </TextField>
                     </children>
                 </HBox>
-                <Label fx:id="invalidFirstNameId" />
+                <Label fx:id="invalidFirstNameId" textFill="#df0808" />
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                     <children>
                         <Label text="Last Name:">
@@ -54,7 +54,7 @@
                         </TextField>
                     </children>
                 </HBox>
-                <Label fx:id="invalidLastNameId" />
+                <Label fx:id="invalidLastNameId" textFill="#df0808"/>
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                     <children>
                         <Label text="Username:">
