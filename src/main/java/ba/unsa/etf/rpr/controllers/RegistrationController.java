@@ -57,4 +57,7 @@ public class RegistrationController {
        Stage stage = (Stage) usernameId.getScene().getWindow();
        stage.close();
     }
+
+
+
 }

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -19,6 +20,7 @@ public class SampleController {
     public Button okButtonId;
     public TextField usernameId;
     public PasswordField passwordId;
+    public Hyperlink hyperlinkId;
 
 
     @FXML
