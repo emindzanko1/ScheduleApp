@@ -20,9 +20,9 @@ public class SampleController {
     public TextField usernameId;
     public PasswordField passwordId;
 
+
     @FXML
     public void initialize() {
-
 
     }
 
@@ -34,5 +34,8 @@ public class SampleController {
         stage.setTitle("ScheduleApp");
         stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
+    }
+
+    public void login(ActionEvent actionEvent) {
     }
 }
