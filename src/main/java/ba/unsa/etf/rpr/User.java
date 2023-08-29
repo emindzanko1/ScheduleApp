@@ -2,7 +2,7 @@ package ba.unsa.etf.rpr;
 
 public class User {
     private int id;
-    private String username, password, salt, firstName, lastName, email;
+    private String username, password, salt, firstName, lastName;
 
     public User(int id, String username, String password, String firstName, String lastName) {
         this.id = id;
@@ -39,7 +39,6 @@ public class User {
         this.password = password;
     }
 
-
     public String getFirstName() {
         return firstName;
     }
@@ -55,6 +54,5 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
 
 }

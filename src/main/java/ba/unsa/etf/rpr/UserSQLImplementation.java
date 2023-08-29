@@ -43,7 +43,7 @@ public class UserSQLImplementation implements UserDao  {
             pretragaUpit.setString(1, String.valueOf(id));
             ResultSet rs = pretragaUpit.executeQuery();
             while(rs.next()) {
-                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
@@ -58,7 +58,7 @@ public class UserSQLImplementation implements UserDao  {
         try {
             ResultSet rs = sviUpit.executeQuery();
             while(rs.next()) {
-                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
@@ -91,13 +91,11 @@ public class UserSQLImplementation implements UserDao  {
     @Override
     public void update(User user) {
         try {
-            izmjenaUpit.setInt(7, user.getId());
+            izmjenaUpit.setInt(5, user.getId());
             izmjenaUpit.setString(1, user.getUsername());
             izmjenaUpit.setString(2, user.getPassword());
-            izmjenaUpit.setString(3, user.getSalt());
-            izmjenaUpit.setString(4, user.getFirstName());
-            izmjenaUpit.setString(5, user.getLastName());
-            izmjenaUpit.setString(6, user.getEmail());
+            izmjenaUpit.setString(3, user.getFirstName());
+            izmjenaUpit.setString(4, user.getLastName());
             izmjenaUpit.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,7 +119,7 @@ public class UserSQLImplementation implements UserDao  {
             poImenuUpit.setString(1, username);
             ResultSet rs = poImenuUpit.executeQuery();
             while(rs.next()) {
-                user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+                user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
