@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -66,26 +68,47 @@ public class RegistrationController {
         String username = usernameId.getText();
         String password = passwordId.getText();
 
-        User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setPassword(password);
-        newUser.setFirstName(firstName);
-        newUser.setLastName(lastName);
+        User user = UserSQLImplementation.getInstance().getByUsername(username);
 
-        UserSQLImplementation userSQL = UserSQLImplementation.getInstance();
-        userSQL.save(newUser);
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));
-        ScheduleController controller = new ScheduleController();
-        loader.setController(controller);
-        stage.setTitle("ScheduleApp");
-        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.show();
+        if (user.getUsername() != null) {
+            showAlert("Registration Error", "Username already exists.");
+        }
+        else if (username.length() < 5) {
+            showAlert("Registration Error", "Username is too short.");
+        }
+
+        else if (password.length() < 5) {
+            showAlert("Registration Error", "Password is too short.");
+        }  else {
+            User newUser = new User();
+            newUser.setUsername(username);
+            newUser.setPassword(password);
+            newUser.setFirstName(firstName);
+            newUser.setLastName(lastName);
+
+            UserSQLImplementation userSQL = UserSQLImplementation.getInstance();
+            userSQL.save(newUser);
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));
+            ScheduleController controller = new ScheduleController();
+            loader.setController(controller);
+            stage.setTitle("ScheduleApp");
+            stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.show();
+        }
     }
 
     public void switchToLogin(ActionEvent actionEvent) throws IOException {
        Stage stage = (Stage) usernameId.getScene().getWindow();
        stage.close();
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
 }
