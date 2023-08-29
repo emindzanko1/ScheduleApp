@@ -63,7 +63,7 @@ public class UserSQLImplementation implements UserDao  {
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
-            throw new ScheduleException("Failed getting all user.", e);
+            throw new ScheduleException("Failed getting all users.", e);
         }
         return users;
     }

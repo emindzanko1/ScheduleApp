@@ -37,7 +37,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
         instance = null;
     }
     @Override
-    public ArrayList<ScheduleItem> get(int id) {
+    public ArrayList<ScheduleItem> get(int id) throws ScheduleException {
         ArrayList<ScheduleItem> scheduleItems = new ArrayList<>();
         try {
             pretragaUpit.setString(1, String.valueOf(id));
@@ -47,13 +47,14 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
+            throw new ScheduleException("Failed getting schedule item by id.", e);
+
         }
         return scheduleItems;
     }
 
     @Override
-    public List<ScheduleItem> getAll() {
+    public List<ScheduleItem> getAll() throws ScheduleException {
         ArrayList<ScheduleItem> scheduleItems = new ArrayList<>();
         try {
             ResultSet rs = sviUpit.executeQuery();
@@ -62,13 +63,13 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
+            throw new ScheduleException("Failed getting all schedule items.", e);
         }
         return scheduleItems;
     }
 
     @Override
-    public void save(ScheduleItem scheduleItem) {
+    public void save(ScheduleItem scheduleItem) throws ScheduleException {
         try {
             ResultSet rs = noviIdUpit.executeQuery();
             if(rs.next())
@@ -86,12 +87,12 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
             dodavanjeUpit.execute();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ScheduleException("Failed creating a schedule item.", e);
         }
     }
 
     @Override
-    public void update(ScheduleItem scheduleItem) {
+    public void update(ScheduleItem scheduleItem) throws ScheduleException {
         try {
             izmjenaUpit.setInt(6, scheduleItem.getId());
             izmjenaUpit.setString(1, scheduleItem.getDayOfWeek());
@@ -101,22 +102,22 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
             izmjenaUpit.setString(5, scheduleItem.getLocation());
             izmjenaUpit.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ScheduleException("Failed updating a schedule item.", e);
         }
     }
 
     @Override
-    public void delete(ScheduleItem scheduleItem) {
+    public void delete(ScheduleItem scheduleItem) throws ScheduleException {
         try {
             brisanjeUpit.setInt(1, scheduleItem.getId());
             brisanjeUpit.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ScheduleException("Failed deleting a schedule item.", e);
         }
     }
 
     @Override
-    public List<ScheduleItem> getByEventName(String eventName) {
+    public List<ScheduleItem> getByEventName(String eventName) throws ScheduleException {
         List<ScheduleItem> scheduleItems = new ArrayList<>();
         try {
             poImenuUpit.setString(1, eventName);
@@ -126,7 +127,7 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
-            System.out.println("Connection failed: " + e.getMessage());
+            throw new ScheduleException("Failed getting event by name.", e);
         }
         return scheduleItems;
     }
