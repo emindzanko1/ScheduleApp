@@ -3,23 +3,18 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.User;
 import ba.unsa.etf.rpr.UserSQLImplementation;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class SampleController {
-    public Button cancelButtonId;
-    public Button okButtonId;
     public TextField usernameId;
     public PasswordField passwordId;
     public Hyperlink hyperlinkId;
@@ -30,7 +25,7 @@ public class SampleController {
 
     }
 
-    public void switchToRegistration(ActionEvent actionEvent) throws IOException {
+    public void switchToRegistration() throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/registration.fxml"));
         RegistrationController controller = new RegistrationController(usernameId.getText(), passwordId.getText());
@@ -40,16 +35,16 @@ public class SampleController {
         stage.show();
     }
 
-    public void login(ActionEvent actionEvent) throws IOException, SQLException, ScheduleException {
+    public void login() throws IOException, SQLException, ScheduleException {
         String username = usernameId.getText();
         String password = passwordId.getText();
         User user = UserSQLImplementation.getInstance().getByUsername(username);
 
         if(user.getUsername() == null || !user.getUsername().equals(username))
-            showAlert("Login Error", "Invalid username.");
+            showAlert("Invalid username.");
 
         else if(user.getPassword() == null || !user.getPassword().equals(password))
-            showAlert("Login Error", "Invalid password.");
+            showAlert("Invalid password.");
 
         else {
             Stage stage = new Stage();
@@ -62,9 +57,9 @@ public class SampleController {
         }
     }
 
-    private void showAlert(String title, String content) {
+    private void showAlert(String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
+        alert.setTitle("Login Error");
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
