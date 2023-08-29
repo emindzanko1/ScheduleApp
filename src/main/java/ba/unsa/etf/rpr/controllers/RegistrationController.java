@@ -70,7 +70,13 @@ public class RegistrationController {
 
         User user = UserSQLImplementation.getInstance().getByUsername(username);
 
-        if (user.getUsername() != null) {
+        if(firstName.length() < 1)
+            showAlert("Registration Error", "Enter your first name.");
+
+        else if(lastName.length() < 1)
+            showAlert("Registration Error", "Enter your last name.");
+
+        else if (user.getUsername() != null) {
             showAlert("Registration Error", "Username already exists.");
         }
         else if (username.length() < 5) {
