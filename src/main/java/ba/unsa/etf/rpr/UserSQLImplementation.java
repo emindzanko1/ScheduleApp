@@ -18,7 +18,7 @@ public class UserSQLImplementation implements UserDao  {
         conn = DriverManager.getConnection(url, username, password);
         pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE User_ID=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
-        dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?,?,?)");
+        dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?)");
         izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=? WHERE User_ID=?");
         brisanjeUpit = conn.prepareStatement("DELETE FROM User WHERE User_ID=?");
         sviUpit = conn.prepareStatement("SELECT * FROM User");
@@ -79,10 +79,8 @@ public class UserSQLImplementation implements UserDao  {
             dodavanjeUpit.setInt(1, user.getId());
             dodavanjeUpit.setString(2, user.getUsername());
             dodavanjeUpit.setString(3, user.getPassword());
-            dodavanjeUpit.setString(4, user.getSalt());
-            dodavanjeUpit.setString(5, user.getFirstName());
-            dodavanjeUpit.setString(6, user.getLastName());
-            dodavanjeUpit.setString(7, user.getEmail());
+            dodavanjeUpit.setString(4, user.getFirstName());
+            dodavanjeUpit.setString(5, user.getLastName());
             dodavanjeUpit.execute();
 
         } catch (SQLException e) {
