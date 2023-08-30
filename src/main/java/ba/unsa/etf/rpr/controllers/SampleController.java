@@ -48,8 +48,8 @@ public class SampleController {
 
         else {
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));
-            ScheduleController controller = new ScheduleController();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/main.fxml"));
+            MainController controller = new MainController();
             loader.setController(controller);
             stage.setTitle("ScheduleApp");
             stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
