@@ -50,7 +50,31 @@ public class UserTest {
         } catch (ScheduleException e) {
             e.printStackTrace();
         }
-        assertEquals(15, users.size());
+        assertEquals(20, users.size());
     }
 
+    @Test
+    public void saveUserTest() {
+        List<User> users = null;
+        try {
+            users = userDao.getAll();
+        } catch (ScheduleException e) {
+            e.printStackTrace();
+        }
+        User user = new User(23, "edzanko11","54321","Emin","Dzanko");
+        boolean foundUser = false;
+        for(User user1 : users) {
+            if(user1.getUsername().equals(user.getUsername()))
+                foundUser = true;
+        }
+        if(!foundUser) {
+            try {
+                userDao.save(user);
+            }
+            catch (ScheduleException e) {
+                e.printStackTrace();
+            }
+        }
+        assertEquals(user.getUsername(), "edzanko11");
+    }
 }
