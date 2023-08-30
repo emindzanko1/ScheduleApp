@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -36,27 +37,38 @@ public class ScheduleController {
     public void addSchedule() throws SQLException {
         try {
             String scheduleName = scheduleNameId.getText();
-            User user = UserSQLImplementation.getInstance().getByUsername(username);
+            if(scheduleName.length() == 0)
+                showAlert("Schedule name is too short.");
+            else {
+                User user = UserSQLImplementation.getInstance().getByUsername(username);
 
-            int userId = user.getId();
+                int userId = user.getId();
 
-            Schedule newSchedule = new Schedule();
-            newSchedule.setScheduleName(scheduleName);
-            newSchedule.setUserId(userId);
-            ScheduleSQLImplementation scheduleSQL = ScheduleSQLImplementation.getInstance();
-            scheduleSQL.save(newSchedule);
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
-            ScheduleFormController controller = new ScheduleFormController(scheduleName);
-            loader.setController(controller);
-            stage.setTitle("ScheduleApp");
-            stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-            stage.show();
+                Schedule newSchedule = new Schedule();
+                newSchedule.setScheduleName(scheduleName);
+                newSchedule.setUserId(userId);
+                ScheduleSQLImplementation scheduleSQL = ScheduleSQLImplementation.getInstance();
+                scheduleSQL.save(newSchedule);
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
+                ScheduleFormController controller = new ScheduleFormController(scheduleName);
+                loader.setController(controller);
+                stage.setTitle("ScheduleApp");
+                stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                stage.show();
+            }
         }
         catch (IOException | ScheduleException e) {
             System.out.println(e.getMessage());
         }
+    }
 
+    private void showAlert(String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Registration Error");
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
 }
