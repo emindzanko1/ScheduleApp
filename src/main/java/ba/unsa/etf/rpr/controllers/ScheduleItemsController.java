@@ -83,7 +83,6 @@ public class ScheduleItemsController {
         catch (ScheduleException | SQLException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     public void cancelAddingScheduleItems() {
@@ -103,7 +102,7 @@ public class ScheduleItemsController {
 
     private void showAlert(String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Registration Error");
+        alert.setTitle("Adding Schedule Item Error");
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();

@@ -71,7 +71,7 @@ public class ScheduleController {
 
     private void showAlert(String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Registration Error");
+        alert.setTitle("Creating Schedule Error");
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
