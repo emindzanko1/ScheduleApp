@@ -54,7 +54,27 @@ public class ScheduleFormController {
 
         stage.setOnHiding(x -> {
             List<String> lista = scheduleItemsController.vratiPodatke();
-            mondayListId.setItems(FXCollections.observableList(lista));
+            String dayOfWeek = lista.get(0);
+
+            switch (dayOfWeek) {
+                case "Monday":
+                    mondayListId.setItems(FXCollections.observableList(lista));
+                    break;
+                case "Tuesday":
+                    tuesdayListId.setItems(FXCollections.observableList(lista));
+                    break;
+                case "wednesday":
+                    wednesdayListId.setItems(FXCollections.observableList(lista));
+                    break;
+                case "thursday":
+                    thursdayListId.setItems(FXCollections.observableList(lista));
+                    break;
+                case "friday":
+                    fridayListId.setItems(FXCollections.observableList(lista));
+                    break;
+                default:
+                    break;
+            }
         });
     }
 

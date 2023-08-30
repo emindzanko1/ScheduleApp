@@ -87,7 +87,6 @@ public class ScheduleItemsController {
     }
 
     public void cancelAddingScheduleItems() {
-
         Stage stage = (Stage) cancelButtonId.getScene().getWindow();
         stage.close();
     }
