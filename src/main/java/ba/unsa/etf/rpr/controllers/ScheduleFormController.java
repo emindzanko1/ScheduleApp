@@ -1,15 +1,18 @@
 package ba.unsa.etf.rpr.controllers;
 
 import ba.unsa.etf.rpr.ScheduleSQLImplementation;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
@@ -20,6 +23,8 @@ public class ScheduleFormController {
     private Label title;
     @FXML
     private Button cancelId;
+    @FXML
+    private ListView<String> mondayListId;
 
     public ScheduleFormController(String scheduleName) {
         this.scheduleName = scheduleName;
@@ -38,6 +43,11 @@ public class ScheduleFormController {
         stage.setTitle("ScheduleApp");
         stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
+
+        stage.setOnHiding(x -> {
+            List<String> lista = scheduleItemsController.vratiPodatke();
+            mondayListId.setItems(FXCollections.observableList(lista));
+        });
     }
 
     public void cancel(ActionEvent actionEvent) {
