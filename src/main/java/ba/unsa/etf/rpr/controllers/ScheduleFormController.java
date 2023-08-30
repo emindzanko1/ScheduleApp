@@ -25,6 +25,14 @@ public class ScheduleFormController {
     private Button cancelId;
     @FXML
     private ListView<String> mondayListId;
+    @FXML
+    private ListView<String> tuesdayListId;
+    @FXML
+    private ListView<String> wednesdayListId;
+    @FXML
+    private ListView<String> thursdayListId;
+    @FXML
+    private ListView<String> fridayListId;
 
     public ScheduleFormController(String scheduleName) {
         this.scheduleName = scheduleName;
