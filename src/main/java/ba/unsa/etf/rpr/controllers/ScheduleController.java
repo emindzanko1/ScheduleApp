@@ -23,14 +23,21 @@ public class ScheduleController {
         stage.close();
     }
 
-    public void addSchedule() throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
-        ScheduleFormController controller = new ScheduleFormController();
-        loader.setController(controller);
-        stage.setTitle("ScheduleApp");
-        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.show();
+
+    public void addSchedule()  {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
+            ScheduleFormController controller = new ScheduleFormController();
+            loader.setController(controller);
+            stage.setTitle("ScheduleApp");
+            stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.show();
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }
