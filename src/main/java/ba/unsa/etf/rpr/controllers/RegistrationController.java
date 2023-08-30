@@ -91,7 +91,7 @@ public class RegistrationController {
             userSQL.save(newUser);
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/main.fxml"));
-            MainController controller = new MainController();
+            MainController controller = new MainController(username);
             loader.setController(controller);
             stage.setTitle("ScheduleApp");
             stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
