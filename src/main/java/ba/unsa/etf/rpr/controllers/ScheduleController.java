@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.Schedule;
-import ba.unsa.etf.rpr.ScheduleItemSQLImplementation;
+import ba.unsa.etf.rpr.*;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,8 +36,15 @@ public class ScheduleController {
     public void addSchedule() throws SQLException {
         try {
             String scheduleName = scheduleNameId.getText();
-            ScheduleItemSQLImplementation.getInstance().getByEventName(scheduleName);
+            User user = UserSQLImplementation.getInstance().getByUsername(username);
 
+            int userId = user.getId();
+
+            Schedule newSchedule = new Schedule();
+            newSchedule.setScheduleName(scheduleName);
+            newSchedule.setUserId(userId);
+            ScheduleSQLImplementation scheduleSQL = ScheduleSQLImplementation.getInstance();
+            scheduleSQL.save(newSchedule);
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
             ScheduleFormController controller = new ScheduleFormController(scheduleName);
