@@ -1,13 +1,20 @@
 package ba.unsa.etf.rpr.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
+
 public class MainController {
 
     public Label subtitleId;
+    public Button newScheduleId;
     public Button logoutId;
 
     private final String username;
@@ -24,5 +31,15 @@ public class MainController {
     public void logout() {
         Stage stage = (Stage) logoutId.getScene().getWindow();
         stage.close();
+    }
+
+    public void createSchedule() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));
+        ScheduleController controller = new ScheduleController();
+        loader.setController(controller);
+        stage.setTitle("ScheduleApp");
+        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.show();
     }
 }
