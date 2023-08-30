@@ -55,6 +55,7 @@ public class ScheduleFormController {
         stage.setOnHiding(x -> {
             List<String> lista = scheduleItemsController.vratiPodatke();
             String dayOfWeek = lista.get(0);
+            lista.remove(lista.get(0));
 
             switch (dayOfWeek) {
                 case "Monday":
