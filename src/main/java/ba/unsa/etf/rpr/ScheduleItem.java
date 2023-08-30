@@ -1,5 +1,9 @@
 package ba.unsa.etf.rpr;
 
+/**
+ * This class is bean for schedule item
+ * @author Emin Džanko
+ */
 public class ScheduleItem {
     private int id, scheduleId;
     private String dayOfWeek, startTime, endTime, eventName, location;

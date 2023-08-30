@@ -1,5 +1,9 @@
 package ba.unsa.etf.rpr;
 
+/**
+ * This class is bean for schedule
+ * @author Emin Džanko
+ */
 public class Schedule {
     private int id, userId;
     private String scheduleName;
