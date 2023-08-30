@@ -38,7 +38,7 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="dayOfWeekId" prefHeight="51.0" prefWidth="150.0">
+                  <TextField fx:id="dayOfWeekId" prefHeight="51.0" prefWidth="150.0" promptText="e.g. Monday">
                      <HBox.margin>
                         <Insets bottom="10.0" left="5.0" top="10.0" />
                      </HBox.margin>
@@ -52,7 +52,7 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="startTimeId" prefHeight="51.0" prefWidth="150.0">
+                  <TextField fx:id="startTimeId" prefHeight="51.0" prefWidth="150.0" promptText="e.g. 09:00">
                      <HBox.margin>
                         <Insets bottom="10.0" left="17.0" top="10.0" />
                      </HBox.margin>
@@ -66,7 +66,7 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="endTimeId" prefHeight="51.0" prefWidth="150.0">
+                  <TextField fx:id="endTimeId" prefHeight="51.0" prefWidth="150.0" promptText="e.g. 10:00">
                      <HBox.margin>
                         <Insets bottom="10.0" left="22.0" top="10.0" />
                      </HBox.margin>
@@ -83,7 +83,7 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="eventNameId" prefHeight="51.0" prefWidth="150.0">
+                  <TextField fx:id="eventNameId" prefHeight="51.0" prefWidth="150.0" promptText="e.g. Event">
                      <HBox.margin>
                         <Insets bottom="10.0" left="8.0" top="10.0" />
                      </HBox.margin>
@@ -97,7 +97,7 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="locationId" prefHeight="51.0" prefWidth="150.0">
+                  <TextField fx:id="locationId" prefHeight="51.0" prefWidth="150.0" promptText="e.g. Location">
                      <HBox.margin>
                         <Insets bottom="10.0" left="26.0" top="10.0" />
                      </HBox.margin>
