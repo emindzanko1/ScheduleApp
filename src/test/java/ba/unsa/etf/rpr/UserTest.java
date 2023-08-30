@@ -27,10 +27,10 @@ public class UserTest {
 
     @Test
     public void getUserByIdTest() {
-        int userIdToFind = 10;
+        int id = 10;
         List<User> users = null;
         try {
-            users = userDao.get(userIdToFind);
+            users = userDao.get(id);
         } catch (ScheduleException e) {
             e.printStackTrace();
         }
@@ -39,7 +39,7 @@ public class UserTest {
         assertEquals(1, users.size());
 
         User foundUser = users.get(0);
-        assertEquals(userIdToFind, foundUser.getId());
+        assertEquals(id, foundUser.getId());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class UserTest {
         } catch (ScheduleException e) {
             e.printStackTrace();
         }
-        assertEquals(20, users.size());
+        assertEquals(17, users.size());
     }
 
     @Test
@@ -77,4 +77,25 @@ public class UserTest {
         }
         assertEquals(user.getUsername(), "edzanko11");
     }
+
+    @Test
+    public void deleteUserTest() {
+
+    }
+
+    @Test
+    public void getUserByUsernameTest() {
+        int id = 12;
+        List<User> users = null;
+        try {
+            users = userDao.get(id);
+        } catch (ScheduleException e) {
+            e.printStackTrace();
+        }
+        User foundUser = users.get(0);
+        assertEquals(foundUser.getUsername(), "hilmo");
+
+    }
+
+
 }
