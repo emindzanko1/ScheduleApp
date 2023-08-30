@@ -32,7 +32,7 @@
             <Insets top="5.0" />
          </padding>
       </Label>
-      <TextField fx:id="scheduleNameId" alignment="TOP_CENTER" prefHeight="130.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TextField fx:id="scheduleNameId" prefHeight="130.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="100.0" right="20.0" />
          </GridPane.margin>
