@@ -41,4 +41,16 @@ public class UserTest {
         User foundUser = users.get(0);
         assertEquals(userIdToFind, foundUser.getId());
     }
+
+    @Test
+    public void getAllUsersTest() {
+        List<User> users = null;
+        try {
+            users = userDao.getAll();
+        } catch (ScheduleException e) {
+            e.printStackTrace();
+        }
+        assertEquals(15, users.size());
+    }
+
 }
