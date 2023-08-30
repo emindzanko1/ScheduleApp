@@ -50,13 +50,15 @@ public class ScheduleItemsController {
 
             int scheduleId = schedule.getId();
             String dayOfWeek = dayOfWeekId.getText().toLowerCase();
-
+            String startTime = startTimeId.getText();
+            String endTime = endTimeId.getText();
             List<String> workDays = Arrays.asList("monday", "tuesday", "wednesday", "thursday", "friday");
+            String timePattern = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
 
             if(!workDays.contains(dayOfWeek))
                 showAlert("Please enter a valid work day.");
-
-
+            else if(!(startTime.matches(timePattern) && endTime.matches(timePattern)))
+                showAlert("Please enter a valid time in a day in format hh:mm.");
 
             else {
 
