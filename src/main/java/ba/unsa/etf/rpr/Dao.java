@@ -5,6 +5,10 @@ import ba.unsa.etf.rpr.exceptions.ScheduleException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Root interface for all DAO classes
+ * @author Emin Džanko
+ */
 public interface Dao<T> {
 
     ArrayList<T> get(int id) throws ScheduleException;
