@@ -53,12 +53,12 @@
                 <Font size="20.0" />
             </font>
         </Label>
-        <Button fx:id="addId" alignment="CENTER" mnemonicParsing="false"  onAction="#addSchedule" prefHeight="26.0" prefWidth="133.0" text="ADD" GridPane.rowIndex="2">
+        <Button fx:id="addId" alignment="CENTER" mnemonicParsing="false"  onAction="#addScheduleItems" prefHeight="26.0" prefWidth="133.0" text="ADD" GridPane.rowIndex="2">
             <GridPane.margin>
                 <Insets left="40.0" right="40.0" />
             </GridPane.margin>
         </Button>
-        <Button fx:id="logoutId" alignment="CENTER" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="133.0" text="LOGOUT" GridPane.columnIndex="4" GridPane.rowIndex="2">
+        <Button fx:id="cancelId" alignment="CENTER" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="133.0" text="CANCEL" GridPane.columnIndex="4" GridPane.rowIndex="2">
             <GridPane.margin>
                 <Insets left="20.0" right="20.0" />
             </GridPane.margin>
