@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * MySQL Implementation of DAO
+ * @author Emin Džanko
+ */
 public class ScheduleItemSQLImplementation implements ScheduleItemDao{
     private static ScheduleItemSQLImplementation instance = null;
 

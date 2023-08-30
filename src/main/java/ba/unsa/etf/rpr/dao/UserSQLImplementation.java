@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * MySQL Implementation of DAO
+ * @author Emin Džanko
+ */
 public class UserSQLImplementation implements UserDao  {
 
     private static UserSQLImplementation instance = null;
