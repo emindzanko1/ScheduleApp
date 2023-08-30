@@ -1,5 +1,9 @@
 package ba.unsa.etf.rpr;
 
+/**
+ * This class is bean for user
+ * @author Emin Džanko
+ */
 public class User {
     private int id;
     private String username, password, salt, firstName, lastName;
