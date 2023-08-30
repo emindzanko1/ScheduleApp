@@ -121,18 +121,18 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     }
 
     @Override
-    public List<Schedule> getByScheduleName(String scheduleName) throws ScheduleException {
-        List<Schedule> schedules = new ArrayList<>();
+    public Schedule getByScheduleName(String scheduleName) throws ScheduleException {
+        Schedule schedule = new Schedule();
         try {
             poImenuUpit.setString(1, scheduleName);
             ResultSet rs = poImenuUpit.executeQuery();
             while(rs.next()) {
-                schedules.add(new Schedule(rs.getInt(1), rs.getInt(2), rs.getString(3)));
+                schedule = new Schedule(rs.getInt(1), rs.getInt(2), rs.getString(3));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
             throw new ScheduleException("Failed getting a schedule by name.", e);
         }
-        return schedules;
+        return schedule;
     }
 }
