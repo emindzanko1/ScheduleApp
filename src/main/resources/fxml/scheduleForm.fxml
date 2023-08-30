@@ -18,15 +18,18 @@
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="312.40001525878904" minHeight="10.0" prefHeight="80.40001831054687" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="312.40001525878904" minHeight="10.0" prefHeight="239.79998168945312" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="312.40001525878904" minHeight="10.0" prefHeight="96.19999389648437" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="312.40001525878904" minHeight="10.0" prefHeight="218.60000610351562" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="194.8000244140625" minHeight="10.0" prefHeight="88.39998474121097" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Label fx:id="title" alignment="CENTER" prefHeight="50.0" prefWidth="601.0" GridPane.columnSpan="5">
+        <Label fx:id="title" alignment="CENTER" prefHeight="44.0" prefWidth="600.0" GridPane.columnSpan="5">
             <font>
                 <Font size="20.0" />
             </font>
+         <GridPane.margin>
+            <Insets bottom="10.0" />
+         </GridPane.margin>
         </Label>
         <Button fx:id="addId" alignment="CENTER" mnemonicParsing="false" onAction="#addScheduleItems" prefHeight="26.0" prefWidth="133.0" text="ADD" GridPane.rowIndex="2">
             <GridPane.margin>
@@ -43,5 +46,31 @@
       <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
       <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <Label alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label alignment="CENTER" prefHeight="18.0" prefWidth="132.0" text="Monday">
+         <GridPane.margin>
+            <Insets top="70.0" />
+         </GridPane.margin>
+      </Label>
+      <Label alignment="CENTER" prefHeight="18.0" prefWidth="132.0" text="Tuesday" GridPane.columnIndex="1">
+         <GridPane.margin>
+            <Insets top="70.0" />
+         </GridPane.margin>
+      </Label>
+      <Label alignment="CENTER" prefHeight="18.0" prefWidth="132.0" text="Wednesday" GridPane.columnIndex="2">
+         <GridPane.margin>
+            <Insets top="70.0" />
+         </GridPane.margin>
+      </Label>
+      <Label alignment="CENTER" prefHeight="18.0" prefWidth="132.0" text="Thursday" GridPane.columnIndex="3">
+         <GridPane.margin>
+            <Insets top="70.0" />
+         </GridPane.margin>
+      </Label>
+      <Label alignment="CENTER" prefHeight="18.0" prefWidth="132.0" text="Friday" GridPane.columnIndex="4">
+         <GridPane.margin>
+            <Insets top="70.0" />
+         </GridPane.margin>
+      </Label>
     </children>
 </GridPane>
