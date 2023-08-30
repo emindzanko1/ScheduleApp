@@ -14,10 +14,12 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 public class ScheduleController {
 
     @FXML
-    public Button logoutId;
+    public Button addButtonId;
+    public Button cancelButtonId;
 
-    public void logout() {
-        Stage stage = (Stage) logoutId.getScene().getWindow();
+
+    public void cancelSchedule() {
+        Stage stage = (Stage) cancelButtonId.getScene().getWindow();
         stage.close();
     }
 

@@ -37,12 +37,12 @@
             <Insets bottom="100.0" right="20.0" />
          </GridPane.margin>
       </TextField>
-      <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="ADD" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Button fx:id="addButtonId" mnemonicParsing="false" onAction="#addSchedule" prefHeight="26.0" prefWidth="50.0" text="ADD" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="13.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="CANCEL" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Button fx:id="cancelButtonId" mnemonicParsing="false" onAction="#cancelSchedule" text="CANCEL" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="69.0" />
          </GridPane.margin>
