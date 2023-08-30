@@ -49,26 +49,30 @@ public class ScheduleItemsController {
             Schedule schedule = ScheduleSQLImplementation.getInstance().getByScheduleName(scheduleName);
 
             int scheduleId = schedule.getId();
-            String dayOfWeek = dayOfWeekId.getText().toLowerCase();
+            String dayOfWeek = dayOfWeekId.getText();
             String startTime = startTimeId.getText();
             String endTime = endTimeId.getText();
-            List<String> workDays = Arrays.asList("monday", "tuesday", "wednesday", "thursday", "friday");
+            String eventName = eventNameId.getText();
+            String location = locationId.getText();
+
+            List<String> workDays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
             String timePattern = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
 
             if(!workDays.contains(dayOfWeek))
-                showAlert("Please enter a valid work day.");
+                showAlert("Please enter a valid work day, for example Monday.");
             else if(!(startTime.matches(timePattern) && endTime.matches(timePattern)))
                 showAlert("Please enter a valid time in a day in format hh:mm.");
-
+            else if (eventName.length() == 0)
+                showAlert("Please enter a valid event name, at least 1 symbol.");
+            else if(location.length() == 0)
+                showAlert("Please enter a valid location, at least 1 symbol.");
             else {
-
                 newScheduleItem.setScheduleId(scheduleId);
-                newScheduleItem.setDayOfWeek(dayOfWeekId.getText());
-                newScheduleItem.setStartTime(startTimeId.getText());
-                newScheduleItem.setEndTime(endTimeId.getText());
-                newScheduleItem.setEventName(eventNameId.getText());
-                newScheduleItem.setLocation(locationId.getText());
-
+                newScheduleItem.setDayOfWeek(dayOfWeek);
+                newScheduleItem.setStartTime(startTime);
+                newScheduleItem.setEndTime(endTime);
+                newScheduleItem.setEventName(eventName);
+                newScheduleItem.setLocation(location);
                 ScheduleItemSQLImplementation scheduleItemSQLImplementation = ScheduleItemSQLImplementation.getInstance();
                 scheduleItemSQLImplementation.save(newScheduleItem);
                 Stage stage = (Stage) cancelButtonId.getScene().getWindow();
