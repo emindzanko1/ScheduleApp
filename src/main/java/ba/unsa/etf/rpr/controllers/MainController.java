@@ -10,7 +10,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
-
+/**
+ * JavaFX controller for User main page
+ * @author Emin Džanko
+ */
 public class MainController {
 
     public Label subtitleId;

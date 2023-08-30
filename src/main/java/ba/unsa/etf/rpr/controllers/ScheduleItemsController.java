@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * JavaFX controller for updating schedule page
+ * @author Emin Džanko
+ */
 public class ScheduleItemsController {
 
     @FXML

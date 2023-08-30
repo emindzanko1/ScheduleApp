@@ -14,6 +14,10 @@ import java.sql.SQLException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * JavaFX controller for User log in
+ * @author Emin Džanko
+ */
 public class SampleController {
     public TextField usernameId;
     public PasswordField passwordId;

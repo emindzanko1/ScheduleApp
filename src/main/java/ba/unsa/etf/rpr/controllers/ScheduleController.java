@@ -18,6 +18,10 @@ import java.sql.SQLException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * JavaFX controller for creating new schedule
+ * @author Emin Džanko
+ */
 public class ScheduleController {
 
     @FXML

@@ -14,6 +14,10 @@ import java.sql.SQLException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * JavaFX controller for User registration
+ * @author Emin Džanko
+ */
 public class RegistrationController {
 
     public TextField firstNameId;
