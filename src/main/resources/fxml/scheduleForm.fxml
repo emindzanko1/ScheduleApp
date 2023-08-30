@@ -48,7 +48,7 @@
                 <Label alignment="TOP_CENTER" prefHeight="29.0" prefWidth="120.0" text="Friday" />
             </children>
         </VBox>
-        <Label alignment="CENTER" prefHeight="50.0" prefWidth="601.0" text="      Schedule App" GridPane.columnSpan="5">
+        <Label fx:id="title" alignment="CENTER" prefHeight="50.0" prefWidth="601.0"  GridPane.columnSpan="5">
             <font>
                 <Font size="20.0" />
             </font>
