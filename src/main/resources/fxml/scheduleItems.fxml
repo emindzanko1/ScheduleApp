@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -32,26 +33,31 @@
             <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="52.0" prefWidth="70.0" text="Day of Week:" />
+                  <TextField prefHeight="52.0" prefWidth="150.0" />
                </children>
             </HBox>
             <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="53.0" prefWidth="57.0" text="Start Time:" />
+                  <TextField prefHeight="51.0" prefWidth="150.0" />
                </children>
             </HBox>
             <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="49.0" prefWidth="52.0" text="End Time:" />
+                  <TextField prefHeight="54.0" prefWidth="150.0" />
                </children>
             </HBox>
             <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="67.0" text="Event Name:" />
+                  <TextField prefHeight="62.0" prefWidth="150.0" />
                </children>
             </HBox>
             <HBox prefHeight="50.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="52.0" prefWidth="48.0" text="Location:" />
+                  <TextField prefHeight="51.0" prefWidth="150.0" />
                </children>
             </HBox>
          </children>
