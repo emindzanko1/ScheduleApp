@@ -38,7 +38,7 @@ public class ScheduleFormController {
     public void addScheduleItems(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleItems.fxml"));
-        ScheduleItemsController scheduleItemsController= new ScheduleItemsController();
+        ScheduleItemsController scheduleItemsController= new ScheduleItemsController(scheduleName);
         loader.setController(scheduleItemsController);
         stage.setTitle("ScheduleApp");
         stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
