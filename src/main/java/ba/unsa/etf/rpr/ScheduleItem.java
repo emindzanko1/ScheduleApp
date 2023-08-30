@@ -14,6 +14,9 @@ public class ScheduleItem {
         this.location = location;
     }
 
+    public ScheduleItem() {
+    }
+
     public int getId() {
         return id;
     }
