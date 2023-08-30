@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -21,5 +23,18 @@
             <Font size="20.0" />
          </font>
       </Label>
+      <Label alignment="TOP_CENTER" prefHeight="130.0" prefWidth="150.0" text="Schedule Name:" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="100.0" left="50.0" />
+         </GridPane.margin>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </Label>
+      <TextField alignment="TOP_CENTER" prefHeight="130.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="100.0" right="20.0" />
+         </GridPane.margin>
+      </TextField>
    </children>
 </GridPane>
