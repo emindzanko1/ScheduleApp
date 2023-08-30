@@ -1,5 +1,6 @@
-package ba.unsa.etf.rpr;
+package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.domain.ScheduleItem;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
 
 import java.util.List;

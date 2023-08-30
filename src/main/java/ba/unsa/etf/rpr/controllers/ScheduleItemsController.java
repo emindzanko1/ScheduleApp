@@ -1,24 +1,20 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.*;
+import ba.unsa.etf.rpr.dao.ScheduleItemSQLImplementation;
+import ba.unsa.etf.rpr.dao.ScheduleSQLImplementation;
+import ba.unsa.etf.rpr.domain.Schedule;
+import ba.unsa.etf.rpr.domain.ScheduleItem;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
-
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 public class ScheduleItemsController {
 

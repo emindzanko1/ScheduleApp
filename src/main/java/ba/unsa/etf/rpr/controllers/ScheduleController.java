@@ -1,8 +1,10 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.*;
+import ba.unsa.etf.rpr.dao.ScheduleSQLImplementation;
+import ba.unsa.etf.rpr.dao.UserSQLImplementation;
+import ba.unsa.etf.rpr.domain.Schedule;
+import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
