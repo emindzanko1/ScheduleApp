@@ -41,11 +41,20 @@
                 <Insets left="20.0" right="20.0" />
             </GridPane.margin>
         </Button>
-      <ListView fx:id="mondayListId" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+      <ListView fx:id="mondayListId" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin></ListView>
       <ListView fx:id="tuesdayListId" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <ListView fx:id="wednesdayListId" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <ListView fx:id="thursdayListId" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <ListView fx:id="fridayListId" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <ListView fx:id="fridayListId" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets right="5.0" />
+         </GridPane.margin></ListView>
       <Label alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label alignment="CENTER" prefHeight="18.0" prefWidth="132.0" text="Monday">
          <GridPane.margin>
