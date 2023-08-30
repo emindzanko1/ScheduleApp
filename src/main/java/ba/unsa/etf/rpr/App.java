@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
+/**
+ * Main class for working with JavaFX framework
+ * @author Emin Džanko
+ */
 public class App extends Application {
 
     @Override
