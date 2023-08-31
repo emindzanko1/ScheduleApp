@@ -23,7 +23,6 @@ import java.util.List;
 public class ScheduleItemsController {
 
     @FXML
-    public Button addButtonId;
     public Button cancelButtonId;
     public TextField dayOfWeekId;
     public TextField startTimeId;
@@ -31,7 +30,7 @@ public class ScheduleItemsController {
     public TextField eventNameId;
     public TextField locationId;
 
-    private String scheduleName;
+    private final String scheduleName;
 
     public ScheduleItemsController(String scheduleName) {
         this.scheduleName = scheduleName;

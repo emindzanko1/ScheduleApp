@@ -17,7 +17,6 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 public class MainController {
 
     public Label subtitleId;
-    public Button newScheduleId;
     public Button logoutId;
 
     private final String username;

@@ -19,7 +19,7 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
  */
 public class ScheduleFormController {
 
-    private String scheduleName;
+    private final String scheduleName;
     @FXML
     private Label title;
     @FXML
@@ -61,23 +61,13 @@ public class ScheduleFormController {
             String formattedData = startTime + " " + eventName;
 
             switch (dayOfWeek) {
-                case "Monday":
-                    mondayListId.getItems().add(formattedData);
-                    break;
-                case "Tuesday":
-                    tuesdayListId.getItems().add(formattedData);
-                    break;
-                case "Wednesday":
-                    wednesdayListId.getItems().add(formattedData);
-                    break;
-                case "Thursday":
-                    thursdayListId.getItems().add(formattedData);
-                    break;
-                case "Friday":
-                    fridayListId.getItems().add(formattedData);
-                    break;
-                default:
-                    break;
+                case "Monday" -> mondayListId.getItems().add(formattedData);
+                case "Tuesday" -> tuesdayListId.getItems().add(formattedData);
+                case "Wednesday" -> wednesdayListId.getItems().add(formattedData);
+                case "Thursday" -> thursdayListId.getItems().add(formattedData);
+                case "Friday" -> fridayListId.getItems().add(formattedData);
+                default -> {
+                }
             }
         });
     }

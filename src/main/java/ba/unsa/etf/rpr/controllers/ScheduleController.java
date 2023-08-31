@@ -26,7 +26,6 @@ public class ScheduleController {
 
     @FXML
     public TextField scheduleNameId;
-    public Button addButtonId;
     public Button cancelButtonId;
 
     public String username;
@@ -44,7 +43,7 @@ public class ScheduleController {
         try {
             String scheduleName = scheduleNameId.getText();
             if(scheduleName.length() == 0)
-                showAlert("Schedule name is too short.");
+                showAlert();
             else {
                 User user = UserSQLImplementation.getInstance().getByUsername(username);
 
@@ -69,11 +68,11 @@ public class ScheduleController {
         }
     }
 
-    private void showAlert(String content) {
+    private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Creating Schedule Error");
         alert.setHeaderText(null);
-        alert.setContentText(content);
+        alert.setContentText("Schedule name is too short.");
         alert.showAndWait();
     }
 
