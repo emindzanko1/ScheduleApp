@@ -11,6 +11,10 @@ import ba.unsa.etf.rpr.exceptions.ScheduleException;
 import java.sql.*;
 import java.util.Scanner;
 
+/**
+ *  CLI (Command Line Interface) implementation
+ * @author Emin Džanko
+ */
 public class App
 {
     private static UserSQLImplementation userDao;
