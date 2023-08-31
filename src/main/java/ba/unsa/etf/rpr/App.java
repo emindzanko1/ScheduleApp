@@ -37,7 +37,7 @@ public class App
 
             if (brojTabele == 1) {
                 do {
-                    System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n5 - pretraga svih\n6 - pretraga po imenu\n0 - kraj programa");
+                    System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n5 - pretraga svih\n6 - pretraga po imenu\n0 - rad sa drugom tabelom");
                     opcija = ulaz.nextInt();
                     if (ulaz.hasNextLine()) ulaz.nextLine();
                     switch (opcija) {
@@ -68,7 +68,7 @@ public class App
                 while (opcija != 0);
             } else if (brojTabele == 2) {
                 do {
-                    System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n5 - pretraga svih\n6 - pretraga po imenu\n0 - kraj programa");
+                    System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n5 - pretraga svih\n6 - pretraga po imenu\n0 - rad sa drugom tabelom");
                     opcija = ulaz.nextInt();
                     if (ulaz.hasNextLine()) ulaz.nextLine();
                     switch (opcija) {
@@ -99,7 +99,7 @@ public class App
                 while (opcija != 0);
             } else if (brojTabele == 3) {
                 do {
-                    System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n5 - pretraga svih\n6 - pretraga po imenu\n0 - kraj programa");
+                    System.out.println("Unesite opciju:\n1 - pretraga\n2 - unos\n3 - izmjena\n4 - brisanje\n5 - pretraga svih\n6 - pretraga po imenu\n0 - rad sa drugom tabelom");
                     opcija = ulaz.nextInt();
                     if (ulaz.hasNextLine()) ulaz.nextLine();
                     switch (opcija) {
@@ -140,14 +140,14 @@ public class App
         String eventName = ulaz.nextLine();
 
         for(ScheduleItem scheduleItem : scheduleItemDao.getByEventName(eventName))
-            System.out.println("Naziv događaja je: " + scheduleItem.getEventName());
+            System.out.println("Naziv sadržaja rasporeda je: " + scheduleItem.getEventName() + ", lokacija je: " + scheduleItem.getLocation() +  ".");
     }
 
     private static void pretragaSvihSadrzajaRasporeda() throws ScheduleException {
         System.out.println("Pretražite naziv sadržaja rasporeda: ");
 
         for(ScheduleItem scheduleItem : scheduleItemDao.getAll())
-            System.out.println("Naziv sadržaja rasporeda je: " + scheduleItem.getEventName() + ".");
+            System.out.println("Naziv sadržaja rasporeda je: " + scheduleItem.getEventName() + ", lokacija je: " + scheduleItem.getLocation() +  ".");
     }
 
     private static void brisanjeSadrzajaRasporeda() throws ScheduleException {
@@ -179,7 +179,7 @@ public class App
         int id = ulaz.nextInt();
 
         for(ScheduleItem scheduleItemDao : scheduleItemDao.get(id))
-            System.out.println("Naziv sadržaja je: " + scheduleItemDao.getEventName() + ".");
+            System.out.println("Naziv sadržaja rasporeda je: " + scheduleItemDao.getEventName() + ", lokacija je: " + scheduleItemDao.getLocation() +  ".");
     }
 
     private static User unosKorisnikaDuplication(int id) {

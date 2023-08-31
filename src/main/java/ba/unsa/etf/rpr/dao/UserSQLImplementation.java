@@ -35,7 +35,7 @@ public class UserSQLImplementation implements UserDao  {
         pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE User_ID=?");
         noviIdUpit = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
         dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?)");
-        izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, salt=?, firstname=?, lastname=?, email=? WHERE User_ID=?");
+        izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, firstname=?, lastname=? WHERE User_ID=?");
         brisanjeUpit = conn.prepareStatement("DELETE FROM User WHERE User_ID=?");
         sviUpit = conn.prepareStatement("SELECT * FROM User");
         poImenuUpit = conn.prepareStatement("SELECT * FROM User WHERE username=?");
