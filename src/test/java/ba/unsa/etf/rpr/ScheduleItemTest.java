@@ -1,23 +1,18 @@
 package ba.unsa.etf.rpr;
 
-import ba.unsa.etf.rpr.dao.ScheduleDao;
 import ba.unsa.etf.rpr.dao.ScheduleItemDao;
 import ba.unsa.etf.rpr.dao.ScheduleItemSQLImplementation;
-import ba.unsa.etf.rpr.dao.ScheduleSQLImplementation;
-import ba.unsa.etf.rpr.domain.Schedule;
 import ba.unsa.etf.rpr.domain.ScheduleItem;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static junit.framework.Assert.*;
-import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -45,20 +40,21 @@ public class ScheduleItemTest {
 
         List<ScheduleItem> actualScheduleItems = scheduleItemDaoMock.get(id);
 
-        assertEquals(expectedScheduleItems, actualScheduleItems);
-        assertEquals(expectedScheduleItems.size(), actualScheduleItems.size());
-        assertEquals(expectedScheduleItems.get(0).getId(), actualScheduleItems.get(0).getId());
+        Assertions.assertEquals(expectedScheduleItems, actualScheduleItems);
+        Assertions.assertEquals(expectedScheduleItems.size(), actualScheduleItems.size());
+        Assertions.assertEquals(expectedScheduleItems.get(0).getId(), actualScheduleItems.get(0).getId());
     }
 
     @Test
-    public void getAllSchedulesTest() throws ScheduleException {
+    public void getAllSchedulesTest() {
         List<ScheduleItem> schedulesItems = null;
         try {
             schedulesItems = scheduleItemDao.getAll();
         } catch (ScheduleException e) {
             e.printStackTrace();
         }
-        assertEquals(schedulesItems.size(), 31);
+        assert schedulesItems != null;
+        Assertions.assertEquals(schedulesItems.size(), 31);
     }
 
     @Test
@@ -70,8 +66,8 @@ public class ScheduleItemTest {
 
         List<ScheduleItem> actualScheduleItems = scheduleItemDaoMock.getByEventName("Sortiraj");
 
-        assertEquals(expectedScheduleItems, actualScheduleItems);
-        assertEquals(expectedScheduleItems.size(), actualScheduleItems.size());
-        assertEquals(expectedScheduleItems.get(0).getId(), actualScheduleItems.get(0).getId());
+        Assertions.assertEquals(expectedScheduleItems, actualScheduleItems);
+        Assertions.assertEquals(expectedScheduleItems.size(), actualScheduleItems.size());
+        Assertions.assertEquals(expectedScheduleItems.get(0).getId(), actualScheduleItems.get(0).getId());
     }
 }
