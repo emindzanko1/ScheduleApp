@@ -12,6 +12,10 @@ import java.util.List;
 
 import static junit.framework.Assert.*;
 
+/**
+ * JUnit tests for User
+ * @author Emin Džanko
+ */
 public class UserTest {
 
     private UserDao userDao;

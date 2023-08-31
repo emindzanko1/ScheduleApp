@@ -20,10 +20,13 @@ import static junit.framework.Assert.*;
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
+/**
+ * JUnit tests for ScheduleItem
+ * @author Emin Džanko
+ */
 public class ScheduleItemTest {
     private ScheduleItemDao scheduleItemDaoMock;
     private ScheduleItemDao scheduleItemDao;
-
 
     @BeforeEach
     public void setUp() throws SQLException {

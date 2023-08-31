@@ -16,6 +16,11 @@ import java.util.List;
 import static junit.framework.Assert.*;
 import static junit.framework.Assert.assertEquals;
 
+/**
+ * JUnit tests for Schedule
+ * @author Emin Džanko
+ */
+
 public class ScheduleTest {
 
     private ScheduleDao scheduleDao;
