@@ -45,4 +45,29 @@ public class ScheduleTest {
         Schedule foundSchedule = schedules.get(0);
         assertEquals(foundSchedule.getId(), 10);
     }
+
+    @Test
+    public void getAllSchedulesTest() {
+        List<Schedule> schedules = null;
+        try {
+            schedules = scheduleDao.getAll();
+        } catch (ScheduleException e) {
+            e.printStackTrace();
+        }
+        assertEquals(schedules.size(), 63);
+    }
+
+    @Test
+    public void getScheduleByScheduleNameTest() {
+        int id = 41;
+        List<Schedule> schedules = null;
+        try {
+            schedules = scheduleDao.get(id);
+        } catch (ScheduleException e) {
+            e.printStackTrace();
+        }
+        Schedule foundSchedule = schedules.get(0);
+        assertEquals(foundSchedule.getScheduleName(), "Emin");
+
+    }
 }

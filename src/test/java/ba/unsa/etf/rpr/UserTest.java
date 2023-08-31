@@ -78,13 +78,23 @@ public class UserTest {
         assertEquals(user.getUsername(), "edzanko11");
     }
 
+
     @Test
-    public void deleteUserTest() {
+    public void getUserByUsernameTest() {
+        int id = 12;
+        List<User> users = null;
+        try {
+            users = userDao.get(id);
+        } catch (ScheduleException e) {
+            e.printStackTrace();
+        }
+        User foundUser = users.get(0);
+        assertEquals(foundUser.getUsername(), "hilmo");
 
     }
 
     @Test
-    public void getUserByUsernameTest() {
+    public void getByUsernameTest() {
         int id = 12;
         List<User> users = null;
         try {
