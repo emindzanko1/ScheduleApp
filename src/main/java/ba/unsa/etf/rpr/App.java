@@ -183,19 +183,15 @@ public class App
     }
 
     private static User unosKorisnikaDuplication(int id) {
-        String username, password, salt, firstName, lastName, email;
+        String username, password, firstName, lastName;
         System.out.println("Unesite username: ");
         username = ulaz.nextLine();
         System.out.println("Unesite password: ");
         password = ulaz.nextLine();
-        System.out.println("Unesite salt: ");
-        salt = ulaz.nextLine();
         System.out.println("Unesite ime: ");
         firstName = ulaz.nextLine();
         System.out.println("Unesite prezime: ");
         lastName = ulaz.nextLine();
-        System.out.println("Unesite email:");
-        email = ulaz.nextLine();
         return(new User(id, username, password, firstName, lastName));
     }
 

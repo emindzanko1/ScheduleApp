@@ -6,7 +6,7 @@ package ba.unsa.etf.rpr.domain;
  */
 public class User {
     private int id;
-    private String username, password, salt, firstName, lastName;
+    private String username, password, firstName, lastName;
 
     public User(int id, String username, String password, String firstName, String lastName) {
         this.id = id;
