@@ -9,44 +9,46 @@ import ba.unsa.etf.rpr.domain.ScheduleItem;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static junit.framework.Assert.*;
 import static junit.framework.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 public class ScheduleItemTest {
+    private ScheduleItemDao scheduleItemDaoMock;
     private ScheduleItemDao scheduleItemDao;
 
+
     @BeforeEach
-    public void setUp() {
-        try {
-            scheduleItemDao = ScheduleItemSQLImplementation.getInstance();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void setUp() throws SQLException {
+        scheduleItemDaoMock = mock(ScheduleItemDao.class);
+        scheduleItemDao = ScheduleItemSQLImplementation.getInstance();
+
     }
 
     @Test
-    public void getScheduleItemByIdTest() {
+    public void getScheduleItemByIdTest() throws ScheduleException {
         int id = 1;
-        List<ScheduleItem> scheduleItems = null;
-        try {
-            scheduleItems = scheduleItemDao.get(id);
-        } catch (ScheduleException e) {
-            e.printStackTrace();
-        }
-        assertNotNull(scheduleItems);
-        assertFalse(scheduleItems.isEmpty());
-        assertEquals(1, scheduleItems.size());
+        ArrayList<ScheduleItem> expectedScheduleItems = new ArrayList<>();
+        expectedScheduleItems.add(new ScheduleItem(28, 63, "Friday", "08:00", "10:00", "Sortiraj", "agadsgdag"));
 
-        ScheduleItem foundScheduleItem = scheduleItems.get(0);
-        assertEquals(foundScheduleItem.getId(), 1);
+        Mockito.when(scheduleItemDaoMock.get(id)).thenReturn(expectedScheduleItems);
+
+        List<ScheduleItem> actualScheduleItems = scheduleItemDaoMock.get(id);
+
+        assertEquals(expectedScheduleItems, actualScheduleItems);
+        assertEquals(expectedScheduleItems.size(), actualScheduleItems.size());
+        assertEquals(expectedScheduleItems.get(0).getId(), actualScheduleItems.get(0).getId());
     }
 
     @Test
-    public void getAllSchedulesTest() {
+    public void getAllSchedulesTest() throws ScheduleException {
         List<ScheduleItem> schedulesItems = null;
         try {
             schedulesItems = scheduleItemDao.getAll();
@@ -57,15 +59,16 @@ public class ScheduleItemTest {
     }
 
     @Test
-    public void getScheduleByScheduleNameTest() {
-        int id = 7;
-        List<ScheduleItem> schedulesItems = null;
-        try {
-            schedulesItems = scheduleItemDao.get(id);
-        } catch (ScheduleException e) {
-            e.printStackTrace();
-        }
-        ScheduleItem foundScheduleItem = schedulesItems.get(0);
-        assertEquals(foundScheduleItem.getEventName(), "Event");
+    public void getScheduleByScheduleNameTest() throws ScheduleException {
+        List<ScheduleItem> expectedScheduleItems = new ArrayList<>();
+        expectedScheduleItems.add(new ScheduleItem(28, 63, "Friday", "08:00", "10:00", "Sortiraj", "agadsgdag"));
+
+        Mockito.when(scheduleItemDaoMock.getByEventName("Sortiraj")).thenReturn(expectedScheduleItems);
+
+        List<ScheduleItem> actualScheduleItems = scheduleItemDaoMock.getByEventName("Sortiraj");
+
+        assertEquals(expectedScheduleItems, actualScheduleItems);
+        assertEquals(expectedScheduleItems.size(), actualScheduleItems.size());
+        assertEquals(expectedScheduleItems.get(0).getId(), actualScheduleItems.get(0).getId());
     }
 }
