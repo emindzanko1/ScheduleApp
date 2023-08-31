@@ -92,20 +92,4 @@ public class UserTest {
         assertEquals(foundUser.getUsername(), "hilmo");
 
     }
-
-    @Test
-    public void getByUsernameTest() {
-        int id = 12;
-        List<User> users = null;
-        try {
-            users = userDao.get(id);
-        } catch (ScheduleException e) {
-            e.printStackTrace();
-        }
-        User foundUser = users.get(0);
-        assertEquals(foundUser.getUsername(), "hilmo");
-
-    }
-
-
 }
