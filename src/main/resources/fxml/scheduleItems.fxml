@@ -39,7 +39,7 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Label>
-                  <ChoiceBox fx:id="dayOfWeekId" prefHeight="46.0" prefWidth="150.0">
+                  <ChoiceBox value="Monday" fx:id="dayOfWeekId" prefHeight="46.0" prefWidth="150.0">
                      <HBox.margin>
                         <Insets bottom="10.0" left="17.0" top="10.0" />
                      </HBox.margin>

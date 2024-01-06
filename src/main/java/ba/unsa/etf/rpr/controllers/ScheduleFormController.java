@@ -58,9 +58,8 @@ public class ScheduleFormController {
 
     private List<Schedule> schedules = new ArrayList<>();
 
-    public ScheduleFormController(String scheduleName, int id) {
+    public ScheduleFormController(String scheduleName) {
         this.scheduleName = scheduleName;
-        this.id = id;
     }
 
     @FXML
@@ -82,7 +81,7 @@ public class ScheduleFormController {
 
     private void handleScheduleButtonClick(String scheduleName) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
             ScheduleController controller = new ScheduleController(scheduleName);
             loader.setController(controller);
             Stage stage = new Stage();
@@ -141,7 +140,7 @@ on(scheduleName);
         Stage stage = (Stage) cancelId.getScene().getWindow();
         stage.close();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
         ScheduleController controller = new ScheduleController(scheduleName);
         loader.setController(controller);
         stage.setTitle("ScheduleApp");

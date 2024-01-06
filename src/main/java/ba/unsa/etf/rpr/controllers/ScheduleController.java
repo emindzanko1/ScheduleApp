@@ -55,8 +55,8 @@ public class ScheduleController {
                 ScheduleSQLImplementation scheduleSQL = ScheduleSQLImplementation.getInstance();
                 scheduleSQL.save(newSchedule);
                 Stage stage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
-                ScheduleFormController controller = new ScheduleFormController(scheduleName, userId);
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));
+                ScheduleFormController controller = new ScheduleFormController(scheduleName);
                 loader.setController(controller);
                 stage.setTitle("ScheduleApp");
                 stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
