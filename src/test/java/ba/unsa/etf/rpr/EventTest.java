@@ -1,17 +1,10 @@
 package ba.unsa.etf.rpr;
 
-import ba.unsa.etf.rpr.dao.ScheduleItemDao;
-import ba.unsa.etf.rpr.dao.ScheduleItemSQLImplementation;
-import ba.unsa.etf.rpr.domain.Event;
-import ba.unsa.etf.rpr.exceptions.ScheduleException;
-import org.junit.jupiter.api.Assertions;
+import ba.unsa.etf.rpr.dao.EventDao;
+import ba.unsa.etf.rpr.dao.EventSQLImplementation;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.mockito.Mockito.mock;
 
@@ -20,13 +13,13 @@ import static org.mockito.Mockito.mock;
  * @author Emin Džanko
  */
 public class EventTest {
-    private ScheduleItemDao scheduleItemDaoMock;
-    private ScheduleItemDao scheduleItemDao;
+    private EventDao scheduleItemDaoMock;
+    private EventDao scheduleItemDao;
 
     @BeforeEach
     public void setUp() throws SQLException {
-        scheduleItemDaoMock = mock(ScheduleItemDao.class);
-        scheduleItemDao = ScheduleItemSQLImplementation.getInstance();
+        scheduleItemDaoMock = mock(EventDao.class);
+        scheduleItemDao = EventSQLImplementation.getInstance();
 
     }
 

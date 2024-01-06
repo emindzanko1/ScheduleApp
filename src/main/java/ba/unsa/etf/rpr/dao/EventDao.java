@@ -9,6 +9,6 @@ import java.util.List;
  * Dao interface for ScheduleItem domain bean
  * @author Emin Džanko
  */
-public interface ScheduleItemDao extends Dao<Event> {
+public interface EventDao extends Dao<Event> {
     List<Event> getByEventName(String eventName) throws ScheduleException;
 }

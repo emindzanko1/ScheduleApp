@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 
-import ba.unsa.etf.rpr.dao.ScheduleItemSQLImplementation;
+import ba.unsa.etf.rpr.dao.EventSQLImplementation;
 import ba.unsa.etf.rpr.dao.ScheduleSQLImplementation;
 import ba.unsa.etf.rpr.dao.UserSQLImplementation;
 import ba.unsa.etf.rpr.domain.Schedule;
@@ -19,13 +19,13 @@ public class App
 {
     private static UserSQLImplementation userDao;
     private static ScheduleSQLImplementation scheduleDao;
-    private static ScheduleItemSQLImplementation scheduleItemDao;
+    private static EventSQLImplementation scheduleItemDao;
     private static Scanner ulaz;
     public static void main( String[] args ) throws SQLException, ScheduleException {
 
         userDao = UserSQLImplementation.getInstance();
         scheduleDao = ScheduleSQLImplementation.getInstance();
-        scheduleItemDao = ScheduleItemSQLImplementation.getInstance();
+        scheduleItemDao = EventSQLImplementation.getInstance();
 
 
         ulaz = new Scanner(System.in);

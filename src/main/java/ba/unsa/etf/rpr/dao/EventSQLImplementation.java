@@ -13,13 +13,13 @@ import java.util.Properties;
  * MySQL Implementation of DAO
  * @author Emin Džanko
  */
-public class ScheduleItemSQLImplementation implements ScheduleItemDao{
-    private static ScheduleItemSQLImplementation instance = null;
+public class EventSQLImplementation implements EventDao {
+    private static EventSQLImplementation instance = null;
 
     private Connection conn;
     private final PreparedStatement searchQuery, addQuery, newIdQuery, changeQuery, deleteQuery, allQuery, getByNameQuery;
 
-    private ScheduleItemSQLImplementation() throws SQLException {
+    private EventSQLImplementation() throws SQLException {
         Properties p = new Properties();
         try {
             p.load(ClassLoader.getSystemResource("application.properties").openStream());
@@ -39,8 +39,8 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
         getByNameQuery = conn.prepareStatement("SELECT * FROM ScheduleItem WHERE eventName=?");
     }
 
-    public static ScheduleItemSQLImplementation getInstance() throws SQLException {
-        if (instance == null) instance = new ScheduleItemSQLImplementation();
+    public static EventSQLImplementation getInstance() throws SQLException {
+        if (instance == null) instance = new EventSQLImplementation();
         return instance;
     }
 

@@ -89,14 +89,16 @@ public class ScheduleSQLImplementation implements ScheduleDao {
                 schedule.setId(rs.getInt(1));
             else
                 schedule.setId(1);
-
             addQuery.setInt(1, schedule.getId());
             addQuery.setInt(2, schedule.getUserId());
+            System.out.println(schedule.getUserId());
             addQuery.setString(3, schedule.getScheduleName());
 
             addQuery.execute();
 
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
             throw new ScheduleException("Failed creating a new schedule.", e);
         }
     }

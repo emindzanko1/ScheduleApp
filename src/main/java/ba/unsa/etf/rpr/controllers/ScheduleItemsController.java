@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.controllers;
 
-import ba.unsa.etf.rpr.dao.ScheduleItemSQLImplementation;
+import ba.unsa.etf.rpr.dao.EventSQLImplementation;
 import ba.unsa.etf.rpr.dao.ScheduleSQLImplementation;
 import ba.unsa.etf.rpr.domain.Schedule;
 import ba.unsa.etf.rpr.domain.Event;
@@ -76,7 +76,7 @@ public class ScheduleItemsController {
                 newEvent.setStartTime(startTime);
                 newEvent.setEventName(eventName);
                 newEvent.setLocation(location);
-                ScheduleItemSQLImplementation scheduleItemSQLImplementation = ScheduleItemSQLImplementation.getInstance();
+                EventSQLImplementation scheduleItemSQLImplementation = EventSQLImplementation.getInstance();
                 scheduleItemSQLImplementation.save(newEvent);
                 Stage stage = (Stage) cancelButtonId.getScene().getWindow();
                 stage.close();
