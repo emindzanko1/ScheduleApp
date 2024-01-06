@@ -18,7 +18,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     private static ScheduleSQLImplementation instance = null;
 
     private Connection conn;
-    private final PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit, sviUpit, poImenuUpit;
+    private final PreparedStatement searchQuery, addQuery, newIdQuery, changeQuery, deleteQuery, allQuery, getByNameQuery;
 
     private ScheduleSQLImplementation() throws SQLException {
         Properties p = new Properties();
@@ -31,13 +31,13 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        pretragaUpit = conn.prepareStatement("SELECT * FROM Schedule WHERE Schedule_ID=?");
-        noviIdUpit = conn.prepareStatement("SELECT MAX(Schedule_ID)+1 FROM Schedule");
-        dodavanjeUpit = conn.prepareStatement("INSERT INTO Schedule VALUES(?,?,?)");
-        sviUpit = conn.prepareStatement("SELECT * FROM Schedule");
-        izmjenaUpit = conn.prepareStatement("UPDATE Schedule SET ScheduleName=? WHERE Schedule_ID=?");
-        brisanjeUpit = conn.prepareStatement("DELETE FROM Schedule WHERE Schedule_ID=?");
-        poImenuUpit = conn.prepareStatement("SELECT * FROM Schedule WHERE ScheduleName=?");
+        searchQuery = conn.prepareStatement("SELECT * FROM Schedule WHERE Schedule_ID=?");
+        newIdQuery = conn.prepareStatement("SELECT MAX(Schedule_ID)+1 FROM Schedule");
+        addQuery = conn.prepareStatement("INSERT INTO Schedule VALUES(?,?,?)");
+        allQuery = conn.prepareStatement("SELECT * FROM Schedule");
+        changeQuery = conn.prepareStatement("UPDATE Schedule SET ScheduleName=? WHERE Schedule_ID=?");
+        deleteQuery = conn.prepareStatement("DELETE FROM Schedule WHERE Schedule_ID=?");
+        getByNameQuery = conn.prepareStatement("SELECT * FROM Schedule WHERE ScheduleName=?");
 
     }
 
@@ -56,8 +56,8 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     public Schedule get(int id) throws ScheduleException {
         Schedule schedule = new Schedule();
         try {
-            pretragaUpit.setString(1, String.valueOf(id));
-            ResultSet rs = pretragaUpit.executeQuery();
+            searchQuery.setString(1, String.valueOf(id));
+            ResultSet rs = searchQuery.executeQuery();
             System.out.println("Connection successful!");
         } catch (SQLException e) {
             throw new ScheduleException("Failed getting a schedule by id.", e);
@@ -69,7 +69,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     public List<Schedule> getAll() throws ScheduleException {
         List<Schedule> schedules = new ArrayList<>();
         try {
-            ResultSet rs = sviUpit.executeQuery();
+            ResultSet rs = allQuery.executeQuery();
             while(rs.next()) {
                 schedules.add(new Schedule(rs.getInt(1), rs.getInt(2), rs.getString(3)));
             }
@@ -84,17 +84,17 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     @Override
     public void save(Schedule schedule) throws ScheduleException {
         try {
-            ResultSet rs = noviIdUpit.executeQuery();
+            ResultSet rs = newIdQuery.executeQuery();
             if(rs.next())
                 schedule.setId(rs.getInt(1));
             else
                 schedule.setId(1);
 
-            dodavanjeUpit.setInt(1, schedule.getId());
-            dodavanjeUpit.setInt(2, schedule.getUserId());
-            dodavanjeUpit.setString(3, schedule.getScheduleName());
+            addQuery.setInt(1, schedule.getId());
+            addQuery.setInt(2, schedule.getUserId());
+            addQuery.setString(3, schedule.getScheduleName());
 
-            dodavanjeUpit.execute();
+            addQuery.execute();
 
         } catch (SQLException e) {
             throw new ScheduleException("Failed creating a new schedule.", e);
@@ -104,9 +104,9 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     @Override
     public void update(Schedule schedule) throws ScheduleException {
         try {
-            izmjenaUpit.setInt(2, schedule.getId());
-            izmjenaUpit.setString(1, schedule.getScheduleName());
-            izmjenaUpit.execute();
+            changeQuery.setInt(2, schedule.getId());
+            changeQuery.setString(1, schedule.getScheduleName());
+            changeQuery.execute();
         } catch (SQLException e) {
             throw new ScheduleException("Failed updating a schedule.", e);
         }
@@ -115,8 +115,8 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     @Override
     public void delete(Schedule schedule) throws ScheduleException {
         try {
-            brisanjeUpit.setInt(1, schedule.getId());
-            brisanjeUpit.execute();
+            deleteQuery.setInt(1, schedule.getId());
+            deleteQuery.execute();
         } catch (SQLException e) {
             throw new ScheduleException("Failed deleting a schedule.", e);
         }
@@ -126,8 +126,8 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     public Schedule getByScheduleName(String scheduleName) throws ScheduleException {
         Schedule schedule = new Schedule();
         try {
-            poImenuUpit.setString(1, scheduleName);
-            ResultSet rs = poImenuUpit.executeQuery();
+            getByNameQuery.setString(1, scheduleName);
+            ResultSet rs = getByNameQuery.executeQuery();
             while(rs.next()) {
                 schedule = new Schedule(rs.getInt(1), rs.getInt(2), rs.getString(3));
             }

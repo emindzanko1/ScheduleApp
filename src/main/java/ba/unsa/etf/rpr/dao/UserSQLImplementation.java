@@ -32,11 +32,11 @@ public class UserSQLImplementation implements UserDao  {
             e.printStackTrace();
         }
 
-        searchQuery = conn.prepareStatement("SELECT * FROM User WHERE User_ID=?");
-        newIdQuery = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
+        searchQuery = conn.prepareStatement("SELECT * FROM User WHERE user_id=?");
+        newIdQuery = conn.prepareStatement("SELECT MAX(user_id)+1 FROM User");
         addQuery = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?)");
         changeQuery = conn.prepareStatement("UPDATE User SET username=?, password=?, first_name=?, last_name=? WHERE user_id=?");
-        deleteQuery = conn.prepareStatement("DELETE FROM User WHERE User_ID=?");
+        deleteQuery = conn.prepareStatement("DELETE FROM User WHERE user_id=?");
         allQuery = conn.prepareStatement("SELECT * FROM User");
         getByNameQuery = conn.prepareStatement("SELECT * FROM User WHERE username=?");
     }
