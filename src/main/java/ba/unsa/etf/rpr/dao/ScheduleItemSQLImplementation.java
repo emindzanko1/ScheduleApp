@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.domain.ScheduleItem;
+import ba.unsa.etf.rpr.domain.Event;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
 
 import java.io.IOException;
@@ -50,53 +50,50 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
         instance = null;
     }
     @Override
-    public ArrayList<ScheduleItem> get(int id) throws ScheduleException {
-        ArrayList<ScheduleItem> scheduleItems = new ArrayList<>();
+    public Event get(int id) throws ScheduleException {
+        Event event = new Event();
         try {
             pretragaUpit.setString(1, String.valueOf(id));
             ResultSet rs = pretragaUpit.executeQuery();
-            while(rs.next()) {
-                scheduleItems.add(new ScheduleItem(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
-            }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
             throw new ScheduleException("Failed getting schedule item by id.", e);
 
         }
-        return scheduleItems;
+        return event;
     }
 
     @Override
-    public List<ScheduleItem> getAll() throws ScheduleException {
-        ArrayList<ScheduleItem> scheduleItems = new ArrayList<>();
+    public List<Event> getAll() throws ScheduleException {
+        ArrayList<Event> events = new ArrayList<>();
         try {
             ResultSet rs = sviUpit.executeQuery();
             while(rs.next()) {
-                scheduleItems.add(new ScheduleItem(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                events.add(new Event(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
             throw new ScheduleException("Failed getting all schedule items.", e);
         }
-        return scheduleItems;
+        return events;
     }
 
     @Override
-    public void save(ScheduleItem scheduleItem) throws ScheduleException {
+    public void save(Event event) throws ScheduleException {
         try {
             ResultSet rs = noviIdUpit.executeQuery();
             if(rs.next())
-                scheduleItem.setId(rs.getInt(1));
+                event.setId(rs.getInt(1));
             else
-                scheduleItem.setId(1);
+                event.setId(1);
 
-            dodavanjeUpit.setInt(1, scheduleItem.getId());
-            dodavanjeUpit.setInt(2, scheduleItem.getScheduleId());
-            dodavanjeUpit.setString(3, scheduleItem.getDayOfWeek());
-            dodavanjeUpit.setString(4, scheduleItem.getStartTime());
-            dodavanjeUpit.setString(5, scheduleItem.getEndTime());
-            dodavanjeUpit.setString(6, scheduleItem.getEventName());
-            dodavanjeUpit.setString(7, scheduleItem.getLocation());
+            dodavanjeUpit.setInt(1, event.getId());
+            dodavanjeUpit.setInt(2, event.getScheduleId());
+            dodavanjeUpit.setString(3, event.getDayOfWeek());
+            dodavanjeUpit.setString(4, event.getStartTime());
+            dodavanjeUpit.setString(5, event.getEndTime());
+            dodavanjeUpit.setString(6, event.getEventName());
+            dodavanjeUpit.setString(7, event.getLocation());
             dodavanjeUpit.execute();
 
         } catch (SQLException e) {
@@ -105,14 +102,14 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
     }
 
     @Override
-    public void update(ScheduleItem scheduleItem) throws ScheduleException {
+    public void update(Event event) throws ScheduleException {
         try {
-            izmjenaUpit.setInt(6, scheduleItem.getId());
-            izmjenaUpit.setString(1, scheduleItem.getDayOfWeek());
-            izmjenaUpit.setString(2, scheduleItem.getStartTime());
-            izmjenaUpit.setString(3, scheduleItem.getEndTime());
-            izmjenaUpit.setString(4, scheduleItem.getEventName());
-            izmjenaUpit.setString(5, scheduleItem.getLocation());
+            izmjenaUpit.setInt(6, event.getId());
+            izmjenaUpit.setString(1, event.getDayOfWeek());
+            izmjenaUpit.setString(2, event.getStartTime());
+            izmjenaUpit.setString(3, event.getEndTime());
+            izmjenaUpit.setString(4, event.getEventName());
+            izmjenaUpit.setString(5, event.getLocation());
             izmjenaUpit.execute();
         } catch (SQLException e) {
             throw new ScheduleException("Failed updating a schedule item.", e);
@@ -120,9 +117,9 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
     }
 
     @Override
-    public void delete(ScheduleItem scheduleItem) throws ScheduleException {
+    public void delete(Event event) throws ScheduleException {
         try {
-            brisanjeUpit.setInt(1, scheduleItem.getId());
+            brisanjeUpit.setInt(1, event.getId());
             brisanjeUpit.execute();
         } catch (SQLException e) {
             throw new ScheduleException("Failed deleting a schedule item.", e);
@@ -130,18 +127,18 @@ public class ScheduleItemSQLImplementation implements ScheduleItemDao{
     }
 
     @Override
-    public List<ScheduleItem> getByEventName(String eventName) throws ScheduleException {
-        List<ScheduleItem> scheduleItems = new ArrayList<>();
+    public List<Event> getByEventName(String eventName) throws ScheduleException {
+        List<Event> events = new ArrayList<>();
         try {
             poImenuUpit.setString(1, eventName);
             ResultSet rs = poImenuUpit.executeQuery();
             while(rs.next()) {
-                scheduleItems.add(new ScheduleItem(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                events.add(new Event(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
             throw new ScheduleException("Failed getting event by name.", e);
         }
-        return scheduleItems;
+        return events;
     }
 }

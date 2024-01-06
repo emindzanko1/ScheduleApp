@@ -4,7 +4,7 @@ import ba.unsa.etf.rpr.dao.ScheduleItemSQLImplementation;
 import ba.unsa.etf.rpr.dao.ScheduleSQLImplementation;
 import ba.unsa.etf.rpr.dao.UserSQLImplementation;
 import ba.unsa.etf.rpr.domain.Schedule;
-import ba.unsa.etf.rpr.domain.ScheduleItem;
+import ba.unsa.etf.rpr.domain.Event;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
 
@@ -139,15 +139,15 @@ public class App
         System.out.println("Unesite naziv događaja:  ");
         String eventName = ulaz.nextLine();
 
-        for(ScheduleItem scheduleItem : scheduleItemDao.getByEventName(eventName))
-            System.out.println("Naziv sadržaja rasporeda je: " + scheduleItem.getEventName() + ", lokacija je: " + scheduleItem.getLocation() +  ".");
+        for(Event event : scheduleItemDao.getByEventName(eventName))
+            System.out.println("Naziv sadržaja rasporeda je: " + event.getEventName() + ", lokacija je: " + event.getLocation() +  ".");
     }
 
     private static void pretragaSvihSadrzajaRasporeda() throws ScheduleException {
         System.out.println("Pretražite naziv sadržaja rasporeda: ");
 
-        for(ScheduleItem scheduleItem : scheduleItemDao.getAll())
-            System.out.println("Naziv sadržaja rasporeda je: " + scheduleItem.getEventName() + ", lokacija je: " + scheduleItem.getLocation() +  ".");
+        for(Event event : scheduleItemDao.getAll())
+            System.out.println("Naziv sadržaja rasporeda je: " + event.getEventName() + ", lokacija je: " + event.getLocation() +  ".");
     }
 
     private static void brisanjeSadrzajaRasporeda() throws ScheduleException {
@@ -158,8 +158,8 @@ public class App
         System.out.println("Unesite ID rasporeda čiji sadržaj brišete: ");
         scheduleId = ulaz.nextInt();
         if(ulaz.hasNextLine()) ulaz.nextLine();
-        ScheduleItem scheduleItem = new ScheduleItem(id, scheduleId, "", "", "", "", "");
-        scheduleItemDao.delete(scheduleItem);
+        Event event = new Event(id, scheduleId, "", "", "", "", "");
+        scheduleItemDao.delete(event);
     }
 
     private static void izmjenaSadrzajaRasporeda() throws ScheduleException {
@@ -170,16 +170,16 @@ public class App
         System.out.println("Unesite ID rasporeda čiji sadržaj mijenjate: ");
         scheduleId = ulaz.nextInt();
         if(ulaz.hasNextLine()) ulaz.nextLine();
-        ScheduleItem scheduleItem = unosSadrzajaRasporedaDuplication(id,scheduleId);
-        scheduleItemDao.update(scheduleItem);
+        Event event = unosSadrzajaRasporedaDuplication(id,scheduleId);
+        scheduleItemDao.update(event);
     }
 
     private static void pretragaSadrzajaRasporeda() throws ScheduleException {
         System.out.println("Unesite id sadržaja kojeg želite pretražiti: ");
         int id = ulaz.nextInt();
 
-        for(ScheduleItem scheduleItemDao : scheduleItemDao.get(id))
-            System.out.println("Naziv sadržaja rasporeda je: " + scheduleItemDao.getEventName() + ", lokacija je: " + scheduleItemDao.getLocation() +  ".");
+        Event eventDao = scheduleItemDao.get(id);
+            System.out.println("Naziv sadržaja rasporeda je: " + eventDao.getEventName() + ", lokacija je: " + eventDao.getLocation() +  ".");
     }
 
     private static User unosKorisnikaDuplication(int id) {
@@ -200,11 +200,11 @@ public class App
         System.out.println("Unesite ispravan id rasporeda čije stavke želite kreireati: ");
         int scheduleId = ulaz.nextInt();
         if(ulaz.hasNextLine()) ulaz.nextLine();
-        ScheduleItem scheduleItem = unosSadrzajaRasporedaDuplication(id, scheduleId);
-        scheduleItemDao.save(scheduleItem);
+        Event event = unosSadrzajaRasporedaDuplication(id, scheduleId);
+        scheduleItemDao.save(event);
     }
 
-    private static ScheduleItem unosSadrzajaRasporedaDuplication(int id, int scheduleId) {
+    private static Event unosSadrzajaRasporedaDuplication(int id, int scheduleId) {
         String dayOfTheWeek, startTime, endTime, eventName, location;
         System.out.println("Unesite dan u sedmici: ");
         dayOfTheWeek = ulaz.nextLine();
@@ -216,7 +216,7 @@ public class App
         eventName = ulaz.nextLine();
         System.out.println("Unesite lokaciju: ");
         location = ulaz.nextLine();
-        return(new ScheduleItem(id, scheduleId, dayOfTheWeek, startTime, endTime, eventName, location));
+        return(new Event(id, scheduleId, dayOfTheWeek, startTime, endTime, eventName, location));
     }
 
     private static void unosKorisnika() throws ScheduleException {
@@ -246,7 +246,7 @@ public class App
         System.out.println("Unesite id korisnika kojeg želite pretražiti: ");
         int id = ulaz.nextInt();
 
-        for(User user : userDao.get(id))
+        User user = userDao.get(id);
             System.out.println("Ime i prezime korisnika je: " + user.getFirstName() + " " + user.getLastName() + ".");
     }
 
@@ -308,8 +308,7 @@ public class App
     private static void pretragaRasporeda() throws ScheduleException {
         System.out.println("Unesite id rasporeda kojeg želite pretražiti: ");
         int id = ulaz.nextInt();
-
-        for(Schedule schedule : scheduleDao.get(id))
+        Schedule schedule = scheduleDao.get(id);
             System.out.println("Naziv rasporeda je: " + schedule.getScheduleName() + ".");
     }
 

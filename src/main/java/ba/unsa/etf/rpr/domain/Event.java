@@ -4,11 +4,11 @@ package ba.unsa.etf.rpr.domain;
  * This class is bean for schedule item
  * @author Emin Džanko
  */
-public class ScheduleItem {
+public class Event {
     private int id, scheduleId;
     private String dayOfWeek, startTime, endTime, eventName, location;
 
-    public ScheduleItem(int id, int scheduleId, String dayOfWeek, String startTime, String endTime, String eventName, String location) {
+    public Event(int id, int scheduleId, String dayOfWeek, String startTime, String endTime, String eventName, String location) {
         this.id = id;
         this.scheduleId = scheduleId;
         this.dayOfWeek = dayOfWeek;
@@ -18,7 +18,7 @@ public class ScheduleItem {
         this.location = location;
     }
 
-    public ScheduleItem() {
+    public Event() {
     }
 
     public int getId() {

@@ -18,7 +18,7 @@ public class UserSQLImplementation implements UserDao  {
     private static UserSQLImplementation instance = null;
 
     private Connection conn;
-    private final PreparedStatement pretragaUpit, dodavanjeUpit, noviIdUpit, izmjenaUpit, brisanjeUpit, sviUpit, poImenuUpit;
+    private final PreparedStatement searchQuery, addQuery, newIdQuery, changeQuery, deleteQuery, allQuery, getByNameQuery;
 
     private UserSQLImplementation() throws SQLException {
         Properties p = new Properties();
@@ -32,13 +32,13 @@ public class UserSQLImplementation implements UserDao  {
             e.printStackTrace();
         }
 
-        pretragaUpit = conn.prepareStatement("SELECT * FROM User WHERE User_ID=?");
-        noviIdUpit = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
-        dodavanjeUpit = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?)");
-        izmjenaUpit = conn.prepareStatement("UPDATE User SET username=?, hashedpassword=?, firstname=?, lastname=? WHERE User_ID=?");
-        brisanjeUpit = conn.prepareStatement("DELETE FROM User WHERE User_ID=?");
-        sviUpit = conn.prepareStatement("SELECT * FROM User");
-        poImenuUpit = conn.prepareStatement("SELECT * FROM User WHERE username=?");
+        searchQuery = conn.prepareStatement("SELECT * FROM User WHERE User_ID=?");
+        newIdQuery = conn.prepareStatement("SELECT MAX(User_ID)+1 FROM User");
+        addQuery = conn.prepareStatement("INSERT INTO User VALUES(?,?,?,?,?)");
+        changeQuery = conn.prepareStatement("UPDATE User SET username=?, password=?, first_name=?, last_name=? WHERE user_id=?");
+        deleteQuery = conn.prepareStatement("DELETE FROM User WHERE User_ID=?");
+        allQuery = conn.prepareStatement("SELECT * FROM User");
+        getByNameQuery = conn.prepareStatement("SELECT * FROM User WHERE username=?");
     }
 
     public static UserSQLImplementation getInstance() throws SQLException {
@@ -53,25 +53,22 @@ public class UserSQLImplementation implements UserDao  {
     }
 
     @Override
-    public ArrayList<User> get(int id) throws ScheduleException{
-        ArrayList<User> users = new ArrayList<>();
+    public User get(int id) throws ScheduleException{
+        User user = new User();
         try {
-            pretragaUpit.setString(1, String.valueOf(id));
-            ResultSet rs = pretragaUpit.executeQuery();
-            while(rs.next()) {
-                users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
-            }
+            searchQuery.setString(1, String.valueOf(id));
+            ResultSet rs = searchQuery.executeQuery();
         } catch (SQLException e) {
             throw new ScheduleException("Failed getting user by id.", e);
         }
-        return users;
+        return user;
     }
 
     @Override
     public List<User> getAll() throws ScheduleException {
         ArrayList<User> users = new ArrayList<>();
         try {
-            ResultSet rs = sviUpit.executeQuery();
+            ResultSet rs = allQuery.executeQuery();
             while(rs.next()) {
                 users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
@@ -85,18 +82,18 @@ public class UserSQLImplementation implements UserDao  {
     @Override
     public void save(User user) throws ScheduleException {
         try {
-            ResultSet rs = noviIdUpit.executeQuery();
+            ResultSet rs = newIdQuery.executeQuery();
             if(rs.next())
                 user.setId(rs.getInt(1));
             else
                 user.setId(1);
 
-            dodavanjeUpit.setInt(1, user.getId());
-            dodavanjeUpit.setString(2, user.getUsername());
-            dodavanjeUpit.setString(3, user.getPassword());
-            dodavanjeUpit.setString(4, user.getFirstName());
-            dodavanjeUpit.setString(5, user.getLastName());
-            dodavanjeUpit.execute();
+            addQuery.setInt(1, user.getId());
+            addQuery.setString(2, user.getUsername());
+            addQuery.setString(3, user.getPassword());
+            addQuery.setString(4, user.getFirstName());
+            addQuery.setString(5, user.getLastName());
+            addQuery.execute();
 
         } catch (SQLException e) {
             throw new ScheduleException("Failed creating a new user.", e);
@@ -106,12 +103,12 @@ public class UserSQLImplementation implements UserDao  {
     @Override
     public void update(User user) throws ScheduleException {
         try {
-            izmjenaUpit.setInt(5, user.getId());
-            izmjenaUpit.setString(1, user.getUsername());
-            izmjenaUpit.setString(2, user.getPassword());
-            izmjenaUpit.setString(3, user.getFirstName());
-            izmjenaUpit.setString(4, user.getLastName());
-            izmjenaUpit.execute();
+            changeQuery.setInt(5, user.getId());
+            changeQuery.setString(1, user.getUsername());
+            changeQuery.setString(2, user.getPassword());
+            changeQuery.setString(3, user.getFirstName());
+            changeQuery.setString(4, user.getLastName());
+            changeQuery.execute();
         } catch (SQLException e) {
             throw new ScheduleException("Failed updating a user.", e);
         }
@@ -121,8 +118,8 @@ public class UserSQLImplementation implements UserDao  {
     @Override
     public void delete(User user) throws ScheduleException {
         try {
-            brisanjeUpit.setInt(1, user.getId());
-            brisanjeUpit.execute();
+            deleteQuery.setInt(1, user.getId());
+            deleteQuery.execute();
         } catch (SQLException e) {
             throw new ScheduleException("Failed deleting a user.", e);
         }
@@ -132,8 +129,8 @@ public class UserSQLImplementation implements UserDao  {
     public User getByUsername(String username) throws ScheduleException {
         User user = new User();
         try {
-            poImenuUpit.setString(1, username);
-            ResultSet rs = poImenuUpit.executeQuery();
+            getByNameQuery.setString(1, username);
+            ResultSet rs = getByNameQuery.executeQuery();
             while(rs.next()) {
                 user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
             }

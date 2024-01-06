@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface Dao<T> {
 
-    ArrayList<T> get(int id) throws ScheduleException;
+    T get(int id) throws ScheduleException;
 
     List<T> getAll() throws ScheduleException;
 

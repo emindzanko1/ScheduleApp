@@ -53,19 +53,16 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     }
 
     @Override
-    public ArrayList<Schedule> get(int id) throws ScheduleException {
-        ArrayList<Schedule> schedules = new ArrayList<>();
+    public Schedule get(int id) throws ScheduleException {
+        Schedule schedule = new Schedule();
         try {
             pretragaUpit.setString(1, String.valueOf(id));
             ResultSet rs = pretragaUpit.executeQuery();
-            while(rs.next()) {
-                schedules.add(new Schedule(rs.getInt(1), rs.getInt(2), rs.getString(3)));
-            }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
             throw new ScheduleException("Failed getting a schedule by id.", e);
         }
-        return schedules;
+        return schedule;
     }
 
     @Override

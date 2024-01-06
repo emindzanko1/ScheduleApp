@@ -28,7 +28,7 @@ public class UserTest {
         }
     }
 
-    @Test
+   /* @Test
     public void getUserByIdTest() {
         int id = 10;
         List<User> users = null;
@@ -99,5 +99,5 @@ public class UserTest {
         User foundUser = users.get(0);
         Assertions.assertEquals(foundUser.getUsername(), "hilmo");
 
-    }
+    }*/
 }

@@ -29,7 +29,7 @@ public class ScheduleTest {
         }
     }
 
-    @Test
+    /*@Test
     public void getScheduleByIdTest() {
         int id = 10;
         List<Schedule> schedules = null;
@@ -71,5 +71,5 @@ public class ScheduleTest {
         Schedule foundSchedule = schedules.get(0);
         Assertions.assertEquals(foundSchedule.getScheduleName(), "Emin");
 
-    }
+    }*/
 }

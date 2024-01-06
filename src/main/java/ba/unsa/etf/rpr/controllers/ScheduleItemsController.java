@@ -3,7 +3,7 @@ package ba.unsa.etf.rpr.controllers;
 import ba.unsa.etf.rpr.dao.ScheduleItemSQLImplementation;
 import ba.unsa.etf.rpr.dao.ScheduleSQLImplementation;
 import ba.unsa.etf.rpr.domain.Schedule;
-import ba.unsa.etf.rpr.domain.ScheduleItem;
+import ba.unsa.etf.rpr.domain.Event;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -43,7 +43,7 @@ public class ScheduleItemsController {
 
     public void addScheduleItems() {
         try {
-            ScheduleItem newScheduleItem = new ScheduleItem();
+            Event newEvent = new Event();
 
             Schedule schedule = ScheduleSQLImplementation.getInstance().getByScheduleName(scheduleName);
 
@@ -66,14 +66,14 @@ public class ScheduleItemsController {
             else if(location.length() == 0)
                 showAlert("Please enter a valid location, at least 1 symbol.");
             else {
-                newScheduleItem.setScheduleId(scheduleId);
-                newScheduleItem.setDayOfWeek(dayOfWeek);
-                newScheduleItem.setStartTime(startTime);
-                newScheduleItem.setEndTime(endTime);
-                newScheduleItem.setEventName(eventName);
-                newScheduleItem.setLocation(location);
+                newEvent.setScheduleId(scheduleId);
+                newEvent.setDayOfWeek(dayOfWeek);
+                newEvent.setStartTime(startTime);
+                newEvent.setEndTime(endTime);
+                newEvent.setEventName(eventName);
+                newEvent.setLocation(location);
                 ScheduleItemSQLImplementation scheduleItemSQLImplementation = ScheduleItemSQLImplementation.getInstance();
-                scheduleItemSQLImplementation.save(newScheduleItem);
+                scheduleItemSQLImplementation.save(newEvent);
                 Stage stage = (Stage) cancelButtonId.getScene().getWindow();
                 stage.close();
             }
