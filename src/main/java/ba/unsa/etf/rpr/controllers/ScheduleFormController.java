@@ -44,7 +44,7 @@ public class ScheduleFormController {
         try {
             String scheduleName = scheduleNameId.getText();
             if(scheduleName.length() == 0)
-                showAlert();
+                showCreatingAlert();
             else {
                 User user = UserSQLImplementation.getInstance().getByUsername(username);
                 int userId = user.getId();
@@ -68,11 +68,46 @@ public class ScheduleFormController {
         }
     }
 
-    private void showAlert() {
+    public void deleteSchedule() throws SQLException, ScheduleException {
+        String scheduleName = scheduleNameId.getText();
+        try {
+            if(ScheduleSQLImplementation.getInstance().getByScheduleName(scheduleName) == null) {
+                showDeletingAlert();
+            }
+            else {
+                User user = UserSQLImplementation.getInstance().getByUsername(username);
+                int userId = user.getId();
+                Schedule newSchedule = new Schedule();
+                Schedule schedule = ScheduleSQLImplementation.getInstance().getByScheduleName(scheduleName);
+                ScheduleSQLImplementation scheduleSQL = ScheduleSQLImplementation.getInstance();
+                scheduleSQL.delete(schedule);
+                Stage stage = new Stage();
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));
+                ScheduleController controller = new ScheduleController(username, scheduleName);
+                loader.setController(controller);
+                stage.setTitle("ScheduleApp");
+                stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+                stage.show();
+            }
+        }
+        catch (IOException | ScheduleException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void showCreatingAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Creating Schedule Error");
         alert.setHeaderText(null);
         alert.setContentText("Schedule name is too short.");
+        alert.showAndWait();
+    }
+
+    private void showDeletingAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Deleting Schedule Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Schedule name does not exists.");
         alert.showAndWait();
     }
 

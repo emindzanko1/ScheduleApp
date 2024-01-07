@@ -35,9 +35,9 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         newIdQuery = conn.prepareStatement("SELECT MAX(Schedule_ID)+1 FROM Schedule");
         addQuery = conn.prepareStatement("INSERT INTO Schedule VALUES(?,?,?)");
         allQuery = conn.prepareStatement("SELECT * FROM Schedule");
-        changeQuery = conn.prepareStatement("UPDATE Schedule SET ScheduleName=? WHERE Schedule_ID=?");
-        deleteQuery = conn.prepareStatement("DELETE FROM Schedule WHERE Schedule_ID=?");
-        getByNameQuery = conn.prepareStatement("SELECT * FROM Schedule WHERE ScheduleName=?");
+        changeQuery = conn.prepareStatement("UPDATE Schedule SET schedule_name=? WHERE Schedule_ID=?");
+        deleteQuery = conn.prepareStatement("DELETE FROM Schedule WHERE schedule_id=?");
+        getByNameQuery = conn.prepareStatement("SELECT * FROM Schedule WHERE schedule_name=?");
         getNumberQuery = conn.prepareStatement("SELECT COUNT(*) FROM Schedule WHERE user_id=?");
         getByUserIdQuery = conn.prepareStatement("SELECT * FROM Schedule WHERE user_id=?");
     }
@@ -96,6 +96,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
             addQuery.setString(3, schedule.getScheduleName());
 
             addQuery.execute();
+            System.out.println("Connection successful!");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -127,7 +128,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
 
     @Override
     public Schedule getByScheduleName(String scheduleName) throws ScheduleException {
-        Schedule schedule = new Schedule();
+        Schedule schedule = null;
         try {
             getByNameQuery.setString(1, scheduleName);
             ResultSet rs = getByNameQuery.executeQuery();
