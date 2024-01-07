@@ -1,6 +1,9 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.dao.ScheduleSQLImplementation;
+import ba.unsa.etf.rpr.dao.UserSQLImplementation;
 import ba.unsa.etf.rpr.domain.Schedule;
+import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -8,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -128,7 +132,7 @@ public class ScheduleController {
         });
     }
 
-    public void createNewSchedule(ActionEvent actionEvent) throws IOException {
+    public void createNewSchedule(ActionEvent actionEvent) throws IOException, SQLException, ScheduleException {
         //for(int i = 0; i < actionEvent.hashCode(); i++
         //gridPane.getChildren().add(new Button("test")) ;
 
@@ -147,12 +151,23 @@ on(scheduleName);
         Stage stage = (Stage) cancelId.getScene().getWindow();
         stage.close();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
-        ScheduleFormController controller = new ScheduleFormController(scheduleName, username);
-        loader.setController(controller);
-        stage.setTitle("ScheduleApp");
-        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.show();
+        User user = UserSQLImplementation.getInstance().getByUsername(username);
+        int userId = user.getId();
+
+        int numberOfSchedules = ScheduleSQLImplementation.getInstance().getNumberOfSchedules((userId));
+
+        if(numberOfSchedules < 7) {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
+
+            ScheduleFormController controller = new ScheduleFormController(scheduleName, username);
+            loader.setController(controller);
+            stage.setTitle("ScheduleApp");
+            stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.show();
+        }
+        else {
+            showAlert();
+        }
     }
 
     private void addSortedItem(ListView<String> listView, String item) {
@@ -187,5 +202,13 @@ on(scheduleName);
     public void cancel(ActionEvent actionEvent) {
         Stage stage = (Stage) cancelId.getScene().getWindow();
         stage.close();
+    }
+
+    private void showAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Creating Schedule Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Maximum number of schedules is 6.");
+        alert.showAndWait();
     }
 }

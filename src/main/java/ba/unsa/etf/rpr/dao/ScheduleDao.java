@@ -9,4 +9,5 @@ import ba.unsa.etf.rpr.exceptions.ScheduleException;
  */
 public interface ScheduleDao extends Dao<Schedule>{
     Schedule getByScheduleName(String scheduleName) throws ScheduleException;
+    int getNumberOfSchedules(int userId) throws ScheduleException;
 }

@@ -18,7 +18,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     private static ScheduleSQLImplementation instance = null;
 
     private Connection conn;
-    private final PreparedStatement searchQuery, addQuery, newIdQuery, changeQuery, deleteQuery, allQuery, getByNameQuery;
+    private final PreparedStatement searchQuery, addQuery, newIdQuery, changeQuery, deleteQuery, allQuery, getByNameQuery, getNumberQuery;
 
     private ScheduleSQLImplementation() throws SQLException {
         Properties p = new Properties();
@@ -38,7 +38,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         changeQuery = conn.prepareStatement("UPDATE Schedule SET ScheduleName=? WHERE Schedule_ID=?");
         deleteQuery = conn.prepareStatement("DELETE FROM Schedule WHERE Schedule_ID=?");
         getByNameQuery = conn.prepareStatement("SELECT * FROM Schedule WHERE ScheduleName=?");
-
+        getNumberQuery = conn.prepareStatement("SELECT COUNT(*) FROM Schedule WHERE user_id=?");
     }
 
     public static ScheduleSQLImplementation getInstance() throws SQLException {
@@ -139,4 +139,20 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         }
         return schedule;
     }
+
+    @Override
+    public int getNumberOfSchedules(int userId) throws ScheduleException {
+        int numberOfSchedules = 0;
+        try {
+            getNumberQuery.setInt(1, userId);
+            ResultSet rs = getNumberQuery.executeQuery();
+            if (rs.next()) {
+                numberOfSchedules = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new ScheduleException("Failed getting the number of schedules for the user.", e);
+        }
+        return numberOfSchedules;
+    }
+
 }
