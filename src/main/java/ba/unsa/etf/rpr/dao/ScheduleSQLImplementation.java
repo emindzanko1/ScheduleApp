@@ -18,7 +18,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
     private static ScheduleSQLImplementation instance = null;
 
     private Connection conn;
-    private final PreparedStatement searchQuery, addQuery, newIdQuery, changeQuery, deleteQuery, allQuery, getByNameQuery, getNumberQuery;
+    private final PreparedStatement searchQuery, addQuery, newIdQuery, changeQuery, deleteQuery, allQuery, getByNameQuery, getNumberQuery, getByUserIdQuery;
 
     private ScheduleSQLImplementation() throws SQLException {
         Properties p = new Properties();
@@ -39,6 +39,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         deleteQuery = conn.prepareStatement("DELETE FROM Schedule WHERE Schedule_ID=?");
         getByNameQuery = conn.prepareStatement("SELECT * FROM Schedule WHERE ScheduleName=?");
         getNumberQuery = conn.prepareStatement("SELECT COUNT(*) FROM Schedule WHERE user_id=?");
+        getByUserIdQuery = conn.prepareStatement("SELECT * FROM Schedule WHERE user_id=?");
     }
 
     public static ScheduleSQLImplementation getInstance() throws SQLException {
@@ -154,5 +155,23 @@ public class ScheduleSQLImplementation implements ScheduleDao {
         }
         return numberOfSchedules;
     }
+
+    @Override
+    public List<Schedule> getSchedulesByUserId(int userId) throws ScheduleException {
+        List<Schedule> schedules = new ArrayList<>();
+        try {
+            getByUserIdQuery.setInt(1, userId);
+            ResultSet rs = getByUserIdQuery.executeQuery();
+            while (rs.next()) {
+                schedules.add(new Schedule(rs.getInt(1), rs.getInt(2), rs.getString(3)));
+            }
+            System.out.println("Connection successful!");
+        } catch (SQLException e) {
+            throw new ScheduleException("Failed getting schedules by user ID.", e);
+        }
+        return schedules;
+    }
+
+
 
 }

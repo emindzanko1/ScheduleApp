@@ -75,7 +75,16 @@ public class ScheduleController {
     @FXML
     public void initialize() throws SQLException, ScheduleException {
         //List<Schedule> schedules = ScheduleSQLImplementation.getInstance().getSchedulesForUser(id);
+        User user = UserSQLImplementation.getInstance().getByUsername(username);
+        int userId = user.getId();
 
+        List<Schedule> schedules = ScheduleSQLImplementation.getInstance().getSchedulesByUserId(userId);
+
+        for (Schedule schedule : schedules) {
+            Button scheduleButton = new Button(schedule.getScheduleName());
+            scheduleButton.setOnAction(event -> handleScheduleButtonClick(schedule.getScheduleName()));
+            hBox.getChildren().add(scheduleButton);
+        }
 
         //if(!scheduleName.equals(""))
         //hBox.getChildren().add(new Button(scheduleName));
@@ -89,6 +98,21 @@ public class ScheduleController {
                 hBox.getChildren().add(scheduleButton);
             }*/
     }
+
+    private void handleScheduleButtonClick(String scheduleName) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
+            ScheduleFormController controller = new ScheduleFormController(username, scheduleName);
+            loader.setController(controller);
+            Stage stage = new Stage();
+            stage.setTitle("ScheduleApp");
+            stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /*private void handleScheduleButtonClick(String scheduleName) {
         try {
@@ -169,6 +193,13 @@ on(scheduleName);
             showAlert();
         }
     }
+
+    public void deleteSchedule(ActionEvent actionEvent) throws IOException, SQLException, ScheduleException {
+
+
+    }
+
+
 
     private void addSortedItem(ListView<String> listView, String item) {
         ObservableList<String> items = listView.getItems();
