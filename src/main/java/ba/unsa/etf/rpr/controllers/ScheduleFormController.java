@@ -28,9 +28,10 @@ public class ScheduleFormController {
     public TextField scheduleNameId;
     public Button cancelButtonId;
 
-    public String username;
+    public String scheduleName, username;
 
-    public ScheduleFormController(String username) {
+    public ScheduleFormController(String scheduleName, String username) {
+        this.scheduleName = scheduleName;
         this.username = username;
     }
 
@@ -46,15 +47,12 @@ public class ScheduleFormController {
                 showAlert();
             else {
                 User user = UserSQLImplementation.getInstance().getByUsername(username);
-                System.out.println(user.getUsername() + " " + username);
                 int userId = user.getId();
 
                 Schedule newSchedule = new Schedule();
                 newSchedule.setScheduleName(scheduleName);
-                System.out.println(userId);
                 newSchedule.setUserId(userId);
                 ScheduleSQLImplementation scheduleSQL = ScheduleSQLImplementation.getInstance();
-                System.out.println(newSchedule.getScheduleName());
                 scheduleSQL.save(newSchedule);
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));

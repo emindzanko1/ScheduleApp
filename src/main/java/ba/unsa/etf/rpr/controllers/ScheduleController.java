@@ -54,7 +54,7 @@ public class ScheduleController {
 
     private int id;
     private final String scheduleName;
-    private String username;
+    private final String username;
 
     private List<Schedule> schedules = new ArrayList<>();
 
@@ -63,7 +63,7 @@ public class ScheduleController {
         this.scheduleName = "";
     }
 
-    public ScheduleController(String scheduleName, String username) {
+    public ScheduleController(String username, String scheduleName) {
         this.username = username;
         this.scheduleName = scheduleName;
     }
@@ -86,7 +86,7 @@ public class ScheduleController {
             }*/
     }
 
-    private void handleScheduleButtonClick(String scheduleName) {
+    /*private void handleScheduleButtonClick(String scheduleName) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
             ScheduleFormController controller = new ScheduleFormController(username);
@@ -98,12 +98,12 @@ public class ScheduleController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public void addScheduleItems(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleItems.fxml"));
-        ScheduleItemsController scheduleItemsController = new ScheduleItemsController(scheduleName);
+        ScheduleItemsController scheduleItemsController = new ScheduleItemsController(username);
         loader.setController(scheduleItemsController);
         stage.setTitle("ScheduleApp");
         stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
@@ -148,8 +148,7 @@ on(scheduleName);
         stage.close();
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
-        System.out.println("Username koji saljem " + username);
-        ScheduleFormController controller = new ScheduleFormController(username);
+        ScheduleFormController controller = new ScheduleFormController(scheduleName, username);
         loader.setController(controller);
         stage.setTitle("ScheduleApp");
         stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
