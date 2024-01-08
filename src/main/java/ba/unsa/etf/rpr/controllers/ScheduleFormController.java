@@ -26,13 +26,30 @@ public class ScheduleFormController {
 
     @FXML
     public TextField scheduleNameId;
-    public Button cancelButtonId;
+    public Button addButtonId, deleteButtonId,  cancelButtonId;
 
-    public String scheduleName, username;
+    public String scheduleName, username, option;
 
-    public ScheduleFormController(String scheduleName, String username) {
+    public ScheduleFormController(String scheduleName, String username, String option) {
         this.scheduleName = scheduleName;
         this.username = username;
+        this.option = option;
+    }
+
+    @FXML
+    public void initialize() throws SQLException {
+        if(option.equals("Delete"))
+             addButtonId.setVisible(false);
+        else
+            deleteButtonId.setVisible(false);
+      /*  String scheduleName = scheduleNameId.getText();
+        System.out.println(scheduleName);
+        // Check the schedule name and hide the appropriate button
+        if ("emin1".equals(scheduleName)) {
+            addButtonId.setVisible(false); // Hide the "Add" button
+        } else if ("emin2".equals(scheduleName)) {
+            deleteButtonId.setVisible(false); // Hide the "Delete" button
+        }*/
     }
 
     public void cancelSchedule() {

@@ -47,7 +47,7 @@
             <Insets left="69.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="addButtonId1" mnemonicParsing="false" onAction="#deleteSchedule" prefHeight="26.0" prefWidth="60.0" text="DELETE" GridPane.rowIndex="1">
+      <Button fx:id="deleteButtonId" mnemonicParsing="false" onAction="#deleteSchedule" prefHeight="26.0" prefWidth="60.0" text="DELETE" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="80.0" />
          </GridPane.margin>

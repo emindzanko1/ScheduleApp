@@ -87,7 +87,7 @@ public class ScheduleController {
     private void handleScheduleButtonClick(String scheduleName) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
-            ScheduleFormController controller = new ScheduleFormController(username, scheduleName);
+            ScheduleFormController controller = new ScheduleFormController(username, scheduleName, "Add");
             loader.setController(controller);
             Stage stage = new Stage();
             stage.setTitle("ScheduleApp");
@@ -168,7 +168,7 @@ on(scheduleName);
         if(numberOfSchedules < 7) {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
 
-            ScheduleFormController controller = new ScheduleFormController(scheduleName, username);
+            ScheduleFormController controller = new ScheduleFormController(scheduleName, username, "Add");
             loader.setController(controller);
             stage.setTitle("ScheduleApp");
             stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
@@ -191,7 +191,7 @@ on(scheduleName);
         if(numberOfSchedules != 0) {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
 
-            ScheduleFormController controller = new ScheduleFormController(scheduleName, username);
+            ScheduleFormController controller = new ScheduleFormController(scheduleName, username, "Delete");
             loader.setController(controller);
             stage.setTitle("ScheduleApp");
             stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
