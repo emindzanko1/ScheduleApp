@@ -112,10 +112,11 @@ public class ScheduleController {
         stage.show();
 
         stage.setOnHiding(x -> {
-            List<String> lista = eventsController.vratiPodatke();
-            String dayOfWeek = lista.get(0);
-            String startTime = lista.get(1);
-            String eventName = lista.get(3);
+            List<String> list = eventsController.listData();
+            String dayOfWeek = list.get(0);
+            String startTime = list.get(1);
+            String eventName = list.get(2);
+            String location = list.get(3);
             String formattedData = startTime + " " + eventName;
 
             switch (dayOfWeek) {

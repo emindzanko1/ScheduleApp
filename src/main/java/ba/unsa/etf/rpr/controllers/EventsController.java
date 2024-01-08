@@ -4,7 +4,6 @@ import ba.unsa.etf.rpr.dao.EventSQLImplementation;
 import ba.unsa.etf.rpr.dao.ScheduleSQLImplementation;
 import ba.unsa.etf.rpr.domain.Schedule;
 import ba.unsa.etf.rpr.domain.Event;
-import ba.unsa.etf.rpr.exceptions.ScheduleException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,9 +13,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,7 +29,7 @@ public class EventsController {
     public TextField eventNameId;
     public TextField locationId;
 
-    private String scheduleName;
+    private final String scheduleName;
 
     private final ObservableList<String> daysOfWeekList = FXCollections.observableArrayList(
             "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
@@ -47,23 +44,19 @@ public class EventsController {
         dayOfWeekId.setItems(daysOfWeekList);
     }
 
-    public void addScheduleItems() throws SQLException, ScheduleException {
-        //try {
+    public void addScheduleItems() {
             Event newEvent = new Event();
-            Schedule schedule = null;
-            //try {
+            Schedule schedule;
+            try {
                 schedule = ScheduleSQLImplementation.getInstance().getByScheduleName(scheduleName);
                 int scheduleId = schedule.getId();
                 String dayOfWeek = (String) dayOfWeekId.getValue();
                 String startTime = startTimeId.getText();
                 String eventName = eventNameId.getText();
                 String location = locationId.getText();
-                List<String> workDays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
                 String timePattern = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
 
-                if(!workDays.contains(dayOfWeek))
-                    showAlert("Please enter a valid work day, for example Monday.");
-                else if(!(startTime.matches(timePattern)))
+                if(!(startTime.matches(timePattern)))
                     showAlert("Please enter a valid time in a day in format hh:mm.");
                 else if (eventName.length() == 0)
                     showAlert("Please enter a valid event name, at least 1 symbol.");
@@ -79,18 +72,12 @@ public class EventsController {
                     eventSQLImplementation.save(newEvent);
                     Stage stage = (Stage) cancelButtonId.getScene().getWindow();
                     stage.close();
-            //    }
-           // }
-          /*  catch (Exception e) {
+               }
+            }
+            catch (Exception e) {
                 System.out.println(scheduleName);
                 System.out.println(e.getMessage());
-            }*/
-
-        }
-       /* catch (Exception e) {
-            System.out.println("tu sam" + scheduleName);
-            System.out.println(e.getMessage());
-        }*/
+            }
     }
 
     public void cancelAddingScheduleItems() {
@@ -98,7 +85,7 @@ public class EventsController {
         stage.close();
     }
 
-    public List<String> vratiPodatke() {
+    public List<String> listData() {
         List<String> lista = new ArrayList<>();
         lista.add((String) dayOfWeekId.getValue());
         lista.add(startTimeId.getText());
