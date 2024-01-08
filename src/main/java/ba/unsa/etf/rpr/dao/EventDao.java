@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface EventDao extends Dao<Event> {
     List<Event> getByEventName(String eventName) throws ScheduleException;
+    List<Event> getByScheduleId(int scheduleId) throws ScheduleException;
 }

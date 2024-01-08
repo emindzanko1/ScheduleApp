@@ -158,7 +158,7 @@ public class App
         System.out.println("Unesite ID rasporeda čiji sadržaj brišete: ");
         scheduleId = ulaz.nextInt();
         if(ulaz.hasNextLine()) ulaz.nextLine();
-        Event event = new Event(id, scheduleId, "", "", "", "", "");
+        Event event = new Event(id, scheduleId, "", "", "", "");
         scheduleItemDao.delete(event);
     }
 
@@ -205,18 +205,16 @@ public class App
     }
 
     private static Event unosSadrzajaRasporedaDuplication(int id, int scheduleId) {
-        String dayOfTheWeek, startTime, endTime, eventName, location;
+        String dayOfTheWeek, startTime, eventName, location;
         System.out.println("Unesite dan u sedmici: ");
         dayOfTheWeek = ulaz.nextLine();
         System.out.println("Unesite početno vrijeme: ");
         startTime = ulaz.nextLine();
-        System.out.println("Unesite krajnje vrijeme: ");
-        endTime = ulaz.nextLine();
         System.out.println("Unesite naziv događaja: ");
         eventName = ulaz.nextLine();
         System.out.println("Unesite lokaciju: ");
         location = ulaz.nextLine();
-        return(new Event(id, scheduleId, dayOfTheWeek, startTime, endTime, eventName, location));
+        return(new Event(id, scheduleId, dayOfTheWeek, startTime, eventName, location));
     }
 
     private static void unosKorisnika() throws ScheduleException {

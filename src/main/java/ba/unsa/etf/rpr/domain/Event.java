@@ -6,15 +6,14 @@ package ba.unsa.etf.rpr.domain;
  */
 public class Event {
     private int id, scheduleId;
-    private String dayOfWeek, startTime, endTime, eventName, location;
+    private String dayOfWeek, startTime, eventName, location;
 
-    public Event(int id, int scheduleId, String dayOfWeek, String startTime, String endTime, String eventName, String location) {
+    public Event(int id, int scheduleId, String eventName, String dayOfWeek, String startTime, String location) {
         this.id = id;
         this.scheduleId = scheduleId;
+        this.eventName = eventName;
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
-        this.endTime = endTime;
-        this.eventName = eventName;
         this.location = location;
     }
 
@@ -51,14 +50,6 @@ public class Event {
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
     }
 
     public String getEventName() {

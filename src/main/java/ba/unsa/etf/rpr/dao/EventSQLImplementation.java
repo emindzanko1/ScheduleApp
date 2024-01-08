@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Event;
+import ba.unsa.etf.rpr.domain.Schedule;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class EventSQLImplementation implements EventDao {
     private static EventSQLImplementation instance = null;
 
     private Connection conn;
-    private final PreparedStatement searchQuery, addQuery, newIdQuery, changeQuery, deleteQuery, allQuery, getByNameQuery;
+    private final PreparedStatement searchQuery, addQuery, newIdQuery, changeQuery, deleteQuery, allQuery, getByNameQuery, getByScheduleIdQuery;
 
     private EventSQLImplementation() throws SQLException {
         Properties p = new Properties();
@@ -37,6 +38,7 @@ public class EventSQLImplementation implements EventDao {
         deleteQuery = conn.prepareStatement("DELETE FROM Event WHERE event_id=?");
         allQuery = conn.prepareStatement("SELECT * FROM Event");
         getByNameQuery = conn.prepareStatement("SELECT * FROM Event WHERE eventame=?");
+        getByScheduleIdQuery = conn.prepareStatement("SELECT * FROM Event WHERE schedule_id=?");
     }
 
     public static EventSQLImplementation getInstance() throws SQLException {
@@ -69,7 +71,7 @@ public class EventSQLImplementation implements EventDao {
         try {
             ResultSet rs = allQuery.executeQuery();
             while(rs.next()) {
-                events.add(new Event(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                events.add(new Event(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
@@ -103,12 +105,11 @@ public class EventSQLImplementation implements EventDao {
     @Override
     public void update(Event event) throws ScheduleException {
         try {
-            changeQuery.setInt(6, event.getId());
+            changeQuery.setInt(5, event.getId());
             changeQuery.setString(1, event.getDayOfWeek());
             changeQuery.setString(2, event.getStartTime());
-            changeQuery.setString(3, event.getEndTime());
-            changeQuery.setString(4, event.getEventName());
-            changeQuery.setString(5, event.getLocation());
+            changeQuery.setString(3, event.getEventName());
+            changeQuery.setString(4, event.getLocation());
             changeQuery.execute();
         } catch (SQLException e) {
             throw new ScheduleException("Failed updating a schedule event.", e);
@@ -132,11 +133,27 @@ public class EventSQLImplementation implements EventDao {
             getByNameQuery.setString(1, eventName);
             ResultSet rs = getByNameQuery.executeQuery();
             while(rs.next()) {
-                events.add(new Event(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                events.add(new Event(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
             throw new ScheduleException("Failed getting event by name.", e);
+        }
+        return events;
+    }
+
+    @Override
+    public List<Event> getByScheduleId(int scheduleId) throws ScheduleException {
+        List<Event> events = new ArrayList<>();
+        try {
+            getByScheduleIdQuery.setInt(1, scheduleId);
+            ResultSet rs = getByScheduleIdQuery.executeQuery();
+            while (rs.next()) {
+                events.add(new Event(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+            }
+            System.out.println("Connection successful!");
+        } catch (SQLException e) {
+            throw new ScheduleException("Failed getting events by schedule ID.", e);
         }
         return events;
     }

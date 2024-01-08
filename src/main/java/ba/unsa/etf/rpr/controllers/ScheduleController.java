@@ -1,7 +1,9 @@
 package ba.unsa.etf.rpr.controllers;
 
+import ba.unsa.etf.rpr.dao.EventSQLImplementation;
 import ba.unsa.etf.rpr.dao.ScheduleSQLImplementation;
 import ba.unsa.etf.rpr.dao.UserSQLImplementation;
+import ba.unsa.etf.rpr.domain.Event;
 import ba.unsa.etf.rpr.domain.Schedule;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exceptions.ScheduleException;
@@ -82,13 +84,31 @@ public class ScheduleController {
 
         for (Schedule schedule : schedules) {
             Button scheduleButton = new Button(schedule.getScheduleName());
-            scheduleButton.setOnAction(event -> handleScheduleButtonClick(schedule.getScheduleName()));
+            scheduleButton.setOnAction(event -> {
+                try {
+                    handleScheduleButtonClick(schedule.getScheduleName());
+                } catch (SQLException | ScheduleException e) {
+                    e.printStackTrace();
+                }
+            });
             hBox.getChildren().add(scheduleButton);
         }
     }
 
-    private void handleScheduleButtonClick(String scheduleName) {
+    private void handleScheduleButtonClick(String scheduleName) throws SQLException, ScheduleException {
         this.scheduleName = scheduleName;
+
+        Schedule schedule = ScheduleSQLImplementation.getInstance().getByScheduleName(scheduleName);
+
+        List<Event> events = EventSQLImplementation.getInstance().getByScheduleId(schedule.getId());
+
+        for(Event event : events)
+            System.out.println(event.getEventName());
+
+
+        displayEventsInListViews(events);
+
+
         /*try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
             ScheduleFormController controller = new ScheduleFormController(username, scheduleName, "Add");
@@ -101,6 +121,38 @@ public class ScheduleController {
             e.printStackTrace();
         }*/
     }
+
+    private void displayEventsInListViews(List<Event> events) {
+        mondayListId.getItems().clear();
+        tuesdayListId.getItems().clear();
+        wednesdayListId.getItems().clear();
+        thursdayListId.getItems().clear();
+        fridayListId.getItems().clear();
+
+        for (Event event : events) {
+            String formattedData = event.getStartTime().substring(0, event.getStartTime().length() - 3) + " " + event.getEventName();
+            switch (event.getDayOfWeek()) {
+                case "Monday":
+                    mondayListId.getItems().add(formattedData);
+                    break;
+                case "Tuesday":
+                    tuesdayListId.getItems().add(formattedData);
+                    break;
+                case "Wednesday":
+                    wednesdayListId.getItems().add(formattedData);
+                    break;
+                case "Thursday":
+                    thursdayListId.getItems().add(formattedData);
+                    break;
+                case "Friday":
+                    fridayListId.getItems().add(formattedData);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
 
     public void addEvent(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
@@ -116,7 +168,6 @@ public class ScheduleController {
             String dayOfWeek = list.get(0);
             String startTime = list.get(1);
             String eventName = list.get(2);
-            String location = list.get(3);
             String formattedData = startTime + " " + eventName;
 
             switch (dayOfWeek) {
