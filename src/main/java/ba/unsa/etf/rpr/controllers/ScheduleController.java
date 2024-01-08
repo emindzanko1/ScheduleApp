@@ -57,10 +57,8 @@ public class ScheduleController {
     private Button button1;
 
     private int id;
-    private final String scheduleName;
+    private String scheduleName;
     private final String username;
-
-    private List<Schedule> schedules = new ArrayList<>();
 
     public ScheduleController(String username) {
         this.username = username;
@@ -77,6 +75,11 @@ public class ScheduleController {
         User user = UserSQLImplementation.getInstance().getByUsername(username);
         int userId = user.getId();
         List<Schedule> schedules = ScheduleSQLImplementation.getInstance().getSchedulesByUserId(userId);
+
+        if (!schedules.isEmpty()) {
+            this.scheduleName = schedules.get(0).getScheduleName();
+        }
+
         for (Schedule schedule : schedules) {
             Button scheduleButton = new Button(schedule.getScheduleName());
             scheduleButton.setOnAction(event -> handleScheduleButtonClick(schedule.getScheduleName()));
@@ -85,7 +88,8 @@ public class ScheduleController {
     }
 
     private void handleScheduleButtonClick(String scheduleName) {
-        try {
+        this.scheduleName = scheduleName;
+        /*try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
             ScheduleFormController controller = new ScheduleFormController(username, scheduleName, "Add");
             loader.setController(controller);
@@ -95,35 +99,20 @@ public class ScheduleController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
-
-    /*private void handleScheduleButtonClick(String scheduleName) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
-            ScheduleFormController controller = new ScheduleFormController(username);
-            loader.setController(controller);
-            Stage stage = new Stage();
-            stage.setTitle("ScheduleApp");
-            stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-    public void addScheduleItems(ActionEvent actionEvent) throws IOException {
+    public void addEvent(ActionEvent actionEvent) throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleItems.fxml"));
-        ScheduleItemsController scheduleItemsController = new ScheduleItemsController(username);
-        loader.setController(scheduleItemsController);
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/event.fxml"));
+        EventsController eventsController = new EventsController(scheduleName);
+        loader.setController(eventsController);
         stage.setTitle("ScheduleApp");
         stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
 
         stage.setOnHiding(x -> {
-            List<String> lista = scheduleItemsController.vratiPodatke();
+            List<String> lista = eventsController.vratiPodatke();
             String dayOfWeek = lista.get(0);
             String startTime = lista.get(1);
             String eventName = lista.get(3);
@@ -142,21 +131,6 @@ public class ScheduleController {
     }
 
     public void createNewSchedule(ActionEvent actionEvent) throws IOException, SQLException, ScheduleException {
-        //for(int i = 0; i < actionEvent.hashCode(); i++
-        //gridPane.getChildren().add(new Button("test")) ;
-
-      //  gridPane.getChildren().add(hBox);
-
-        //append, get child
-        /*for(int i = 0; i < 5; i++) {
-                    hBox.getChildren().add(new Button(scheduleName));
-on(scheduleName);
-            gridPane.add(button, i, 0, 1, 1);
-        }*/
-
-        //koliko imam rasporeda, toliko cu imati dugmica ofc
-
-
         Stage stage = (Stage) cancelId.getScene().getWindow();
         stage.close();
 

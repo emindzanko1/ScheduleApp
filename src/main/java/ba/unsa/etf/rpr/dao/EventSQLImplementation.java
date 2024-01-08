@@ -30,13 +30,13 @@ public class EventSQLImplementation implements EventDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        searchQuery = conn.prepareStatement("SELECT * FROM ScheduleItem WHERE Item_ID=?");
-        newIdQuery = conn.prepareStatement("SELECT MAX(Item_ID)+1 FROM ScheduleItem");
-        addQuery = conn.prepareStatement("INSERT INTO ScheduleItem VALUES(?,?,?,?,?,?,?)");
-        changeQuery = conn.prepareStatement("UPDATE ScheduleItem SET dayOfWeek=?, startTime=?, endTime=?, eventName=?, location=? WHERE Item_ID=?");
-        deleteQuery = conn.prepareStatement("DELETE FROM ScheduleItem WHERE Item_ID=?");
-        allQuery = conn.prepareStatement("SELECT * FROM ScheduleItem");
-        getByNameQuery = conn.prepareStatement("SELECT * FROM ScheduleItem WHERE eventName=?");
+        searchQuery = conn.prepareStatement("SELECT * FROM Event WHERE event_id=?");
+        newIdQuery = conn.prepareStatement("SELECT MAX(event_id)+1 FROM Event");
+        addQuery = conn.prepareStatement("INSERT INTO Event VALUES(?,?,?,?,?,?)");
+        changeQuery = conn.prepareStatement("UPDATE Event SET day_of_week=?, start_time=?, event_name=?, location=? WHERE event_id=?");
+        deleteQuery = conn.prepareStatement("DELETE FROM Event WHERE event_id=?");
+        allQuery = conn.prepareStatement("SELECT * FROM Event");
+        getByNameQuery = conn.prepareStatement("SELECT * FROM Event WHERE eventame=?");
     }
 
     public static EventSQLImplementation getInstance() throws SQLException {
@@ -73,7 +73,7 @@ public class EventSQLImplementation implements EventDao {
             }
             System.out.println("Connection successful!");
         } catch (SQLException e) {
-            throw new ScheduleException("Failed getting all schedule items.", e);
+            throw new ScheduleException("Failed getting all schedule events.", e);
         }
         return events;
     }
@@ -89,15 +89,14 @@ public class EventSQLImplementation implements EventDao {
 
             addQuery.setInt(1, event.getId());
             addQuery.setInt(2, event.getScheduleId());
-            addQuery.setString(3, event.getDayOfWeek());
-            addQuery.setString(4, event.getStartTime());
-            addQuery.setString(5, event.getEndTime());
-            addQuery.setString(6, event.getEventName());
-            addQuery.setString(7, event.getLocation());
+            addQuery.setString(3, event.getEventName());
+            addQuery.setString(4, event.getDayOfWeek());
+            addQuery.setString(5, event.getStartTime());
+            addQuery.setString(6, event.getLocation());
             addQuery.execute();
 
         } catch (SQLException e) {
-            throw new ScheduleException("Failed creating a new schedule item.", e);
+            throw new ScheduleException("Failed creating a new schedule event.", e);
         }
     }
 
@@ -112,7 +111,7 @@ public class EventSQLImplementation implements EventDao {
             changeQuery.setString(5, event.getLocation());
             changeQuery.execute();
         } catch (SQLException e) {
-            throw new ScheduleException("Failed updating a schedule item.", e);
+            throw new ScheduleException("Failed updating a schedule event.", e);
         }
     }
 
@@ -122,7 +121,7 @@ public class EventSQLImplementation implements EventDao {
             deleteQuery.setInt(1, event.getId());
             deleteQuery.execute();
         } catch (SQLException e) {
-            throw new ScheduleException("Failed deleting a schedule item.", e);
+            throw new ScheduleException("Failed deleting a schedule event.", e);
         }
     }
 
