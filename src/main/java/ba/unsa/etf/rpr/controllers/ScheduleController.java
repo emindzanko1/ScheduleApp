@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -80,6 +79,7 @@ public class ScheduleController {
 
         if (!schedules.isEmpty()) {
             this.scheduleName = schedules.get(0).getScheduleName();
+            displaySchedule(this.scheduleName);
         }
 
         for (Schedule schedule : schedules) {
@@ -92,6 +92,9 @@ public class ScheduleController {
                 }
             });
             hBox.getChildren().add(scheduleButton);
+        }
+        if (!hBox.getChildren().isEmpty()) {
+            //simulateButtonClick(0);
         }
     }
 
@@ -120,6 +123,24 @@ public class ScheduleController {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+    }
+
+    private void displaySchedule(String scheduleName) throws SQLException, ScheduleException {
+        this.scheduleName = scheduleName;
+
+        Schedule schedule = ScheduleSQLImplementation.getInstance().getByScheduleName(scheduleName);
+
+        List<Event> events = EventSQLImplementation.getInstance().getByScheduleId(schedule.getId());
+
+        displayEventsInListViews(events);
+    }
+
+    private void simulateButtonClick(int index) {
+        Button clickedButton = (Button) hBox.getChildren().get(index);
+        clickedButton.setStyle("-fx-background-color: lightblue; -fx-border-color: blue; -fx-border-width: 2px;");
+
+        // Trigger the action associated with the button click
+        clickedButton.fire(); // Simulate the button click event
     }
 
     private void displayEventsInListViews(List<Event> events) {
@@ -163,7 +184,7 @@ public class ScheduleController {
         stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.show();
 
-        stage.setOnHiding(x -> {
+        /*stage.setOnHiding(x -> {
             List<String> list = eventsController.listData();
             String dayOfWeek = list.get(0);
             String startTime = list.get(1);
@@ -179,7 +200,7 @@ public class ScheduleController {
                 default -> {
                 }
             }
-        });
+        });*/
     }
 
     public void createNewSchedule(ActionEvent actionEvent) throws IOException, SQLException, ScheduleException {
