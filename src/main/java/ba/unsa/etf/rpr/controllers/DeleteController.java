@@ -29,7 +29,7 @@ public class DeleteController {
 
     @FXML
     public void initialize() {
-        title.setText("Are you you want to delete " + scheduleName + "?");
+        title.setText("Are you sure you want to delete " + scheduleName + "?");
     }
 
     public DeleteController(String scheduleName, String username) {

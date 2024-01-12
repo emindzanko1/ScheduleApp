@@ -26,7 +26,7 @@ public class ScheduleFormController {
 
     @FXML
     public TextField scheduleNameId;
-    public Button addButtonId, deleteButtonId,  cancelButtonId;
+    public Button cancelButtonId;
 
     public String scheduleName, username, option;
 
@@ -37,20 +37,7 @@ public class ScheduleFormController {
     }
 
     @FXML
-    public void initialize() throws SQLException {
-        if(option.equals("Delete"))
-             addButtonId.setVisible(false);
-        else
-            deleteButtonId.setVisible(false);
-      /*  String scheduleName = scheduleNameId.getText();
-        System.out.println(scheduleName);
-        // Check the schedule name and hide the appropriate button
-        if ("emin1".equals(scheduleName)) {
-            addButtonId.setVisible(false); // Hide the "Add" button
-        } else if ("emin2".equals(scheduleName)) {
-            deleteButtonId.setVisible(false); // Hide the "Delete" button
-        }*/
-    }
+    public void initialize() throws SQLException {}
 
     public void cancelSchedule() {
         Stage stage = (Stage) cancelButtonId.getScene().getWindow();
@@ -85,33 +72,6 @@ public class ScheduleFormController {
         }
     }
 
-    public void deleteSchedule() throws SQLException, ScheduleException {
-        String scheduleName = scheduleNameId.getText();
-        try {
-            if(ScheduleSQLImplementation.getInstance().getByScheduleName(scheduleName) == null) {
-                showDeletingAlert();
-            }
-            else {
-                User user = UserSQLImplementation.getInstance().getByUsername(username);
-                int userId = user.getId();
-                Schedule newSchedule = new Schedule();
-                Schedule schedule = ScheduleSQLImplementation.getInstance().getByScheduleName(scheduleName);
-                ScheduleSQLImplementation scheduleSQL = ScheduleSQLImplementation.getInstance();
-                scheduleSQL.delete(schedule);
-                Stage stage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/schedule.fxml"));
-                ScheduleController controller = new ScheduleController(username, scheduleName);
-                loader.setController(controller);
-                stage.setTitle("ScheduleApp");
-                stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-                stage.show();
-            }
-        }
-        catch (IOException | ScheduleException | SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     private void showCreatingAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Creating Schedule Error");
@@ -119,13 +79,4 @@ public class ScheduleFormController {
         alert.setContentText("Schedule name is too short.");
         alert.showAndWait();
     }
-
-    private void showDeletingAlert() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Deleting Schedule Error");
-        alert.setHeaderText(null);
-        alert.setContentText("Schedule name does not exists.");
-        alert.showAndWait();
-    }
-
 }

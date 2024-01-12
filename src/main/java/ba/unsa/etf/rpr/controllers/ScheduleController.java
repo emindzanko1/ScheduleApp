@@ -89,6 +89,8 @@ public class ScheduleController {
             displaySchedule(this.scheduleName);
         }
 
+        hBox.setSpacing(10);
+
         for (Schedule schedule : schedules) {
             Button scheduleButton = new Button(schedule.getScheduleName());
             scheduleButton.setOnAction(event -> {
