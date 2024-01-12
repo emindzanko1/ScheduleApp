@@ -121,6 +121,7 @@ public class ScheduleSQLImplementation implements ScheduleDao {
             deleteQuery.setInt(1, schedule.getId());
             deleteQuery.execute();
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new ScheduleException("Failed deleting a schedule.", e);
         }
     }

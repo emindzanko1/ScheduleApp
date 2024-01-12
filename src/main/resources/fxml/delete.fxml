@@ -32,7 +32,7 @@
             <Insets right="40.0" top="100.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="57.0" text="Yes" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteSchedule" prefHeight="26.0" prefWidth="57.0" text="Yes" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="60.0" top="100.0" />
          </GridPane.margin>
