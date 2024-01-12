@@ -236,9 +236,10 @@ public class ScheduleController {
         int numberOfSchedules = ScheduleSQLImplementation.getInstance().getNumberOfSchedules((userId));
 
         if(numberOfSchedules != 0) {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/scheduleForm.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/delete.fxml"));
 
-            ScheduleFormController controller = new ScheduleFormController(scheduleName, username, "Delete");
+            //ScheduleFormController controller = new ScheduleFormController(scheduleName, username, "Delete");
+            DeleteController controller = new DeleteController(scheduleName);
             loader.setController(controller);
             stage.setTitle("ScheduleApp");
             stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
