@@ -4,7 +4,7 @@ package ba.unsa.etf.rpr.domain;
  * This class is bean for schedule item
  * @author Emin Džanko
  */
-public class Event {
+public class Event implements Comparable<Event> {
     private int id, scheduleId;
     private String dayOfWeek, startTime, eventName, location;
 
@@ -66,5 +66,10 @@ public class Event {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @Override
+    public int compareTo(Event otherEvent) {
+        return this.getStartTime().compareTo(otherEvent.getStartTime());
     }
 }
